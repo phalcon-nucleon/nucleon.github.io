@@ -1,76 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+	showdown.setFlavor('github');
+	
+	var converter = new showdown.Converter()
 
-    <title>Nucl&eacute;on framework</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-    <!-- Styles -->
-    <style>
-        html, body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Raleway', sans-serif;
-            font-weight: 100;
-            height: 100vh;
-            margin: 0;
-        }
-        .full-height {
-            height: 100vh;
-        }
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-        .position-ref {
-            position: relative;
-        }
-        .content {
-            text-align: center;
-        }
-        .title {
-            font-size: 84px;
-        }
-        .links > a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-        .m-b-md {
-            margin-bottom: 30px;
-        }
-        .logo{
-            display: block;
-            margin: auto;
-            max-width: 96px;
-            max-height: 96px;
-        }
-        .sub{
-            font-size: 24px;
-        }
-    </style>
+	jQuery.ajax({url: 'https://raw.githubusercontent.com/phalcon-nucleon/nucleon/master/README.md'})
+	.done(function(data){
+		document.body.innerHTML = converter.makeHtml(data);
+	})
+})
+</script>
 </head>
-<body>
-<div class="flex-center position-ref full-height">
-    <div class="content">
-        <div class="title m-b-md">
-            <img src="/img/nucleon.svg" class="logo"/>
-            Nucl&eacute;on
-        </div>
-        <p class="sub">
-            Under construction
-        </p>
-    </div>
-</div>
+<body class="markdown-body container">
+
 </body>
 </html>
