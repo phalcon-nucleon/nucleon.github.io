@@ -1,23 +1,126 @@
 <html>
 <head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script>
-jQuery(document).ready(function(){
-	showdown.setFlavor('github');
-	
-	var converter = new showdown.Converter()
-
-	jQuery.ajax({url: 'https://raw.githubusercontent.com/phalcon-nucleon/nucleon/master/README.md'})
-	.done(function(data){
-		document.body.innerHTML = converter.makeHtml(data);
-	})
-})
-</script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
 </head>
-<body class="markdown-body container">
+<body>
 
+<ul id="slide-out" class="sidenav sidenav-fixed">
+  <li class="logo center-align">
+    <a id="logo-container" href="/" class="brand-logo">
+      <img src="img/nucleon.svg" height="57px">
+    </a>
+  </li>
+  <li class="version center-align">
+      <span>
+        1.3.0
+      </span>
+  </li>
+  <li class="divider"></li>
+  <li class="no-padding">
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header">Getting Started<i class="material-icons">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="#installation.html" data-template="installation">Installation</a></li>
+            <li><a href="#configuration.html" data-template="configuration">Configuration</a></li>
+            <li><a href="#directory-structure.html" data-template="directory-structure">Directory Structure</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
+  <li class="divider"></li>
+  <li class="no-padding">
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header">Architecture Concepts<i class="material-icons">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="#kernels-concepts.html" data-template="kernels-concepts">Kernels Concepts</a></li>
+            <li><a href="#modules-concepts.html" data-template="modules-concepts">Modules Concepts</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
+  <li class="no-padding">
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header">Kernels Concepts<i class="material-icons">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="#http-kernel.html" data-template="http-kernel">Http Kernel</a></li>
+            <li><a href="#micro-kernel.html" data-template="micro-kernel">Micro Kernel</a></li>
+            <li><a href="#cli-kernel.html" data-template="cli-kernel">Cli Kernel</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
+  <li class="divider"></li>
+  <li class="no-padding">
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header">The Basics<i class="material-icons">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="#routing.html" data-template="routing">Routing</a></li>
+            <li><a href="#controllers.html" data-template="controllers">Controllers</a></li>
+            <li><a href="#middleware.html" data-template="middleware">Middleware</a></li>
+            <li><a href="#csrf-protection.html" data-template="csrf-protection">CSRF Protection</a></li>
+            <li><a href="#requests.html" data-template="requests">Requests</a></li>
+            <li><a href="#responses.html" data-template="responses">Responses</a></li>
+            <li><a href="#views.html" data-template="views">Views</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<header>
+  <nav>
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col m2 show-on-medium-and-down">
+            <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          </div>
+          <div class="col m10 l11 offset-l1">
+            <h1 class="header">Nucleon</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <div class="container" data-template-target></div>
+
+  <div class="preloader">
+    <div class="preloader-wrapper big active">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+        <div class="circle"></div>
+      </div><div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+
+</footer>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/materialize.min.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

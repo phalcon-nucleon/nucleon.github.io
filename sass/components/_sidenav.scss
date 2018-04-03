@@ -1,0 +1,22 @@
+header, main, footer {
+  padding-left: 300px;
+}
+@media only screen and (max-width: 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+}
+.sidenav {
+  & {
+    border-right: 1px solid $nav-border-color;
+  }
+  .logo {
+    margin: 20px 0;
+    .brand-logo {
+      background-color: transparent !important;
+    }
+  }
+  .collapsible-body ul li a {
+    padding-left: 40px;
+  }
+}
