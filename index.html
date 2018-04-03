@@ -19,60 +19,66 @@
   <li class="divider"></li>
   <li class="no-padding">
     <ul class="collapsible collapsible-accordion">
-      <li>
-        <a class="collapsible-header">Getting Started<i class="material-icons">arrow_drop_down</i></a>
+      <li class="no-padding">
+        <a class="collapsible-header">Getting Started<i class="material-icons">keyboard_arrow_right</i></a>
         <div class="collapsible-body">
           <ul>
-            <li><a href="#installation.html" data-template="installation">Installation</a></li>
-            <li><a href="#configuration.html" data-template="configuration">Configuration</a></li>
-            <li><a href="#directory-structure.html" data-template="directory-structure">Directory Structure</a></li>
+            <li><a href="#installation.html" data-template="getting-started/installation">Installation</a></li>
+            <li><a href="#configuration.html" data-template="getting-started/configuration">Configuration</a></li>
+            <li><a href="#directory-structure.html" data-template="getting-started/directory-structure">Directory Structure</a></li>
           </ul>
         </div>
       </li>
-    </ul>
-  </li>
-  <li class="divider"></li>
-  <li class="no-padding">
-    <ul class="collapsible collapsible-accordion">
-      <li>
-        <a class="collapsible-header">Architecture Concepts<i class="material-icons">arrow_drop_down</i></a>
+      <li class="no-padding">
+        <a class="collapsible-header">Architecture Concepts<i class="material-icons">keyboard_arrow_right</i></a>
         <div class="collapsible-body">
           <ul>
-            <li><a href="#kernels-concepts.html" data-template="kernels-concepts">Kernels Concepts</a></li>
-            <li><a href="#modules-concepts.html" data-template="modules-concepts">Modules Concepts</a></li>
+            <li><a href="#kernels-concepts.html" data-template="architecture-concepts/kernels-concepts">Kernels Concepts</a></li>
+            <li><a href="#modules-concepts.html" data-template="architecture-concepts/modules-concepts">Modules Concepts</a></li>
           </ul>
         </div>
       </li>
-    </ul>
-  </li>
-  <li class="no-padding">
-    <ul class="collapsible collapsible-accordion">
-      <li>
-        <a class="collapsible-header">Kernels Concepts<i class="material-icons">arrow_drop_down</i></a>
+      <li class="no-padding">
+        <a class="collapsible-header">Kernels Concepts<i class="material-icons">keyboard_arrow_right</i></a>
         <div class="collapsible-body">
           <ul>
-            <li><a href="#http-kernel.html" data-template="http-kernel">Http Kernel</a></li>
-            <li><a href="#micro-kernel.html" data-template="micro-kernel">Micro Kernel</a></li>
-            <li><a href="#cli-kernel.html" data-template="cli-kernel">Cli Kernel</a></li>
+            <li><a href="#http-kernel.html" data-template="kernels-concepts/http-kernel">Http Kernel</a></li>
+            <li><a href="#micro-kernel.html" data-template="kernels-concepts/micro-kernel">Micro Kernel</a></li>
+            <li><a href="#cli-kernel.html" data-template="kernels-concepts/cli-kernel">Cli Kernel</a></li>
           </ul>
         </div>
       </li>
-    </ul>
-  </li>
-  <li class="divider"></li>
-  <li class="no-padding">
-    <ul class="collapsible collapsible-accordion">
-      <li>
-        <a class="collapsible-header">The Basics<i class="material-icons">arrow_drop_down</i></a>
+      <li class="no-padding">
+        <a class="collapsible-header">The Basics<i class="material-icons">keyboard_arrow_right</i></a>
         <div class="collapsible-body">
           <ul>
-            <li><a href="#routing.html" data-template="routing">Routing</a></li>
-            <li><a href="#controllers.html" data-template="controllers">Controllers</a></li>
-            <li><a href="#middleware.html" data-template="middleware">Middleware</a></li>
-            <li><a href="#csrf-protection.html" data-template="csrf-protection">CSRF Protection</a></li>
-            <li><a href="#requests.html" data-template="requests">Requests</a></li>
-            <li><a href="#responses.html" data-template="responses">Responses</a></li>
-            <li><a href="#views.html" data-template="views">Views</a></li>
+            <li><a href="#routing.html" data-template="basics/routing">Routing</a></li>
+            <li><a href="#controllers.html" data-template="basics/controllers">Controllers</a></li>
+            <li><a href="#middleware.html" data-template="basics/middleware">Middleware</a></li>
+            <li><a href="#csrf-protection.html" data-template="basics/csrf-protection">CSRF Protection</a></li>
+            <li><a href="#requests.html" data-template="basics/requests">Requests</a></li>
+            <li><a href="#responses.html" data-template="basics/responses">Responses</a></li>
+            <li><a href="#views.html" data-template="basics/views">Views</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="no-padding">
+        <a class="collapsible-header">Digging deeper<i class="material-icons">keyboard_arrow_right</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="#quark-console.html" data-template="digging-deeper/quark-console">Quark Console</a></li>
+            <li><a href="#helpers.html" data-template="digging-deeper/helpers">Helpers</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="no-padding">
+        <a class="collapsible-header">Debug<i class="material-icons">keyboard_arrow_right</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="#debugging.html" data-template="debug/debugging">Debugging</a></li>
+            <li><a href="#var-dumper.html" data-template="debug/var-dumper">Var Dumper</a></li>
+            <li><a href="#debug-toolbar.html" data-template="debug/debug-toolbar">Debug toolbar</a></li>
+            <li><a href="#profilers.html" data-template="debug/profilers">Profilers</a></li>
           </ul>
         </div>
       </li>
@@ -85,11 +91,11 @@
     <div class="container">
       <div class="nav-wrapper">
         <div class="row">
-          <div class="col m2 show-on-medium-and-down">
+          <div class="col m2 hide-on-large-only">
             <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
           </div>
-          <div class="col m10 l11 offset-l1">
-            <h1 class="header">Nucleon</h1>
+          <div class="col m10 l12">
+            <h1 class="header" data-template-title>Nucleon</h1>
           </div>
         </div>
       </div>
@@ -98,18 +104,21 @@
 </header>
 
 <main>
-  <div class="container" data-template-target></div>
-
+  <div class="page-wrapper">
+    <div class="container" data-template-target></div>
+  </div>
   <div class="preloader">
     <div class="preloader-wrapper big active">
       <div class="spinner-layer spinner-blue-only">
         <div class="circle-clipper left">
           <div class="circle"></div>
-        </div><div class="gap-patch">
-        <div class="circle"></div>
-      </div><div class="circle-clipper right">
-        <div class="circle"></div>
-      </div>
+        </div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
       </div>
     </div>
   </div>

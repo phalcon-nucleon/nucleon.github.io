@@ -1,8 +1,9 @@
 @import "materialize/components/color-variables";
 
-$primary-color: color("shades", "white");
-$primary-color: color("shades", "white");
+$primary-color: #C8523B;
 
 $nav-border-color: color('grey', 'lighten-2');
+$navbar-font-color: $primary-color;
 
-$navbar-font-color: color('teal', 'lighten-2');
+$navbar-height: 94px;
+$navbar-height-mobile: 64px;
