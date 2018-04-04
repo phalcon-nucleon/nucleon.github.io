@@ -1,5 +1,51 @@
 <div class="row">
-  <div class="col s12">
-    <h1>directory-structure.html</h1>
+  <div class="col s12 m3">
+  <ul class="directory">
+    <li data-hanchor="directory-app">app</li>
+    <li class="open" data-hanchor="directory-bootstrap">bootstrap
+      <ul class="directory">
+        <li class="special" data-hanchor="directory-bootstrap-compile">compile</li>
+      </ul>
+    </li>
+    <li data-hanchor="directory-config">config</li>
+    <li data-hanchor="directory-migrations">migrations</li>
+    <li data-hanchor="directory-public">public</li>
+    <li data-hanchor="directory-resources">resources</li>
+    <li data-hanchor="directory-routes">routes</li>
+    <li class="open" data-hanchor="directory-storages">storages
+      <ul class="directory">
+        <li class="special">caches</li>
+        <li class="special">logs</li>
+        <li class="special">views</li>
+      </ul>
+    </li>
+    <li data-hanchor="directory-tests">tests</li>
+  </ul>
   </div>
+<div class="col s12 m9">
+  <h2>Root directory</h2>
+
+  <h4 data-anchor="directory-app"><i class="material-icons">folder</i> app</h4>
+  <p>The core code of your application. Autoloaded via PSR4.</p>
+  <h4 data-anchor="directory-bootstrap"><i class="material-icons">folder</i> bootstrap</h4>
+  <p>Files that bootstrap the framework and configure autoloading.</p>
+  <h4 data-anchor="directory-bootstrap-compile"><i class="material-icons">folder</i> bootstrap/compile</h4>
+  <p>Contains the compilation of various elements of the applications (code, config, routes, ...).</p>
+  <h4 data-anchor="directory-config"><i class="material-icons">folder</i> config</h4>
+  <p>Your application's configuration files.</p>
+  <h4 data-anchor="directory-migrations"><i class="material-icons">folder</i> migrations</h4>
+  <p>Contains your database migrations</p>
+  <h4 data-anchor="directory-public"><i class="material-icons">folder</i> public</h4>
+  <p>The entry point for all requests entering your application.</p>
+  <h4 data-anchor="directory-resources"><i class="material-icons">folder</i> resources</h4>
+  <p>Your views as well as your raw, uncompiled assets such as LESS, SASS, or JavaScript.</p>
+  <h4 data-anchor="directory-routes"><i class="material-icons">folder</i> routes</h4>
+  <p>All of the route definitions for your application.</p>
+  <h4 data-anchor="directory-storages"><i class="material-icons">folder</i> storages</h4>
+  <p>All logs & caches & compiled views.</p>
+  <h4 data-anchor="directory-tests"><i class="material-icons">folder</i> tests</h4>
+  <p>Your automated tests.</p>
+
+  <h2>App directory</h2>
+</div>
 </div>
