@@ -58,6 +58,8 @@
         $('pre code').each(function (i, block) {
           hljs.highlightBlock(block);
         });
+
+        Sticky.register();
       })
     }
   };
@@ -72,12 +74,69 @@
     }
   };
 
+  var Sticky = {
+    init: function () {
+      var tick;
+      $(window)
+          .on('resize', (function (tick) {
+            return function () {
+              if (tick) {
+                return;
+              }
+              tick = setTimeout(function () {
+                tick = null;
+                Sticky.register()
+              }, 50)
+            }
+          })(null))
+          .on('scroll', (function (tick) {
+            return function () {
+              if (tick) {
+                return;
+              }
+              tick = setTimeout(function () {
+                tick = null;
+                Sticky.computeScroll()
+              }, 50)
+            }
+          })(null))
+    },
+    register: function () {
+      $('.sticky').each(function () {
+        $(this).data('sticky-base-top', $(this).offset().top)
+      })
+    },
+    computeScroll: function () {
+      if (window.innerWidth <= 601) {
+        return
+      }
+      var doc = document.documentElement;
+      var top = (window.pageYOffset || doc.scrollTop) - doc.clientTop;
+      $('.sticky').each(function () {
+        var $this = $(this);
+        var btop = $this.data('sticky-base-top');
+
+        if (top > btop) {
+          $this.addClass('is-stuck')
+        } else {
+          $this.removeClass('is-stuck');
+        }
+      })
+    },
+    computeResize: function () {
+      if (window.innerWidth <= 601) {
+        $('.sticky.is-stuck').removeClass('is-stuck')
+      }
+    }
+  };
+
   var Main = {
     init: function () {
       M.AutoInit();
       Template.init();
       Sidenav.init();
       HAnchor.init();
+      Sticky.init();
 
       if (location.hash.substring(0, 2) === '#!') {
         Template.show(location.hash.substring(2));

@@ -4,6 +4,9 @@ header {
     border-bottom: 1px solid $nav-border-color;
 
     h1.header {
+      @media #{$small-and-down} {
+        font-size: 2rem;
+      }
       @media #{$medium-and-up} {
         height: $navbar-height;
         line-height: $navbar-line-height;

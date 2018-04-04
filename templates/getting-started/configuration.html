@@ -1,5 +1,30 @@
 <div class="row">
   <div class="col s12">
-    <h1>Configuration</h1>
+    <h2>Intro</h2>
+    <p>
+      All of the configuration files for the Nucleon framework are stored in the <kbd>config</kbd> directory.
+      Each option is documented, so feel free to look through the files and get familiar with the options available to
+      you.
+    </p>
+
+    <p>
+      Each configuration file will be added to the global object <kbd>Phalcon\Config</kbd> via its name.</p>
+    <p>Ex :</p>
+    <pre><code class="php">// app.php
+return [
+  'name' => 'nucleon'
+];</code></pre>
+    Will give :
+    <pre><code class="php">$config->app->name === 'nucleon';</code></pre>
+
+    <h2>Environnement & DotConst</h2>
+    <p>To work, nucleon, and neutrino, need to have 3 constants defined :</p>
+    <ul class="browser-default">
+      <li><kbd>BASE_PATH</kbd> : Application base path</li>
+      <li><kbd>APP_DEBUG</kbd> : Application base path</li>
+      <li><kbd>APP_ENV</kbd> : Application environment (development, test, staging, production)</li>
+    </ul>
+    <p>Neutrino introduce Dotconst. It allow load any constants from .ini files.</p>
+
   </div>
 </div>

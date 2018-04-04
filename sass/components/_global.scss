@@ -1,6 +1,23 @@
 a:focus {
   outline: 0;
 }
+
+@media #{$small-and-down} {
+  .no-padding-on-small {
+    padding: 0 !important;
+  }
+}
+@media #{$medium-and-down} {
+  .no-padding-on-medium {
+    padding: 0 !important;
+  }
+}
+@media #{$large-and-down} {
+  .no-padding-on-large {
+    padding: 0 !important;
+  }
+}
+
 main {
   position: relative;
   min-height: calc(100vh - #{$navbar-height});
@@ -22,7 +39,7 @@ main {
 
 ul.directory {
   font-size: 1rem;
-  padding-left: 20px;
+  padding-left: 24px;
   list-style-type: none;
 
   li {

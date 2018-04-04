@@ -1,51 +1,93 @@
 <div class="row">
   <div class="col s12 m3">
-  <ul class="directory">
-    <li data-hanchor="directory-app">app</li>
-    <li class="open" data-hanchor="directory-bootstrap">bootstrap
-      <ul class="directory">
-        <li class="special" data-hanchor="directory-bootstrap-compile">compile</li>
+    <div class="sticky-container">
+      <ul class="directory sticky">
+        <li><a data-hanchor="directory-app">app</a>
+          <ul class="directory">
+            <li class="special">Core
+              <ul class="directory">
+                <li><a data-hanchor="directory-app-core-constants">Constants</a></li>
+                <li><a data-hanchor="directory-app-core-facades">Facades</a></li>
+                <li><a data-hanchor="directory-app-core-models">Models</a></li>
+                <li><a data-hanchor="directory-app-core-micro">Providers</a></li>
+                <li><a data-hanchor="directory-app-core-services">Services</a></li>
+                <li><a data-hanchor="directory-app-core-support">Support</a></li>
+              </ul>
+            </li>
+            <li class="special">Kernels
+              <ul class="directory">
+                <li><a data-hanchor="directory-app-kernels-cli">Cli</a></li>
+                <li><a data-hanchor="directory-app-kernels-http">Http</a></li>
+                <li><a data-hanchor="directory-app-kernels-micro">Micro</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="open"><a data-hanchor="directory-bootstrap">bootstrap</a>
+          <ul class="directory">
+            <li class="special"><a data-hanchor="directory-bootstrap-compile">compile</a></li>
+          </ul>
+        </li>
+        <li><a data-hanchor="directory-config">config</a></li>
+        <li><a data-hanchor="directory-migrations">migrations</a></li>
+        <li><a data-hanchor="directory-public">public</a></li>
+        <li><a data-hanchor="directory-resources">resources</a></li>
+        <li><a data-hanchor="directory-routes">routes</a></li>
+        <li class="open"><a data-hanchor="directory-storages">storages</a>
+          <ul class="directory">
+            <li class="special">caches</li>
+            <li class="special">logs</li>
+            <li class="special">views</li>
+          </ul>
+        </li>
+        <li><a data-hanchor="directory-tests">tests</a></li>
       </ul>
-    </li>
-    <li data-hanchor="directory-config">config</li>
-    <li data-hanchor="directory-migrations">migrations</li>
-    <li data-hanchor="directory-public">public</li>
-    <li data-hanchor="directory-resources">resources</li>
-    <li data-hanchor="directory-routes">routes</li>
-    <li class="open" data-hanchor="directory-storages">storages
-      <ul class="directory">
-        <li class="special">caches</li>
-        <li class="special">logs</li>
-        <li class="special">views</li>
-      </ul>
-    </li>
-    <li data-hanchor="directory-tests">tests</li>
-  </ul>
+    </div>
   </div>
-<div class="col s12 m9">
-  <h2>Root directory</h2>
+  <div class="col s12 m9">
+    <h2>Root directory</h2>
+    <h4 data-anchor="directory-app"><i class="material-icons">folder</i> app</h4>
+    <p>The core code of your application. Autoloaded via PSR4.</p>
+    <h4 data-anchor="directory-bootstrap"><i class="material-icons">folder</i> bootstrap</h4>
+    <p>Files that bootstrap the framework and configure autoloading.</p>
+    <h4 data-anchor="directory-bootstrap-compile"><i class="material-icons">folder</i> bootstrap/compile</h4>
+    <p>Contains the compilation of various elements of the applications (code, config, routes, ...).</p>
+    <h4 data-anchor="directory-config"><i class="material-icons">folder</i> config</h4>
+    <p>Your application's configuration files.</p>
+    <h4 data-anchor="directory-migrations"><i class="material-icons">folder</i> migrations</h4>
+    <p>Contains your database migrations</p>
+    <h4 data-anchor="directory-public"><i class="material-icons">folder</i> public</h4>
+    <p>The entry point for all requests entering your application.</p>
+    <h4 data-anchor="directory-resources"><i class="material-icons">folder</i> resources</h4>
+    <p>Your views as well as your raw, uncompiled assets such as LESS, SASS, or JavaScript.</p>
+    <h4 data-anchor="directory-routes"><i class="material-icons">folder</i> routes</h4>
+    <p>All of the route definitions for your application.</p>
+    <h4 data-anchor="directory-storages"><i class="material-icons">folder</i> storages</h4>
+    <p>All logs & caches & compiled views.</p>
+    <h4 data-anchor="directory-tests"><i class="material-icons">folder</i> tests</h4>
+    <p>Your automated tests.</p>
 
-  <h4 data-anchor="directory-app"><i class="material-icons">folder</i> app</h4>
-  <p>The core code of your application. Autoloaded via PSR4.</p>
-  <h4 data-anchor="directory-bootstrap"><i class="material-icons">folder</i> bootstrap</h4>
-  <p>Files that bootstrap the framework and configure autoloading.</p>
-  <h4 data-anchor="directory-bootstrap-compile"><i class="material-icons">folder</i> bootstrap/compile</h4>
-  <p>Contains the compilation of various elements of the applications (code, config, routes, ...).</p>
-  <h4 data-anchor="directory-config"><i class="material-icons">folder</i> config</h4>
-  <p>Your application's configuration files.</p>
-  <h4 data-anchor="directory-migrations"><i class="material-icons">folder</i> migrations</h4>
-  <p>Contains your database migrations</p>
-  <h4 data-anchor="directory-public"><i class="material-icons">folder</i> public</h4>
-  <p>The entry point for all requests entering your application.</p>
-  <h4 data-anchor="directory-resources"><i class="material-icons">folder</i> resources</h4>
-  <p>Your views as well as your raw, uncompiled assets such as LESS, SASS, or JavaScript.</p>
-  <h4 data-anchor="directory-routes"><i class="material-icons">folder</i> routes</h4>
-  <p>All of the route definitions for your application.</p>
-  <h4 data-anchor="directory-storages"><i class="material-icons">folder</i> storages</h4>
-  <p>All logs & caches & compiled views.</p>
-  <h4 data-anchor="directory-tests"><i class="material-icons">folder</i> tests</h4>
-  <p>Your automated tests.</p>
+    <h2>App directory</h2>
+    <h3 data-anchor="directory-app-core"><i class="material-icons">folder</i> Core</h3>
+    <p>Contains your application core code. Should contains business logic, shared with all kernels.</p>
+    <h4 data-anchor="directory-app-core-constants"><i class="material-icons">folder</i> Core/Constants</h4>
+    <p>This directory contains all constants you may should use in your application.</p>
+    <h4 data-anchor="directory-app-core-facades"><i class="material-icons">folder</i> Core/Facades</h4>
+    <p>This directory contains all facades you may should use in your application.</p>
+    <h4 data-anchor="directory-app-core-models"><i class="material-icons">folder</i> Core/Models</h4>
+    <p>The Models directory is a proposed location of your Models.</p>
+    <h4 data-anchor="directory-app-core-providers"><i class="material-icons">folder</i> Core/Providers</h4>
+    <p>The Providers directory contains all of the service providers for your application. Service providers bootstrap your application by binding services in the service container (Phalcon\Di) without instantiating.</p>
+    <h4 data-anchor="directory-app-core-support"><i class="material-icons">folder</i> Core/Support</h4>
+    <p>The Support directory is a proposed location of your tools.</p>
 
-  <h2>App directory</h2>
-</div>
+    <h3 data-anchor="directory-app-kernels"><i class="material-icons">folder</i> Kernels</h3>
+    <p>Contains the code the application kernels (Kernel settings, Controllers, ... ).</p>
+    <h4 data-anchor="directory-app-kernels-cli"><i class="material-icons">folder</i> Kernels/Cli <small>Console application</small></h4>
+    <p>The Tasks directory contains all of the custom cli commands for your application. This directory also houses your console kernel.</p>
+    <h4 data-anchor="directory-app-kernels-http"><i class="material-icons">folder</i> Kernels/Http <small>Http fullstack application</small></h4>
+    <p>The Http directory contains your controllers, middleware, modules, and your http kernel.</p>
+    <h4 data-anchor="directory-app-kernels-micro"><i class="material-icons">folder</i> Kernels/Micro <small>Micro application</small></h4>
+    <p>The Micro directory contains your controllers, middleware, and your micro kernel.</p>
+  </div>
 </div>
