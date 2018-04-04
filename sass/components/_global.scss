@@ -1,15 +1,20 @@
 main {
   position: relative;
-  min-height: calc(100vh - #{$navbar-height}) ;
-  display: flex;
-  flex-shrink: 0;
+  min-height: calc(100vh - #{$navbar-height});
+  @extend .flex-wrapper;
 
   .page-wrapper {
-    flex: 1 0 auto;
-    max-width: 100%;
-    overflow: hidden;
 
     @include wild-container();
+  }
+
+  .full-hw {
+    min-height: calc(100vh - #{$navbar-height});
+  }
+
+  .main-logo {
+    max-height: 250px;
+    max-width: 250px;
   }
 }
 
