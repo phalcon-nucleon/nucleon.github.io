@@ -6,11 +6,13 @@ main {
 
   .page-wrapper {
     flex: 1 0 auto;
+    max-width: 100%;
+    overflow: hidden;
 
     @include wild-container();
   }
 }
 
 a:focus {
-  outline:0;
+  outline: 0;
 }

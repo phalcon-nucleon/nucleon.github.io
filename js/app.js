@@ -43,6 +43,10 @@
           return $1.toUpperCase()
         }));
         $('[data-template-target]').html(data);
+
+        $('pre code').each(function(i, block) {
+          hljs.highlightBlock(block);
+        });
       })
     }
   };

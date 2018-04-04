@@ -2,9 +2,11 @@
 
 @import "materialize/materialize";
 
-@import "components/container";
+@import "components/mixins";
+@import "components/header";
 @import "components/navbar";
 @import "components/sidenav";
 @import "components/preloader";
+@import "components/precode";
 
 @import "components/global";

@@ -1,0 +1,11 @@
+kbd, samp {
+  background-color: color('grey', 'lighten-3');
+  border-radius: 3px;
+  padding: 0 5px;
+  font-size: 95%;
+}
+
+pre code {
+  background-color: color('grey', 'lighten-4') !important;
+  border-radius: 3px;
+}
