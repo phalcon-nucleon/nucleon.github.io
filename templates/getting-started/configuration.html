@@ -20,11 +20,73 @@ return [
     <h2>Environnement & DotConst</h2>
     <p>To work, nucleon, and neutrino, need to have 3 constants defined :</p>
     <ul class="browser-default">
-      <li><kbd>BASE_PATH</kbd> : Application base path</li>
-      <li><kbd>APP_DEBUG</kbd> : Application base path</li>
-      <li><kbd>APP_ENV</kbd> : Application environment (development, test, staging, production)</li>
+      <li><kbd>BASE_PATH</kbd> : Application base path.</li>
+      <li><kbd>APP_DEBUG</kbd> : Application is in debug mode.</li>
+      <li><kbd>APP_ENV</kbd> : Application environment (development, test, staging, production).</li>
     </ul>
-    <p>Neutrino introduce Dotconst. It allow load any constants from .ini files.</p>
 
+    <p>Neutrino introduce <kbd>Dotconst</kbd>. It allow load any constants from <kbd>.const.ini</kbd> files.</p>
+
+    <h3>How it work</h3>
+    <p>In a fresh Nucleon installation, the root directory of your application will contain a <kbd>.const.ini</kbd> file</p>
+    <p>The file contains :</p>
+    <pre><code class="ini">[base]
+path = @php/dir
+
+[app]
+env = @php/env:APP_ENV:development
+debug = true
+;...
+</code></pre>
+    <p>This will load in php : </p>
+    <pre><code class="php">BASE_PATH === '{base path of .const.ini file}'
+APP_ENV === getenv('APP_ENV')
+APP_DEBUG === true
+</code></pre>
+
+    <p>
+      Every sections will be flatten. Each variable will be prefixed with the section name.<br/>
+      Every variable will be UPPERIZED. e.g.
+    </p>
+
+    <h3>Special function</h3>
+    <table class="responsive-table">
+      <thead>
+      <tr>
+        <th>func</th>
+        <th>desc</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><pre class="inline"><code class="ini">@php/dir</code></pre></td>
+        <td>Base path of .const file</td>
+      </tr>
+      <tr>
+        <td><pre class="inline"><code class="ini">@php/env:ENV_VAR:default_value</code></pre></td>
+        <td>Call getenv('ENV_VAR'). if <kbd>ENV_VAR</kbd> is not set <pre class="inline"><code class="php">return 'default_value'</code></pre></td>
+      </tr>
+      <tr>
+        <td><pre class="inline"><code class="ini">@php/const:PHP_VERSION_ID</code></pre></td>
+        <td>Call constant('PHP_VERSION_ID')</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h3>Environment Overloading</h3>
+    The first file called is <kbd>.const.ini</kbd>. If the variable <kbd>APP_ENV</kbd> is defined in this file, dotconst will look for the file <kbd>.const.{APP_ENV}.ini</kbd>, and override the base values. <br/>
+    Useful when working on multiple environments.
+    <pre><code class="ini">; .const.ini
+[app]
+env = production
+
+[database]
+host = localhost</code></pre>
+    <pre><code class="ini">; .const.production.ini
+[database]
+host = 10.0.0.0</code></pre>
+
+    Will become
+    <pre><code class="php">DATABASE_HOST === '10.0.0.0'</code></pre>
   </div>
 </div>

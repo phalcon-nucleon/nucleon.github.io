@@ -1,11 +1,32 @@
 kbd, samp {
-  background-color: color('grey', 'lighten-3');
+  color: $primary-color;
+  background-color: rgba(color('grey', 'lighten-3'), 0.50) !important;
+  border-bottom: 2px solid rgba(color('grey', 'lighten-2'), 0.50);
   border-radius: 3px;
-  padding: 0 5px;
-  font-size: 95%;
-}
 
-pre code {
-  background-color: color('grey', 'lighten-4') !important;
+  padding: 0.3em;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+pre {
+  border-bottom: 2px solid color('grey', 'lighten-3');
   border-radius: 3px;
+
+  code {
+    background-color: color('grey', 'lighten-4') !important;
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
+
+  &.inline {
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+    code {
+      padding: 0.3em;
+    }
+  }
+}
+td > pre {
+  margin: 0;
 }

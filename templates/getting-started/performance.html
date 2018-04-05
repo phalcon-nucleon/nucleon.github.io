@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col s12">
+    <blockquote>
+      <kbd>php quark optimize</kbd> do :
+      <ul class="browser-default no-margin">
+        <li>Class compilation</li>
+        <li>Autoloader optimization</li>
+        <li><kbd>config:cache</kbd></li>
+        <li><kbd>route:cache</kbd></li>
+        <li><kbd>DotConst</kbd> caching</li>
+      </ul>
+    </blockquote>
+
+    <h2>Class compilation</h2>
+    <p>The framework compiles some of the most used classes, which will be loaded before the bootstrap to speed up the application.</p>
+    <p>You can add classes to this compilation by writing them to the <kbd>config/compile.php</kbd> file.</p>
+
+    <blockquote class="warning">
+      Loading the compiled file is done before the autoload.<br/>
+      All classes listed in the compilation need no call to the autoload.<br/>
+      All extents, implements, traits, used in class listed in the compilation, must be in the compilation files list
+    </blockquote>
+
+    <h2>Composer & Autoloading</h2>
+    <p>The command <kbd>php quark optimize</kbd> will convert the autoload composer, in autoload phalcon.</p>
+    <p>So the autoloading will be done via <kbd>Phalcon\Loader</kbd>.</p>
+
+    <h4>Optimize --process</h4>
+    <p>With option <kbd>--process</kbd> the optimizer will call <kbd>composer --dumpautoload --optimize</kbd> whose generate a classmap autoload.</p>
+    <p>This generates a huge array that will accelerate the loading process of the class.</p>
+
+    <h4>Optimize --memory</h4>
+    <p>With option <kbd>--memory</kbd> the optimizer will call <kbd>composer --dumpautoload</kbd> whose generate a namespace autoload.</p>
+    <p>This significantly reduces the size of the <kbd>autoload_classmap.php</kbd> file and therefore the size of the generated file. This implies that the classes will not have a direct path to their file, and thus an additional processing on the part of the autoloader <kbd>Phalcon\Loader</kbd>.</p>
+
+    <h2>Configuration Caching</h2>
+    <p>To give your application a speed boost, you should cache all of your configuration files into a single file using the <kbd>config:cache</kbd> Quark command. This will combine all of the configuration options for your application into a single file which will be loaded quickly by the framework.</p>
+
+    <h2>Route Caching</h2>
+    <p>To give your application a speed boost, you should cache your route file using the <kbd>route:cache</kbd> Quark command.
+      This translate all used function for add a route to it's fasted way.</p>
+    <p>Ex:</p>
+    <pre><code class="php">$router->addGet('/', [
+  'controller' => 'home',
+  'action' => 'index'
+]);
+$router->addPost('/', [
+  'controller' => 'home',
+  'action' => 'postIndex'
+]);
+$frontend = new \Phalcon\Mvc\Router\Group([
+    'namespace' => 'My\Namespace',
+    'module'     => 'Frontend'
+]);
+$frontend->addGet('/index', [
+    'controller' => 'index',
+    'action'     => 'index',
+]);
+$router->mount($frontend);</code></pre>
+    <p>Will become :</p>
+    <pre><code class="php">$router->add('/', ['controller' => 'home', 'action' => 'index'], 'GET');
+$router->add('/', ['controller' => 'home', 'action' => 'postIndex'], 'POST');
+$router->add('/index', ['namespace' => 'My\Namespace', 'module' => 'Frontend', 'controller' => 'home', 'action' => 'postIndex'], 'GET');</code></pre>
+  </div>
+</div>
