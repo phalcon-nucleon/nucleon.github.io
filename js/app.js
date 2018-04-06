@@ -39,22 +39,35 @@
   };
 
   var Template = {
+    __current: null,
     init: function () {
-      $('body').on('click', '[data-template]', function () {
-        Template.show($(this).attr('href').substr(2))
-      })
+      $(window).on("popstate", function () {
+        Template.show(location.hash.match(/^\#\!([^@]+)/)[1]);
+      });
+    },
+    ready: function () {
+      if (location.hash.substring(0, 2) === '#!') {
+        Template.show(location.hash.match(/^\#\!([^@]+)/)[1]);
+      }
     },
     show: function (template) {
+      if(Template.__current === template){
+        return;
+      }
+
+      Template.__current = template;
+
       Sidenav.select($('a[href="#!' + template + '"]'));
 
       Loader.ajax({
         url: 'templates/' + template
       }).done(function (data) {
+        window.scrollTo(0,0);
+
         $('[data-template-title]').text(template.replace(/.+\/(.+).html/, '$1').replace(/[_-]/g, ' ').replace(/^(.)|\s+(.)/g, function ($1) {
           return $1.toUpperCase()
         }));
         $('[data-template-container]').html(data);
-
 
         $('body').trigger('template.show');
       })
@@ -69,7 +82,17 @@
       $('body').on('click', '[data-hanchor]', function () {
         var anchor = $(this).data('hanchor');
 
+        location.hash = location.hash.replace(/@.+/, '') + '@' + anchor;
+
         $('[data-anchor="' + anchor + '"]').scrollTo();
+      });
+
+      Template.onShow(function () {
+        var match = location.hash.match(/\#\!.+@(.+)/);
+
+        if (match) {
+          $('[data-anchor="' + match[1] + '"]').scrollTo();
+        }
       })
     }
   };
@@ -77,19 +100,19 @@
   var Main = {
     init: function () {
       M.AutoInit();
-      Template.init();
       Sidenav.init();
       HAnchor.init();
+
+      Template.init();
 
       Template.onShow(function () {
         $('pre code').each(function (i, block) {
           hljs.highlightBlock(block);
         });
       });
-
-      if (location.hash.substring(0, 2) === '#!') {
-        Template.show(location.hash.substring(2));
-      }
+    },
+    ready:function () {
+      Template.ready();
     }
   };
 
@@ -100,4 +123,5 @@
   };
 
   $(document).ready(Main.init);
+  $(window).on('load', Main.ready);
 })(window, document, jQuery, M);
