@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col s12">
+
+    <h2>PHP - Opcache</h2>
+    <p>To give your application a huge speed boost, you must use a PHP Bytecode Cache.</p>
+    <p>Prefer <samp>Zend Opcache</samp>, is only opcode cache. Built for this, works for this.</p>
+    <p><a href="http://php.net/manual/en/opcache.configuration.php" class="btn-small" target="_blank">Opcache documentation</a></p>
+    <p>Configuration example :</p>
+    <pre><code class="ini">[opcache]
+; Determines if Zend OPCache is enabled
+opcache.enable=1
+; The OPcache shared memory storage size.
+opcache.memory_consumption=64 ; Or more for server multi-site
+; The amount of memory for interned strings in Mbytes.
+opcache.interned_strings_buffer=16
+; The maximum number of keys (scripts) in the OPcache hash table.
+opcache.max_accelerated_files=20000
+; Enabled a fast shutdown sequence
+opcache.fast_shutdown=1
+; Reduce the size of the optimized code.
+opcache.save_comments=0
+; Disable check for updated scripts.
+opcache.validate_timestamps=0</code></pre>
+
+    <h4>opcache.validate_timestamps</h4>
+    <p>If it's disabled, your PHP application will be completely cached, so you'll get the maximum performance.<br/>
+      But you must reset the OPcache manually or restart the webserver for changes to the filesystem to take effect.</p>
+    <p>You can very well plan in your deployment routine to restart <samp>php-fpm</samp> or other instances.</p>
+    <pre><code class="ini">opcache.validate_timestamps=0</code></pre>
+    <blockquote class="warning">
+      If is disable, you should adjust <samp>opcache.revalidate_freq</samp>.
+    </blockquote>
+
+    <h4>opcache.save_comments</h4>
+    <p>Nucleon does not use annotations, so saving comments in opcache is useless.</p>
+    <blockquote class="info">In general, annotations are bad practice. <br/>
+      In Java, C#, ...,  annonations aren't in comment blocks, and they are compile and used by the language.<br/>
+      In PHP, annonations are in comment blocks, and a comment is not code, it's a comment.</blockquote>
+  </div>
+</div>

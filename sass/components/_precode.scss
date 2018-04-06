@@ -4,9 +4,15 @@ kbd, samp {
   border-bottom: 2px solid rgba(color('grey', 'lighten-2'), 0.50);
   border-radius: 3px;
 
-  padding: 0.3em;
-  font-size: 0.9em;
+  padding: 0.3rem 0.3rem 0.1rem;
+  font-size: 0.9rem;
   white-space: nowrap;
+}
+blockquote {
+  kbd, samp {
+    background-color: color('grey', 'lighten-3') !important;
+    border-bottom: 2px solid color('grey', 'lighten-2');
+  }
 }
 pre {
   border-bottom: 2px solid color('grey', 'lighten-3');

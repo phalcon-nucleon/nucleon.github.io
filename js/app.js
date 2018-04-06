@@ -55,14 +55,12 @@
         }));
         $('[data-template-container]').html(data);
 
-        for (var refs = Template.__onShow, i = 0, l = refs.length; i < l; i++) {
-          refs[i]();
-        }
+
+        $('body').trigger('template.show');
       })
     },
-    __onShow: [],
     onShow: function (callback) {
-      this.__onShow.push(callback);
+      $('body').on('template.show', callback);
     }
   };
 
@@ -76,73 +74,12 @@
     }
   };
 
-  var Sticky = {
-    init: function () {
-      var tick;
-      $(window)
-          .on('resize', (function (tick) {
-            return function () {
-              if (tick) {
-                return;
-              }
-              tick = setTimeout(function () {
-                tick = null;
-                Sticky.register();
-                Sticky.computeResize();
-                Sticky.computeScroll();
-              }, 32)
-            }
-          })(null))
-          .on('scroll', (function (tick) {
-            return function () {
-              if (tick) {
-                return;
-              }
-              tick = setTimeout(function () {
-                tick = null;
-                Sticky.computeScroll()
-              }, 32)
-            }
-          })(null));
-
-      Template.onShow(Sticky.register);
-    },
-    register: function () {
-      $('.sticky').each(function () {
-        $(this).data('sticky-base-top', $(this).offset().top)
-      })
-    },
-    computeScroll: function () {
-      if (window.innerWidth <= 601) {
-        return
-      }
-      var doc = document.documentElement;
-      var top = (window.pageYOffset || doc.scrollTop) - doc.clientTop;
-      $('.sticky').each(function () {
-        var $this = $(this);
-        var btop = $this.data('sticky-base-top');
-
-        if (top > btop) {
-          $this.addClass('is-stuck')
-        } else {
-          $this.removeClass('is-stuck');
-        }
-      })
-    },
-    computeResize: function () {
-      if (window.innerWidth <= 601) {
-        $('.sticky.is-stuck').removeClass('is-stuck')
-      }
-    }
-  };
-
   var Main = {
     init: function () {
       M.AutoInit();
       Template.init();
       Sidenav.init();
       HAnchor.init();
-      Sticky.init();
 
       Template.onShow(function () {
         $('pre code').each(function (i, block) {

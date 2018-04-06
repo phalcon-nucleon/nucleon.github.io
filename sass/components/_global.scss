@@ -1,6 +1,10 @@
 a:focus {
   outline: 0;
 }
+[data-hanchor] {
+  @extend a;
+  cursor: pointer;
+}
 p {
   text-align: justify;
 }
@@ -82,32 +86,35 @@ main {
     max-width: 250px;
   }
 }
-ul.directory {
-  font-size: 1rem;
+ul.summary {
+  font-size: 0.9rem;
   padding-left: 24px;
   list-style-type: none;
 
+  & > li > a{
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  ul {
+    padding-left: 25px;
+  }
+
   li {
-    span.desc {
-      display: block;
+    line-height: 1.7;
+    a {
+      position: relative;
+      &:before {
+        position: absolute;
+        left: -1rem;
+        content: "#";
+        font-family: monospace;
+        color: color('red', 'accent-1');
+      }
     }
-
-    position: relative;
-    line-height: 33px;
-    &:before {
-      @include material-icon();
-      font-size: 1.5rem;
-      line-height: 1.5;
-      position: absolute;
-      left: -25px;
-      content: "folder";
-    }
-
-    &.special:before {
-      content: "folder_special";
-    }
-    &.open:before {
-      content: "folder_open";
+    kbd, samp {
+      padding: 0.1rem 0.3rem 0.1rem;
+      font-size: 0.8rem;
     }
   }
 }
