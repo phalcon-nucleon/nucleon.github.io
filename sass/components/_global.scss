@@ -134,6 +134,16 @@ ul.summary {
 
   a {
     display: block;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+}
+
+#index-page {
+  h1 {
+    font-weight: 500;
+    font-variant: small-caps;
   }
 }
 #page-index {

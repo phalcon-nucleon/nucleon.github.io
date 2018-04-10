@@ -82,6 +82,7 @@ pre[class*="language-"] {
 	opacity: .7;
 }
 
+.token.constant,
 .token.attr-name,
 .token.scope,
 .token.property,
@@ -109,7 +110,6 @@ pre[class*="language-"] {
 	color: #9a6e3a;
 }
 
-.token.constant,
 .token.atrule,
 .token.attr-value,
 .token.keyword {
@@ -140,5 +140,9 @@ pre[class*="language-"] {
 
 .token.entity {
 	cursor: help;
+}
+
+[class*="language-bash"] .token.function{
+	color: #DA564A;
 }
 
