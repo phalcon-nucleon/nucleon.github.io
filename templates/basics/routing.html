@@ -1,5 +1,92 @@
 <div class="row">
   <div class="col s12">
-    <h1>routing.html</h1>
+    <h2>Basic Routing</h2>
+    <p>All Nucleon routes are defined in your route files, which are located in the routes directory.<br/>
+      These files are automatically loaded by the framework.
+    </p>
+    <h3>Http kernel routes</h3>
+    <p>The <samp>routes/http.php</samp> file defines routes that are for your <samp>web</samp> interface.
+      The routes defined in <samp>routes/http.php</samp> may be accessed by entering the defined route's URL in your browser.
+      For example, you may access the following route by navigating to <samp>http://app.test/index</samp> in your browser : </p>
+    <pre><code class="language-php">$router->addGet('/user', ['controller' => 'home', 'action' => 'index']);</code></pre>
+    <p>The <samp>$router</samp> is retrieve via the dependency injector at the top of file :</p>
+    <pre><code class="language-php">$router = Phalcon\Di::getDefault()->getShared(Neutrino\Constants\Services::ROUTER);</code></pre>
+
+    <blockquote class="info">
+      Controllers must not have suffix <samp>Controller</samp>, that's automatically added via the dispatcher. <br/>
+      Action must not have suffix <samp>Action</samp>, that's automatically added via the dispatcher. <br/>
+    </blockquote>
+    <blockquote class="notice">
+      Controller & Action suffix are managed by <a target="_blank" href="https://docs.phalconphp.com/en/3.3/Phalcon_Mvc_Dispatcher"><samp>Phalcon\Mvc\Dispatcher</samp></a>
+    </blockquote>
+
+    <h3>Micro kernel routes</h3>
+    <p>The <samp>routes/micro.php</samp> file defines routes that are for your <samp>api</samp> interface.
+      The routes defined in <samp>routes/micro.php</samp> may be accessed by entering the defined route's URL in your browser.
+      For example, you may access the following route by navigating to <samp>http://app.test/api/index</samp> in your browser : </p>
+    <h4>via <samp>Closure</samp></h4>
+    <pre><code class="language-php">$router->addGet('/api/index', function(){
+    $this->response->setStatusCode(200);
+    $this->response->setJsonContent(['status' => 'found', 'code' => 200]);
+    return $this->response;
+});</code></pre>
+    <h4>via <samp>Controller</samp></h4>
+    <pre><code class="language-php">$router->addGet('/api/index', [
+    'controller' => App\Kernels\Micro\Controllers\MicroController::class,
+    'action' => 'indexAction'
+]);</code></pre>
+
+    <blockquote class="warning">
+      Controllers must be specified with his namespace, and suffix (ex Controller) <br/>
+    </blockquote>
+
+    <h2>Available Router Methods</h2>
+    <pre><code class="language-php">$router->addHead($uri, $definition);
+$router->addGet($uri, $definition);
+$router->addPost($uri, $definition);
+$router->addPut($uri, $definition);
+$router->addPatch($uri, $definition);
+$router->addDelete($uri, $definition);
+$router->addOptions($uri, $definition);
+// ONLY FOR HTTP KERNEL
+$router->addConnect($uri, $definition);
+$router->addPurge($uri, $definition);
+$router->addTrace($uri, $definition);</code></pre>
+
+    <h2>Route Definition</h2>
+    <p>The first parameter of the method (<samp>$uri</samp>) is the pattern you want to match.</p>
+    <p>The second parameter contains the definition of the route :</p>
+    <ul>
+      <li><samp>controller</samp> : Define the Controller who handle the route </li>
+      <li><samp>action</samp> : Define the Action of the controller who handle the route </li>
+    </ul>
+
+    <h3>Parameters</h3>
+    <p>The example below demonstrates how to define names to route parameters:</p>
+    <pre><code class="language-php">$router->addGet('/user/{id:\d+}', [
+    'controller' => 'user',
+    'action' => 'getById'
+]);</code></pre>
+
+    <p>Here we have define a route with a parameter named <samp>id</samp>. <br/>
+      Inside the controller, those named parameters can be accessed as follows:</p>
+    <pre><code class="language-php">use Neutrino\Http\Controller;
+
+class UserController extends Controller
+{
+    public function getByIdAction($id)
+    {
+        // Get parameter "id", via function params
+        $id;
+
+        // Get parameter "id", via dispatcher
+        $id = $this->dispatcher->getParam('id');
+    }
+}</code></pre>
+
+    <blockquote class="notice">For more information visite <a target="_blank" href="https://docs.phalconphp.com/en/3.3/routing">Phalcon routing</a></blockquote>
+    <h2>Route Groups</h2>
+    <p>Route groups allow you to share route attributes, such as middleware or namespaces, across a large number of routes without needing to define those attributes on each individual route. </p>
+    <p></p>
   </div>
 </div>

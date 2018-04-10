@@ -15,11 +15,11 @@ blockquote {
   }
 }
 pre {
+  padding: 0.5em;
   border-bottom: 2px solid color('grey', 'lighten-3');
   border-radius: 3px;
 
   code {
-    background-color: color('grey', 'lighten-4') !important;
     border-radius: 3px;
     font-size: 0.9em;
   }
@@ -28,6 +28,10 @@ pre {
     display: inline-block;
     line-height: 1;
     vertical-align: middle;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+
     code {
       padding: 0.3em;
     }
@@ -35,4 +39,11 @@ pre {
 }
 td > pre {
   margin: 0;
+}
+pre[class*="language-"] {
+  code {
+    background-color: inh;
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
 }

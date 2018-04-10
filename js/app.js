@@ -106,9 +106,7 @@
       Template.init();
 
       Template.onShow(function () {
-        $('pre code').each(function (i, block) {
-          hljs.highlightBlock(block);
-        });
+          Prism.highlightAll()
       });
     },
     ready:function () {

@@ -1,7 +1,8 @@
 <html>
 <head>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="css/highlight/github-gist.css">
+  <!--link rel="stylesheet" href="css/highlight/github-gist.css"-->
+  <link rel="stylesheet" href="css/prism/prism.css">
   <link rel="stylesheet" href="css/app.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -117,11 +118,11 @@
 <main>
   <div class="flex-content">
     <div class="container" data-template-container>
-      <div class="flex-wrapper flex-vcenter center-align full-vh full-hw">
+      <div id="page-index" class="flex-wrapper flex-vcenter center-align full-vh full-hw">
         <div class="flex-content">
-          <img src="img/nucleon.svg" class="main-logo">
-          <p class="flow-text">Nucleon : Phalcon extended framework</p>
-          <p class="flow-text">Our philosophy is to make the web faster, with enjoyable development.</p>
+          <div><img src="img/nucleon.svg" class="main-logo"></div>
+          <h1 class="flow-text center-align">Nucleon : Phalcon extended framework</h1>
+          <p class="flow-text center-align">Our philosophy is to make the web faster, with enjoyable development.</p>
         </div>
       </div>
     </div>
@@ -149,7 +150,8 @@
 
 <script src="js/jquery.min.js"></script>
 <script src="js/materialize.min.js"></script>
-<script src="js/highlight.min.js"></script>
+<!--script src="js/highlight.min.js"></script-->
+<script src="js/prism.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

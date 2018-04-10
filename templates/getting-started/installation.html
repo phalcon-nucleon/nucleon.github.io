@@ -11,7 +11,7 @@
     <p><a href="https://phalconphp.com/en/download/" class="btn-small" target="_blank">Phalcon installation documentation</a></p>
     <h3>Ubuntu or Debian</h3>
     To install Phalcon on Ubuntu or Debian you need to follow these steps:
-    <pre><code class="shell">$ curl -s "https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh" | sudo bash
+    <pre><code class="language-bash">$ curl -s "https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh" | sudo bash
 
 $ sudo apt-get install php5-phalcon
 
@@ -22,13 +22,15 @@ $ sudo apt-get install php7.0-phalcon
     <p><a href="https://github.com/phalcon/cphalcon/releases" class="btn-small" target="_blank">Download Windows DLL</a></p>
     <p>Windows DLLs can be downloaded from Phalcon Github release page.</p>
     <p>Then add in your php.ini</p>
-    <pre><code class="ini">extension=php_phalcon.dll</code></pre>
+    <pre><code class="language-ini">extension=php_phalcon.dll</code></pre>
 
     <h2>Nucleon Installation</h2>
     <h3>Via Composer Create-Project</h3>
-    <pre><code class="shell">$ composer create-project --prefer-dist nucleon/nucleon app-root</code></pre>
+    <pre><code class="language-bash">$ composer create-project --prefer-dist nucleon/nucleon app-root
+</code></pre>
     <h3>Local Development Server</h3>
     <p>If you have PHP installed locally and you would like to use PHP's built-in development server to serve your application, you may use the <samp>server:run</samp> Quark command. This command will start a development server at <samp>http://127.0.0.1:8000</samp>:</p>
-    <pre><code class="shell">$ php quark server:run</code></pre>
+    <pre><code class="language-bash">$ php quark server:run
+</code></pre>
   </div>
 </div>

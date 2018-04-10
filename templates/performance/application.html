@@ -40,7 +40,7 @@
     <p>To give your application a speed boost, you should cache your route file using the <samp>route:cache</samp> Quark command.
       This translate all used function for add a route to it's fasted way.</p>
     <p>Ex:</p>
-    <pre><code class="php">$router->addGet('/', [
+    <pre><code class="language-php">$router->addGet('/', [
   'controller' => 'home',
   'action' => 'index'
 ]);
@@ -48,7 +48,7 @@ $router->addPost('/', [
   'controller' => 'home',
   'action' => 'postIndex'
 ]);
-$frontend = new \Phalcon\Mvc\Router\Group([
+$frontend = new Phalcon\Mvc\Router\Group([
     'namespace' => 'My\Namespace',
     'module'     => 'Frontend'
 ]);
@@ -58,7 +58,7 @@ $frontend->addGet('/index', [
 ]);
 $router->mount($frontend);</code></pre>
     <p>Will become :</p>
-    <pre><code class="php">$router->add('/', ['controller' => 'home', 'action' => 'index'], 'GET');
+    <pre><code class="language-php">$router->add('/', ['controller' => 'home', 'action' => 'index'], 'GET');
 $router->add('/', ['controller' => 'home', 'action' => 'postIndex'], 'POST');
 $router->add('/index', ['namespace' => 'My\Namespace', 'module' => 'Frontend', 'controller' => 'home', 'action' => 'postIndex'], 'GET');</code></pre>
   </div>

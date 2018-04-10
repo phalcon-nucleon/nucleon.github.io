@@ -41,6 +41,9 @@ blockquote {
     &:before {
       content: 'lightbulb_outline';
     }
+    a {
+      color: color('deep-purple', 'darken-3');
+    }
   }
   &.info {
     border-color: color('grey', 'darken-1');
@@ -91,7 +94,7 @@ ul.summary {
   padding-left: 24px;
   list-style-type: none;
 
-  & > li > a{
+  & > li > a {
     font-size: 1rem;
     font-weight: bold;
   }
@@ -118,7 +121,6 @@ ul.summary {
     }
   }
 }
-
 .method-list {
   & > p {
     line-height: 1.9;
@@ -132,5 +134,11 @@ ul.summary {
 
   a {
     display: block;
+  }
+}
+#page-index {
+  h1 {
+    font-weight: 500;
+    font-variant: small-caps;
   }
 }

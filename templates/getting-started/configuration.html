@@ -10,12 +10,12 @@
     <p>
       Each configuration file will be added to the global object <samp>Phalcon\Config</samp> via its name.</p>
     <p>Ex :</p>
-    <pre><code class="php">// app.php
+    <pre><code class="language-php">// app.php
 return [
   'name' => 'nucleon'
 ];</code></pre>
     Will give :
-    <pre><code class="php">$config->app->name === 'nucleon';</code></pre>
+    <pre><code class="language-php">$config->app->name === 'nucleon';</code></pre>
 
     <h2>Environnement & DotConst</h2>
     <p>To work, nucleon, and neutrino, need to have 3 constants defined :</p>
@@ -30,7 +30,7 @@ return [
     <h3>How it work</h3>
     <p>In a fresh Nucleon installation, the root directory of your application will contain a <samp>.const.ini</samp> file</p>
     <p>The file contains :</p>
-    <pre><code class="ini">[base]
+    <pre><code class="language-ini">[base]
 path = @php/dir
 
 [app]
@@ -39,7 +39,7 @@ debug = true
 ;...
 </code></pre>
     <p>This will load in php : </p>
-    <pre><code class="php">BASE_PATH === '{base path of .const.ini file}'
+    <pre><code class="language-php">BASE_PATH === '{base path of .const.ini file}'
 APP_ENV === getenv('APP_ENV')
 APP_DEBUG === true
 </code></pre>
@@ -59,15 +59,15 @@ APP_DEBUG === true
       </thead>
       <tbody>
       <tr>
-        <td><pre class="inline"><code class="ini">@php/dir</code></pre></td>
+        <td><pre class="inline"><code class="language-ini">@php/dir</code></pre></td>
         <td>Base path of .const file</td>
       </tr>
       <tr>
-        <td><pre class="inline"><code class="ini">@php/env:ENV_VAR:default_value</code></pre></td>
-        <td>Call getenv('ENV_VAR'). if <samp>ENV_VAR</samp> is not set <pre class="inline"><code class="php">return 'default_value'</code></pre></td>
+        <td><pre class="inline"><code class="language-ini">@php/env:ENV_VAR:default_value</code></pre></td>
+        <td>Call getenv('ENV_VAR'). if <samp>ENV_VAR</samp> is not set <pre class="inline"><code class="language-php">return 'default_value'</code></pre></td>
       </tr>
       <tr>
-        <td><pre class="inline"><code class="ini">@php/const:PHP_VERSION_ID</code></pre></td>
+        <td><pre class="inline"><code class="language-ini">@php/const:PHP_VERSION_ID</code></pre></td>
         <td>Call constant('PHP_VERSION_ID')</td>
       </tr>
       </tbody>
@@ -76,17 +76,17 @@ APP_DEBUG === true
     <h3>Environment Overloading</h3>
     The first file called is <samp>.const.ini</samp>. If the variable <samp>APP_ENV</samp> is defined in this file, dotconst will look for the file <samp>.const.{APP_ENV}.ini</samp>, and override the base values. <br/>
     Useful when working on multiple environments.
-    <pre><code class="ini">; .const.ini
+    <pre><code class="language-ini">; .const.ini
 [app]
 env = production
 
 [database]
 host = localhost</code></pre>
-    <pre><code class="ini">; .const.production.ini
+    <pre><code class="language-ini">; .const.production.ini
 [database]
 host = 10.0.0.0</code></pre>
 
     Will become
-    <pre><code class="php">DATABASE_HOST === '10.0.0.0'</code></pre>
+    <pre><code class="language-php">DATABASE_HOST === '10.0.0.0'</code></pre>
   </div>
 </div>
