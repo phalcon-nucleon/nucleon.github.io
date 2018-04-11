@@ -1,19 +1,19 @@
 <div class="row">
   <div class="col s12">
     <blockquote>
-      <samp>php quark optimize</samp> do :
+      <code class="language-php">php quark optimize</code> do :
       <ul class="browser-default no-margin">
         <li>Class compilation</li>
         <li>Autoloader optimization</li>
-        <li><samp>config:cache</samp></li>
-        <li><samp>route:cache</samp></li>
-        <li><samp>DotConst</samp> caching</li>
+        <li><code class="language-php">config:cache</code></li>
+        <li><code class="language-php">route:cache</code></li>
+        <li><code class="language-php">DotConst</code> caching</li>
       </ul>
     </blockquote>
 
     <h2>Class compilation</h2>
     <p>The framework compiles some of the most used classes, which will be loaded before the bootstrap to speed up the application.</p>
-    <p>You can add classes to this compilation by writing them to the <samp>config/compile.php</samp> file.</p>
+    <p>You can add classes to this compilation by writing them to the <code class="language-php">config/compile.php</code> file.</p>
 
     <blockquote class="warning">
       Loading the compiled file is done before the autoload.<br/>
@@ -22,22 +22,22 @@
     </blockquote>
 
     <h2>Composer & Autoloading</h2>
-    <p>The command <samp>php quark optimize</samp> will convert the autoload composer, in autoload phalcon.</p>
-    <p>So the autoloading will be done via <samp>Phalcon\Loader</samp>.</p>
+    <p>The command <code class="language-php">php quark optimize</code> will convert the autoload composer, in autoload phalcon.</p>
+    <p>So the autoloading will be done via <code class="language-php">Phalcon\Loader</code>.</p>
 
     <h4>Optimize --process</h4>
-    <p>With option <samp>--process</samp> the optimizer will call <samp>composer --dumpautoload --optimize</samp> whose generate a classmap autoload.</p>
+    <p>With option <code class="language-php">--process</code> the optimizer will call <code class="language-php">composer --dumpautoload --optimize</code> whose generate a classmap autoload.</p>
     <p>This generates a huge array that will accelerate the loading process of the class.</p>
 
     <h4>Optimize --memory</h4>
-    <p>With option <samp>--memory</samp> the optimizer will call <samp>composer --dumpautoload</samp> whose generate a namespace autoload.</p>
-    <p>This significantly reduces the size of the <samp>autoload_classmap.php</samp> file and therefore the size of the generated file. This implies that the classes will not have a direct path to their file, and thus an additional processing on the part of the autoloader <samp>Phalcon\Loader</samp>.</p>
+    <p>With option <code class="language-php">--memory</code> the optimizer will call <code class="language-php">composer --dumpautoload</code> whose generate a namespace autoload.</p>
+    <p>This significantly reduces the size of the <code class="language-php">autoload_classmap.php</code> file and therefore the size of the generated file. This implies that the classes will not have a direct path to their file, and thus an additional processing on the part of the autoloader <code class="language-php">Phalcon\Loader</code>.</p>
 
     <h2>Configuration Caching</h2>
-    <p>To give your application a speed boost, you should cache all of your configuration files into a single file using the <samp>config:cache</samp> Quark command. This will combine all of the configuration options for your application into a single file which will be loaded quickly by the framework.</p>
+    <p>To give your application a speed boost, you should cache all of your configuration files into a single file using the <code class="language-php">config:cache</code> Quark command. This will combine all of the configuration options for your application into a single file which will be loaded quickly by the framework.</p>
 
     <h2>Route Caching</h2>
-    <p>To give your application a speed boost, you should cache your route file using the <samp>route:cache</samp> Quark command.
+    <p>To give your application a speed boost, you should cache your route file using the <code class="language-php">route:cache</code> Quark command.
       This translate all used function for add a route to it's fasted way.</p>
     <p>Ex:</p>
     <pre><code class="language-php">$router->addGet('/', [

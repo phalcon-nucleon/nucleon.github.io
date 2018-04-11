@@ -26,10 +26,10 @@ $ sudo apt-get install php7.0-phalcon
 
     <h2>Nucleon Installation</h2>
     <h3>Via Composer Create-Project</h3>
-    <pre><code class="language-bash">composer create-project --prefer-dist nucleon/nucleon app-root
+    <pre><code class="language-bash">$ composer create-project --prefer-dist nucleon/nucleon app-root
 </code></pre>
     <h3>Local Development Server</h3>
-    <p>If you have PHP installed locally and you would like to use PHP's built-in development server to serve your application, you may use the <samp>server:run</samp> Quark command. This command will start a development server at <samp>http://127.0.0.1:8000</samp>:</p>
+    <p>If you have PHP installed locally and you would like to use PHP's built-in development server to serve your application, you may use the <code class="language-php">server:run</code> Quark command. This command will start a development server at <code class="language-php">http://127.0.0.1:8000</code>:</p>
     <pre><code class="language-bash">$ php quark server:run
 </code></pre>
     <h2>WebServer Configuration</h2>
@@ -40,7 +40,7 @@ $ sudo apt-get install php7.0-phalcon
     </p>
 
     <h3>Nginx</h3>
-    <p>If you use Nginx, the following directive in your site configuration will redirect requests to the front controller <samp>index.php</samp> / <samp>micro.php</samp>:</p>
+    <p>If you use Nginx, the following directive in your site configuration will redirect requests to the front controller <code class="language-php">index.php</code> / <code class="language-php">micro.php</code>:</p>
     <pre><code class="language-nginx">server {
     # ...
     server_name example.com;
@@ -64,8 +64,8 @@ $ sudo apt-get install php7.0-phalcon
 }</code></pre>
 
     <h3>Apache</h3>
-    <p>Nucleon includes a <samp>public/.htaccess</samp> file that is used to provide URLs without the <samp>index.php</samp> / <samp>micro.php</samp>, front controller in the path. Before serving Nucleon with Apache, be sure to enable the <samp>mod_rewrite</samp> module so the <samp>.htaccess</samp> file will be honored by the server.</p>
-    <p>If the <samp>.htaccess</samp> file that ships with Nucleon does not work with your Apache installation, try this alternative:</p>
+    <p>Nucleon includes a <code class="language-php">public/.htaccess</code> file that is used to provide URLs without the <code class="language-php">index.php</code> / <code class="language-php">micro.php</code>, front controller in the path. Before serving Nucleon with Apache, be sure to enable the <code class="language-php">mod_rewrite</code> module so the <code class="language-php">.htaccess</code> file will be honored by the server.</p>
+    <p>If the <code class="language-php">.htaccess</code> file that ships with Nucleon does not work with your Apache installation, try this alternative:</p>
     <pre><code class="language-apacheconf">Options +FollowSymLinks
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-d

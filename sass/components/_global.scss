@@ -77,7 +77,6 @@ main {
   @extend .flex-wrapper;
 
   .flex-content {
-    @include wild-container();
   }
 
   .full-hw {
