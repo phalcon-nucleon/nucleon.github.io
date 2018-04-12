@@ -1,0 +1,573 @@
+<div class="row">
+  <div class="col s12">
+    <blockquote>The implementation of migration is totally inspired <a target="_blank" href="https://laravel.com/docs/5.3/migrations">laravel/migration</a>
+      , the use is almost strictly the same.
+      Only the different points have been adapted in this documentation.
+    </blockquote>
+    <h2>Intro</h2>
+    <p>Migrations are like version control for your database.</p>
+    <p>The Neutrino <code>Schema\Builder</code> provides database agnostic support for creating and manipulating tables across all of
+      Phalcon's supported database systems.</p>
+
+    <h2>Generating Migrations</h2>
+    <p>To create a migration, use the <code>make:migration</code> quark command:</p>
+    <pre><code>php quark make:migration create_users_table</code></pre>
+    <p>The new migration will be placed in your <code>/migrations</code> directory. Each migration file name contains a timestamp which
+      allows Neutrino
+      to determine the order of the migrations.</p>
+    <pre><code>php quark make:migration create_users_table --create=users
+
+php quark make:migration add_votes_to_users_table --table=users</code></pre>
+
+    <p>If you would like to specify a custom output path for the generated migration, you may use the <code>--path</code> option when
+      executing the
+      <code>make:migration</code> command. The given path should be relative to your application's base path.</p>
+
+    <h2>Migration Structure</h2>
+    <p>A migration class contains two methods: <code>up</code> and <code>down</code>. The up method is used to add new tables, columns, or
+      indexes to your database, while the <code>down</code> method should simply reverse the operations performed by the <code>up</code>
+      method.</p>
+
+    <p>Within both of these methods you may use the Neutrino schema builder to expressively create and modify tables. To learn about all of
+      the methods available on the <code>Schema\Builder</code>, <a href="#!database/migrations.html@create-tables">check out its
+        documentation</a>.
+      For example, this migration example creates a <code>flights</code> table:</p>
+    <pre><code>use Neutrino\Database\Migrations\Migration;
+use Neutrino\Database\Schema\Builder;
+use Neutrino\Database\Schema\Blueprint;
+
+class CreateFlightsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @param Neutrino\Database\Schema\Builder $builder
+     *
+     * @return void
+     */
+    public function up(Builder $builder)
+    {
+        $builder->create('flights', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('airline');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @param Neutrino\Database\Schema\Builder $builder
+     *
+     * @return void
+     */
+    public function down(Builder $builder)
+    {
+        $builder->drop('flights');
+    }
+}</code></pre>
+
+    <h2>Running Migrations</h2>
+    <p>To run all of your outstanding migrations, execute the <code>migrate</code> quark command:</p>
+    <pre><code>php quark migrate</code></pre>
+    <p><strong>Forcing Migrations To Run In Production</strong></p>
+    <p>Some migration operations are destructive, which means they may cause you to lose data. In order to protect you from running these
+      commands against your production database, you will be prompted for confirmation before the commands are executed. To force the
+      commands to run without a prompt, use the <code>--force</code> flag:</p>
+    <pre><code>php quark migrate --force</code></pre>
+
+    <h3>Rolling Back Migrations</h3>
+    <p>To rollback the latest migration operation, you may use the <code>rollback</code> command. This command rolls back the last "batch"
+      of migrations, which may include multiple migration files:</p>
+    <pre><code>php quark migrate:rollback</code></pre>
+    <p>You may rollback a limited number of migrations by providing the <code>step</code> option to the <code>rollback</code> command. For
+      example, the following command will rollback the last five migrations:</p>
+    <pre><code>php quark migrate:rollback --step=5</code></pre>
+    <p>The <code>migrate:reset</code> command will roll back all of your application's migrations:</p>
+    <pre><code>php quark migrate:reset</code></pre>
+
+    <h4>Rollback & Migrate In Single Command</h4>
+    <p>The <code>migrate:refresh</code> command will roll back all of your migrations and then execute the migrate command. This command
+      effectively re-creates your entire database:</p>
+    <pre><code>php quark migrate:refresh</code></pre>
+    <p>You may rollback & re-migrate a limited number of migrations by providing the <code>step</code> option to the <code>refresh</code>
+      command. For example, the following command will rollback & re-migrate the last five migrations:</p>
+    <pre><code>php quark migrate:refresh --step=5</code></pre>
+
+    <h4>Drop All Tables & Migrate</h4>
+    <p>The <code>migrate:fresh</code> command will drop all tables from the database and then execute the <code>migrate</code> command:</p>
+
+    <h2>Tables</h2>
+    <h3>Creating tables</h3>
+    <p>To create a new database table, use the <code>create</code> method on the <code>Schema\Builder</code>. The <code>create</code> method
+      accepts two arguments. The first is the name of the table, while the second is a <code>Closure</code> which receives a
+      <code>Blueprint</code> object that may be used to define the new table:</p>
+    <pre><code>use \Neutrino\Database\Schema;
+
+$builder = new Schema\Builder();
+
+$builder->create('users', function (Schema\Blueprint $table) {
+    $table->increments('id');
+});</code></pre>
+    <p>Of course, when creating the table, you may use any of the schema builder's column methods to define the table's columns.</p>
+
+    <h4>Checking For Table / Column Existence</h4>
+    <p>You may easily check for the existence of a table or column using the <code>hasTable</code> and <code>hasColumn</code> methods:</p>
+    <pre><code>if ($builder->hasTable('users')) {
+    //
+}
+if ($builder->hasColumn('users', 'email')) {
+    //
+}</code></pre>
+
+    <h4>Table Options</h4>
+    <p>You may use the following commands on the schema builder to define the table's options:</p>
+    <table class="small">
+      <thead>
+      <tr>
+        <th>Command</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>$table->option('engine', 'InnoDB');</code></td>
+        <td>Specify the table storage engine (MySQL).</td>
+      </tr>
+      <tr>
+        <td><code>$table->option('charset', 'utf8');</code></td>
+        <td>Specify a default character set for the table (MySQL).</td>
+      </tr>
+      <tr>
+        <td><code>$table->option('collation', 'utf8_unicode_ci');</code></td>
+        <td>Specify a default collation for the table (MySQL).</td>
+      </tr>
+      <tr>
+        <td><code>$table->temporary();</code></td>
+        <td>Create a temporary table (except SQL Server).</td>
+      </tr>
+      </tbody>
+    </table>
+    <h3>Renaming / Dropping Tables</h3>
+    <p>To rename an existing database table, use the <code>rename</code> method:</p>
+    <pre><code>$builder->rename($from, $to);</code></pre>
+    <p>To drop an existing table, you may use the <code>drop</code> or <code>dropIfExists</code> methods:</p>
+    <pre><code>$builder->drop('users');
+
+$builder->dropIfExists('users');</code></pre>
+    <p><strong>Renaming Tables With Foreign Keys</strong> Before renaming a table, you should verify that any foreign key constraints on the
+      table have an explicit name in your migration files instead of letting Neutrino assign a convention based name. Otherwise, the foreign
+      key constraint name will refer to the old table name.</p>
+
+    <h2>Columns</h2>
+    <h3>Creating Columns</h3>
+    <p>The <code>table</code> method on the <code>Schema\Builder</code> may be used to update existing tables. Like the <code>create</code>
+      method, the <code>table</code> method accepts two arguments: the name of the table and a <code>Closure</code> that receives a <code>Blueprint</code>
+      instance you may use to add columns to the table:</p>
+    <pre><code>$builder->table('users', function (Blueprint $table) {
+    $table->string('email');
+});</code></pre>
+
+    <h4>Available Column Types</h4>
+    <p>Of course, the schema builder contains a variety of column types that you may specify when building your tables</p>
+    <table class="small">
+      <thead>
+      <tr>
+        <th>Command</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>$table->bigIncrements('id');</code></td>
+        <td>Incrementing ID (primary key) using a "UNSIGNED BIG INTEGER" equivalent</td>
+      </tr>
+      <tr>
+        <td><code>$table->bigInteger('votes');</code></td>
+        <td>BIGINT equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->binary('data');</code></td>
+        <td>BLOB equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->boolean('confirmed');</code></td>
+        <td>BOOLEAN equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->char('name', 4);</code></td>
+        <td>CHAR equivalent with a length</td>
+      </tr>
+      <tr>
+        <td><code>$table->date('created_at');</code></td>
+        <td>DATE equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->dateTime('created_at');</code></td>
+        <td>DATETIME equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->dateTimeTz('created_at');</code></td>
+        <td>DATETIME (with timezone) equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->decimal('amount', 5, 2);</code></td>
+        <td>DECIMAL equivalent with a precision and scale</td>
+      </tr>
+      <tr>
+        <td><code>$table->double('column', 15, 8);</code></td>
+        <td>DOUBLE equivalent with precision, 15 digits in total and 8 after the decimal point</td>
+      </tr>
+      <tr>
+        <td><code>$table->enum('choices', ['foo', 'bar']);</code></td>
+        <td>ENUM equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->float('amount', 8, 2);</code></td>
+        <td>FLOAT equivalent for the database, 8 digits in total and 2 after the decimal point</td>
+      </tr>
+      <tr>
+        <td><code>$table->increments('id');</code></td>
+        <td>Incrementing ID (primary key) using a "UNSIGNED INTEGER" equivalent</td>
+      </tr>
+      <tr>
+        <td><code>$table->integer('votes');</code></td>
+        <td>INTEGER equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->ipAddress('visitor');</code></td>
+        <td>IP address equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->json('options');</code></td>
+        <td>JSON equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->jsonb('options');</code></td>
+        <td>JSONB equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->longText('description');</code></td>
+        <td>LONGTEXT equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->macAddress('device');</code></td>
+        <td>MAC address equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->mediumIncrements('id');</code></td>
+        <td>Incrementing ID (primary key) using a "UNSIGNED MEDIUM INTEGER" equivalent</td>
+      </tr>
+      <tr>
+        <td><code>$table->mediumInteger('numbers');</code></td>
+        <td>MEDIUMINT equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->mediumText('description');</code></td>
+        <td>MEDIUMTEXT equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->morphs('taggable');</code></td>
+        <td>Adds unsigned INTEGER taggable_id and STRING taggable_type</td>
+      </tr>
+      <tr>
+        <td><code>$table->nullableMorphs('taggable');</code></td>
+        <td>Nullable versions of the morphs() columns</td>
+      </tr>
+      <tr>
+        <td><code>$table->nullableTimestamps();</code></td>
+        <td>Nullable versions of the timestamps() columns</td>
+      </tr>
+      <tr>
+        <td><code>$table->rememberToken();</code></td>
+        <td>Adds remember_token as VARCHAR(100) NULL</td>
+      </tr>
+      <tr>
+        <td><code>$table->smallIncrements('id');</code></td>
+        <td>Incrementing ID (primary key) using a "UNSIGNED SMALL INTEGER" equivalent</td>
+      </tr>
+      <tr>
+        <td><code>$table->smallInteger('votes');</code></td>
+        <td>SMALLINT equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->softDeletes();</code></td>
+        <td>Adds nullable deleted_at column for soft deletes</td>
+      </tr>
+      <tr>
+        <td><code>$table->string('email');</code></td>
+        <td>VARCHAR equivalent column</td>
+      </tr>
+      <tr>
+        <td><code>$table->string('name', 100);</code></td>
+        <td>VARCHAR equivalent with a length</td>
+      </tr>
+      <tr>
+        <td><code>$table->text('description');</code></td>
+        <td>TEXT equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->time('sunrise');</code></td>
+        <td>TIME equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->timeTz('sunrise');</code></td>
+        <td>TIME (with timezone) equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->tinyInteger('numbers');</code></td>
+        <td>TINYINT equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->timestamp('added_on');</code></td>
+        <td>TIMESTAMP equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->timestampTz('added_on');</code></td>
+        <td>TIMESTAMP (with timezone) equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->timestamps();</code></td>
+        <td>Adds nullable created_at and updated_at columns</td>
+      </tr>
+      <tr>
+        <td><code>$table->timestampsTz();</code></td>
+        <td>Adds nullable created_at and updated_at (with timezone) columns</td>
+      </tr>
+      <tr>
+        <td><code>$table->unsignedBigInteger('votes');</code></td>
+        <td>Unsigned BIGINT equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->unsignedInteger('votes');</code></td>
+        <td>Unsigned INT equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->unsignedMediumInteger('votes');</code></td>
+        <td>Unsigned MEDIUMINT equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->unsignedSmallInteger('votes');</code></td>
+        <td>Unsigned SMALLINT equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->unsignedTinyInteger('votes');</code></td>
+        <td>Unsigned TINYINT equivalent for the database</td>
+      </tr>
+      <tr>
+        <td><code>$table->uuid('id');</code></td>
+        <td>UUID equivalent for the database</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h3>Column Modifiers</h3>
+    <p>In addition to the column types listed above, there are several column "modifiers" you may use while adding a column to a database
+      table. For example, to make the column <code>nullable</code> you may use the <code>nullable</code> method:</p>
+    <pre><code>$builder->create('users', function (Schema\Blueprint $table) {
+    $table->string('email')->nullable();
+});</code></pre>
+
+    <p>Below is a list of all the available column modifiers. This list does not include the index modifiers:</p>
+
+    <table class="small">
+      <thead>
+      <tr>
+        <th>Command</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>->after('column')</code></td>
+        <td>Place the column "after" another column (MySQL)</td>
+      </tr>
+      <tr>
+        <td><code>->autoIncrement()</code></td>
+        <td>Set INTEGER columns as auto-increment (primary key)</td>
+      </tr>
+      <tr>
+        <td><code>->comment('my comment')</code></td>
+        <td>Add a comment to a column (MySQL)</td>
+      </tr>
+      <tr>
+        <td><code>->default($value)</code></td>
+        <td>Specify a "default" value for the column</td>
+      </tr>
+      <tr>
+        <td><code>->first()</code></td>
+        <td>Place the column "first" in the table (MySQL)</td>
+      </tr>
+      <tr>
+        <td><code>->nullable($value = true)</code></td>
+        <td>Allows (by default) NULL values to be inserted into the column</td>
+      </tr>
+      <tr>
+        <td><code>->unsigned()</code></td>
+        <td>Set INTEGER columns as UNSIGNED (MySQL)</td>
+      </tr>
+      </tbody>
+    </table>
+    
+    <h3>Modifying Columns</h3>
+    <h4>Updating Column Attributes</h4>
+    <p>The modification is implicit, when you redefine a column in an update, it will be modified.</p>
+    <p>For example, you may want to increase the size of a string column. increase the size of the name column from 25 to 50:</p>
+    <pre><code>$builder->create('users', function (Schema\Blueprint $table) {
+    $table->string('name', 25);
+});
+$builder->table('users', function (Schema\Blueprint $table) {
+    $table->string('name', 50);
+});</code></pre>
+    
+    <p>We could also modify a column to be nullable:</p>
+    <pre><code>$builder->table('users', function (Schema\Blueprint $table) {
+    $table->string('name', 50)->nullable();
+});</code></pre>
+    
+    <h4>Renaming Columns</h4>
+    <p>To rename a column, you may use the <code>renameColumn</code> method on the <code>Schema\Builder</code>.</p>
+    <pre><code>$builder->table('users', function (Schema\Blueprint $table) {
+    $table->renameColumn('from', 'to');
+});</code></pre>
+    
+    <h3>Dropping Columns</h3>
+    <p>To drop a column, use the <code>dropColumn</code> method on the <code>Schema\Builder</code>. To drop many column in one line, use the
+      <code>dropColumns</code> method.</p>
+    <pre><code>$builder->table('users', function (Schema\Blueprint $table) {
+    $table->dropColumn('votes');
+    $table->dropColumns(['votes', 'avatar', 'location']);
+});</code></pre>
+    <h4>Available Command Aliases</h4>
+
+    <table class="small">
+      <thead>
+      <tr>
+        <th>Command</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>$table->dropRememberToken();</code></td>
+        <td>Drop the remember_token column</td>
+      </tr>
+      <tr>
+        <td><code>$table->dropSoftDeletes();</code></td>
+        <td>Drop the deleted_at column</td>
+      </tr>
+      <tr>
+        <td><code>$table->dropSoftDeletesTz();</code></td>
+        <td>Alias of dropSoftDeletes() method</td>
+      </tr>
+      <tr>
+        <td><code>$table->dropTimestamps();</code></td>
+        <td>Drop the created_at and updated_at columns</td>
+      </tr>
+      <tr>
+        <td><code>$table->dropTimestampsTz();</code></td>
+        <td>Alias of dropTimestamps() method</td>
+      </tr>
+      </tbody>
+    </table>
+    <h2>Indexes</h2>
+    <h3>Creating Indexes</h3>
+    <p>The schema builder supports several types of indexes. First, let's look at an example that specifies a column's values should be
+      unique. To create the index, we can simply chain the <code>unique</code> method onto the column definition:</p>
+    <pre><code>$table->string('email')->unique();</code></pre>
+
+    <p>Alternatively, you may create the index after defining the column. For example:</p>
+    <pre><code>$table->unique('email');</code></pre>
+
+    <p>You may even pass an array of columns to an index method to create a compound (or composite) index:</p>
+    <pre><code>$table->index(['account_id', 'created_at']);</code></pre>
+
+    <p>Neutrino will automatically generate a reasonable index name, but you may pass a second argument to the method to specify the name yourself:</p>
+    <pre><code>$table->unique('email', 'unique_email');</code></pre>
+    <h4>Available Index Types</h4>
+
+    <table class="small">
+      <thead>
+      <tr>
+        <th>Command</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>$table->primary('id');</code></td>
+        <td>Adds a primary key</td>
+      </tr>
+      <tr>
+        <td><code>$table->primary(['id', 'parent_id']);</code></td>
+        <td>Adds composite keys</td>
+      </tr>
+      <tr>
+        <td><code>$table->unique('email');</code></td>
+        <td>Adds a unique index</td>
+      </tr>
+      <tr>
+        <td><code>$table->index('state');</code></td>
+        <td>Adds a plain index</td>
+      </tr>
+      </tbody>
+    </table>
+    
+    <h3>Dropping Indexes</h3>
+    <p>To drop an index, you must specify the index's name. By default, Neutrino automatically assigns a reasonable name to the indexes.
+      Simply concatenate the table name, the name of the indexed column, and the index type. Here are some examples:</p>
+
+    <table class="small">
+      <thead>
+      <tr>
+        <th>Command</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>$table->dropPrimary('users_id_primary');</code></td>
+        <td>Drop a primary key from the "users" table</td>
+      </tr>
+      <tr>
+        <td><code>$table->dropUnique('users_email_unique');</code></td>
+        <td>Drop a unique index from the "users" table</td>
+      </tr>
+      <tr>
+        <td><code>$table->dropIndex('geo_state_index');</code></td>
+        <td>Drop a basic index from the "geo" table</td>
+      </tr>
+      </tbody>
+    </table>
+    <p>If you pass an array of columns into a method that drops indexes, the conventional index name will be generated based on the table
+      name, columns and key type:</p>
+    <pre><code>$builder->table('geo', function (Schema\Blueprint $table) {
+     $table->dropIndex(['state']); // Drops index 'geo_state_index'
+});</code></pre>
+
+    <h3>Foreign Key Constraints</h3>
+    <p>Neutrino also provides support for creating foreign key constraints, which are used to force referential integrity at the database
+      level.
+      For example, let's define a <code>user_id</code> column on the posts table that references the <code>id</code> column on a users
+      table:</p>
+    <pre><code>$builder->table('posts', function (Schema\Blueprint $table) {
+    $table->integer('user_id')->unsigned();
+
+    $table->foreign('user_id')->references('id')->on('users');
+});</code></pre>
+    <p>You may also specify the desired action for the "on delete" and "on update" properties of the constraint:</p>
+    <pre><code>$table->foreign('user_id')
+    ->references('id')->on('users')
+    ->onDelete('cascade');</code></pre>
+
+    <p>To drop a foreign key, you may use the <code>dropForeign</code> method. Foreign key constraints use the same naming convention as
+      indexes. So, we will concatenate the table name and the columns in the constraint then suffix the name with <code>_foreign</code>:</p>
+    <pre><code>$table->dropForeign('posts_user_id_foreign');</code></pre>
+
+    <p>You may enable or disable foreign key constraints within your migrations by using the following methods:</p>
+    <pre><code>$builder->enableForeignKeyConstraints();
+
+$builder->disableForeignKeyConstraints();</code></pre>
+  </div>
+</div>

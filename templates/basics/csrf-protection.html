@@ -1,5 +1,44 @@
 <div class="row">
   <div class="col s12">
-    <h1>csrf-protection.html</h1>
+    <h2>CSRF</h2>
+    <p>Nucleon makes it easy to protect your application from <a target="_blank" href="https://en.wikipedia.org/wiki/Cross-site_request_forgery">
+      cross-site request forgery</a> (CSRF) attacks. Cross-site request forgeries are a type of malicious exploit whereby unauthorized commands are
+      performed on behalf of an authenticated user.</p>
+
+    <p>Nucleon automatically generates a CSRF "token" for each active user session managed by the application. This token is used to verify
+      that the authenticated user is the one actually making the requests to the application.</p>
+
+    <p>Anytime you define a HTML form in your application, you should include a hidden CSRF token field in the form so that the CSRF protection middleware can validate the request. You may use the <code>csrf</code> function to generate the token field:</p>
+
+    <pre><code class="language-twig">{{ form('/profile', 'method': 'POST') }}
+    {{ csrf() }}
+    ...
+{{ end_form() }}</code></pre>
+    <p>The <code>Csrf</code> middleware, will automatically verify that the token in the request input matches the token stored in the
+      session.</p>
+
+    <pre><code>$router->addPost('/profile', [
+    'middleware' => [
+      Neutrino\Http\Middleware\Csrf::class
+    ]
+]);</code></pre>
+
+    <blockquote class="notice">
+      For more information read <a target="_blank" href="https://docs.phalconphp.com/en/3.3/security">Phalcon Security</a>
+    </blockquote>
+
+    <h2>X-CSRF</h2>
+    <p>In addition to checking for the CSRF token as a POST parameter, the <code>Csrf</code> middleware will also check for the <code>X-CSRF-{KEY}</code>
+      request header. You could, for example, store the token in a HTML meta tag:</p>
+    <pre><code class="language-html">&lt;meta name="x-csrf-key" content="{{ csrf_key() }}">
+&lt;meta name="x-csrf-token" content="{{ csrf_token() }}"></code></pre>
+    <p>Then, once you have created the <code>meta</code> tag, you can instruct a library like jQuery to automatically add the token to all
+      request headers. This provides simple, convenient CSRF protection for your AJAX based applications:</p>
+    <pre><code class="language-javascript">var headers = {};
+
+headers['X-CSRF-' + $('meta[name="x-csrf-key"]').attr('content')] = $('meta[name="x-csrf-token"]').attr('content');
+
+$.ajaxSetup({headers: headers});</code></pre>
+
   </div>
 </div>
