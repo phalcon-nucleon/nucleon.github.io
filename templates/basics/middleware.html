@@ -1,5 +1,192 @@
 <div class="row">
   <div class="col s12">
-    <h1>middleware.html</h1>
+    <p>Middleware provide a convenient mechanism for filtering requests entering your application.</p>
+    <p>Middleware are managed through the Event Manager.</p>
+    <p>They can handle 4 methods :</p>
+    <ul class="browser-default">
+      <li>init : Initialization</li>
+      <li>before : Before handle the request</li>
+      <li>after : After handle the request</li>
+      <li>finish : Finalization</li>
+    </ul>
+    <p>They 3 types of middleware :</p>
+    <ul class="browser-default">
+      <li>Application middleware</li>
+      <li>Dispatcher middleware</li>
+      <li>Controller middleware</li>
+    </ul>
+
+    <h2>Application Middleware</h2>
+    <p>Handle : </p>
+    <table class="auto-size list">
+      <tbody>
+      <tr>
+        <td>init</td>
+        <td><code>Neutrino\Constants\Events\Http\Application::BOOT</code></td>
+      </tr>
+      <tr>
+        <td>before</td>
+        <td><code>Neutrino\Constants\Events\Http\Application::BEFORE_HANDLE</code></td>
+      </tr>
+      <tr>
+        <td>after</td>
+        <td><code>Neutrino\Constants\Events\Http\Application::AFTER_HANDLE</code></td>
+      </tr>
+      <tr>
+        <td>finish</td>
+        <td><code>Neutrino\Constants\Events\Http\Application::BEFORE_SEND_RESPONSE</code></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <blockquote class="info">Application middleware are register in the kernel, in property $middlewares.</blockquote>
+
+    <pre><code>namespace App\Kernels\Http;
+
+class Kernel extends Neutrino\Foundation\Http\Kernel
+{
+    protected $middlewares = [
+        ExampleApplicationMiddleware::class
+    ];
+}</code></pre>
+
+    <h2>Dispatcher Middleware</h2>
+    <p>Handle : </p>
+    <table class="auto-size list">
+      <tbody>
+      <tr>
+        <td>init</td>
+        <td><code>Neutrino\Constants\Events\Dispatch::BEFORE_DISPATCH_LOOP</code></td>
+      </tr>
+      <tr>
+        <td>before</td>
+        <td><code>Neutrino\Constants\Events\Dispatch::BEFORE_DISPATCH</code></td>
+      </tr>
+      <tr>
+        <td>after</td>
+        <td><code>Neutrino\Constants\Events\Dispatch::AFTER_DISPATCH</code></td>
+      </tr>
+      <tr>
+        <td>finish</td>
+        <td><code>Neutrino\Constants\Events\Dispatch::AFTER_DISPATCH_LOOP</code></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <blockquote class="info">Dispatcher middleware are register in the kernel, in property $middlewares.</blockquote>
+
+    <pre><code>namespace App\Kernels\Http;
+
+class Kernel extends Neutrino\Foundation\Http\Kernel
+{
+    protected $middlewares = [
+        ExampleDispatcherMiddleware::class
+    ];
+}</code></pre>
+
+    <h2>Controller Middleware</h2>
+    <p>Handle : </p>
+    <table class="auto-size list">
+      <tbody>
+      <tr>
+        <td>before</td>
+        <td><code>Neutrino\Constants\Events\Dispatch::BEFORE_EXECUTE_ROUTE</code></td>
+      </tr>
+      <tr>
+        <td>after</td>
+        <td><code>Neutrino\Constants\Events\Dispatch::AFTER_EXECUTE_ROUTE</code></td>
+      </tr>
+      <tr>
+        <td>finish</td>
+        <td><code>Neutrino\Constants\Events\Dispatch::AFTER_DISPATCH</code></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h3>Register a Controller Middleware</h3>
+    <h4>Via the Router</h4>
+    <p>Controller middleware can be register directly in the route, via the attribute <code>middleware</code>.</p>
+    <p>Here we register a middleware only on <code>ProfileController::indexAction</code></p>
+    <pre><code class="language-php">$router->addGet('/profile', [
+    'controller' => 'profile',
+    'action' => 'index',
+    'middleware' => [
+        Neutrino\Auth\Middleware\Authenticate::class
+    ]
+]);</code></pre>
+
+    <h4>Via the Controller</h4>
+    <p>Controller middleware can be register directly in the controller, in the <code>onConstruct</code> method.</p>
+
+    <p>Here we register a middleware on all methods of <code>ProfileController</code></p>
+    <pre><code class="language-php">class ProfileController extends Neutrino\Http\Controller
+{
+    protected function onConstruct()
+    {
+        $this->middleware(\Neutrino\Auth\Middleware\Authenticate::class);
+    }
+}</code></pre>
+
+    <h5>Filter Middleware</h5>
+    <p>The middleware on the controllers can be filtered.</p>
+    <p>You can specify the method(s) subject to the middleware setting with the <code>only</code> function.</p>
+    <p>Or, conversely, exclude the method(s) that will not be submitted to the middleware with the <code>except</code> function.</p>
+
+    <pre><code class="language-php">class AuthController extends Neutrino\Http\Controller
+{
+    protected function onConstruct()
+    {
+        $this->middleware(\Neutrino\Http\Middleware\Csrf::class)
+            // CSRF middleware only on loginAction
+            ->only(['login']);
+        $this->middleware(\Neutrino\Auth\Middleware\Authenticate::class)
+            // Authenticate middleware expect on loginAction
+            ->expect(['login']);
+    }
+}</code></pre>
+
+    <h4>Create Middleware</h4>
+    <p>You can create your own middleware by inheriting <code>Middleware\Application</code>, <code>Middleware\Dispatcher</code>, or <code>Middleware\Controller</code>.</p>
+    <p>The management of associated events does this simply by implementing the interfaces :</p>
+    <table class="auto-size list">
+      <tbody>
+      <tr>
+        <td>init</td>
+        <td><code>Neutrino\Interfaces\Middleware\InitInterface</code></td>
+      </tr>
+      <tr>
+        <td>before</td>
+        <td><code>Neutrino\Interfaces\Middleware\BeforeInterface</code></td>
+      </tr>
+      <tr>
+        <td>after</td>
+        <td><code>Neutrino\Interfaces\Middleware\AfterInterface</code></td>
+      </tr>
+      <tr>
+        <td>finish</td>
+        <td><code>Neutrino\Interfaces\Middleware\FinishInterface</code></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <pre><code>use Neutrino\Constants\Services;
+use Neutrino\Foundation\Middleware\Controller as ControllerMiddleware;
+use Neutrino\Interfaces\Middleware\BeforeInterface;
+use Phalcon\Events\Event;
+
+class RedirectIfAuthenticated extends ControllerMiddleware implements BeforeInterface
+{
+    public function before(Event $event, $source, $data = null)
+    {
+        if($this->{Services::AUTH}->check()){
+            $this->response->redirect('/');
+
+            // Stop the dispatcher
+            return false;
+        }
+
+        return true;
+    }
+}</code></pre>
   </div>
 </div>

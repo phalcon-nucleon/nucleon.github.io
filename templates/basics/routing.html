@@ -121,7 +121,7 @@ $router->addGet('posts/{id:[0-9]+}/{slug:[\w-]+}', []);</code></pre>
     'controller' => 'auth',
     'action' => 'postLogin',
     'middleware' => [
-        Neutrino\Auth\Middleware\Guest::class,
+        App\Kernels\Http\Middleware\RedirectIfAuthenticated::class,
         Neutrino\Http\Middleware\Csrf::class
     ],
 ]);</code></pre>
