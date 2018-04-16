@@ -78,194 +78,428 @@
     <div>
       <h4 data-anchor="arr-accessible"><code>Arr::accessible</code></h4>
       <p>Determine whether the given value is array accessible.</p>
-      <pre><code>Arr::accessible($value)</code></pre>
+      <pre><code>$value = [];
+Arr::accessible([]);
+// true
+
+$value = new class implements ArrayAccess{};
+Arr:accessible($value);
+// true
+</code></pre>
+
     </div>
     <div>
       <h4 data-anchor="arr-add"><code>Arr::add</code></h4>
       <p>Add an element to an array using "dot" notation if it doesn't exist.</p>
-      <pre><code>Arr::add($array, $key, $value)</code></pre>
+      <pre><code>$array = Arr::add([], 'foo.bar', 123);
+
+// ['foo' => ['bar' => 123]]</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-collapse"><code>Arr::collapse</code></h4>
       <p>Collapse an array of arrays into a single array.</p>
-      <pre><code>Arr::collapse($array)</code></pre>
+      <pre><code>$array = Arr::collapse([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
+
+// [1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-divide"><code>Arr::divide</code></h4>
       <p>Divide an array into two arrays. One with keys and the other with values.</p>
-      <pre><code>Arr::divide($array)</code></pre>
+      <pre><code>[$keys, $values] = Arr::divide(['name' => 'Desk']);
+
+// $keys: ['name']
+
+// $values: ['Desk']</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-dot"><code>Arr::dot</code></h4>
       <p>Flatten a multi-dimensional associative array with dots.</p>
-      <pre><code>Arr::dot($array, $prepend = '')</code></pre>
+      <pre><code>$array = ['products' => ['desk' => ['price' => 100]]];
+
+$flattened = Arr::dot();
+
+// ['products.desk.price' => 100]</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-except"><code>Arr::except</code></h4>
       <p>Get all of the given array except for a specified array of items.</p>
-      <pre><code>Arr::except($array, $keys)</code></pre>
+      <pre><code>$array = ['name' => 'Desk', 'price' => 100];
+
+$filtered = Arr::except($array, ['price']);
+
+// ['name' => 'Desk']</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-exists"><code>Arr::exists</code></h4>
       <p>Determine if the given key exists in the provided array.</p>
-      <pre><code>Arr::exists($array, $key)</code></pre>
+      <pre><code>$array = ['name' => 'Desk', 'price' => 100];
+
+Arr::exists($array, 'price');
+
+// true</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-first"><code>Arr::first</code></h4>
       <p>Return the first element in an array passing a given truth test.</p>
-      <pre><code>Arr::first($array, $callback = null, $default = null)</code></pre>
+      <pre><code>$array = [100, 200, 300];
+
+$first = Arr::first($array, function ($value, $key) {
+    return $value >= 150;
+});
+
+// 200</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-last"><code>Arr::last</code></h4>
       <p>Return the last element in an array passing a given truth test.</p>
-      <pre><code>Arr::last($array, callable $callback = null, $default = null)</code></pre>
+      <pre><code>$array = [100, 200, 300, 110];
+
+$first = Arr::last($array, function ($value, $key) {
+    return $value >= 150;
+});
+
+// 300</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-flatten"><code>Arr::flatten</code></h4>
       <p>Flatten a multi-dimensional array into a single level.</p>
-      <pre><code>Arr::flatten($array, $depth = INF)</code></pre>
+      <pre><code>$array = ['name' => 'Joe', 'languages' => ['PHP', 'Ruby']];
+
+$flattened = Arr::flatten($array);
+
+// ['Joe', 'PHP', 'Ruby']</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-forget"><code>Arr::forget</code></h4>
       <p>Remove one or many array items from a given array using "dot" notation.</p>
-      <pre><code>Arr::forget(&$array, $keys)</code></pre>
+      <pre><code>$array = ['products' => ['desk' => ['price' => 100]]];
+
+Arr::forget($array, 'products.desk');
+
+// ['products' => []]</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-read"><code>Arr::read</code></h4>
       <p>Get an item from an array.</p>
-      <pre><code>Arr::read($array, $key, $default = null)</code></pre>
+      <pre><code>$array = ['foo' => 123, 'bar' => null];
+
+$value = Arr::read($array, 'foo', 'default');
+
+// 123
+
+$value = Arr::read($array, 'bar', 'default');
+
+// null
+
+$value = Arr::read($array, 'baz', 'default');
+
+// 'default'</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-fetch"><code>Arr::fetch</code></h4>
       <p>Get an item, no null, from an array.</p>
-      <pre><code>Arr::fetch($array, $key, $default = null)</code></pre>
+      <pre><code>$array = ['foo' => 123, 'bar' => null];
+
+$value = Arr::read($array, 'foo', 'default');
+
+// 123
+
+$value = Arr::read($array, 'bar', 'default');
+
+// 'default'
+
+$value = Arr::read($array, 'baz', 'default');
+
+// 'default'</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-get"><code>Arr::get</code></h4>
       <p>Get an item from an array using "dot" notation.</p>
-      <pre><code>Arr::get($array, $key, $default = null)</code></pre>
+      <pre><code>$array = ['products' => ['desk' => ['price' => 100]]];
+
+$price = Arr::get($array, 'products.desk.price');
+
+// 100</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-has"><code>Arr::has</code></h4>
       <p>Check if an item exists in an array using "dot" notation.</p>
-      <pre><code>Arr::has($array, $keys)</code></pre>
+      <pre><code>$array = ['product' => ['name' => 'desk', 'price' => 100]];
+
+$hasItem = Arr::has($array, 'product.name');
+
+// true
+
+$hasItems = Arr::has($array, ['product.price', 'product.discount']);
+
+// false</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-isAssoc"><code>Arr::isAssoc</code></h4>
       <p>Determines if an array is associative.<br/>
         An array is "associative" if it doesn't have sequential numerical keys beginning with zero.</p>
-      <pre><code>Arr::isAssoc(array $array)</code></pre>
+      <pre><code>$value = Arr::isAssoc(['a', 'b', 'c']);
+
+// true
+
+$value = Arr::isAssoc(['a' => 1, 'b' => 2, 'c' => 3);
+
+// false</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-only"><code>Arr::only</code></h4>
       <p>Get a subset of the items from the given array.</p>
-      <pre><code>Arr::only($array, $keys)</code></pre>
+      <pre><code>$array = ['name' => 'Desk', 'price' => 100, 'orders' => 10];
+
+$array = Arr::only($array, ['name', 'price']);
+
+// ['name' => 'Desk', 'price' => 100]</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-pluck"><code>Arr::pluck</code></h4>
       <p>Pluck an array of values from an array.</p>
-      <pre><code>Arr::pluck($array, $value, $key = null)</code></pre>
+      <pre><code>$array = [
+    ['developer' => ['id' => 1, 'name' => 'Ark']],
+    ['developer' => ['id' => 2, 'name' => 'Maryline']],
+];
+
+$array = Arr::pluck($array, 'developer.name');
+
+// ['Ark', 'Maryline'];</code></pre>
+
+      You may also specify how you wish the resulting list to be keyed:
+      <pre><code>$array = Arr::pluck($array, 'developer.name', 'developer.id');
+
+// [1 => 'Ark', 2 => 'Maryline'];</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-prepend"><code>Arr::prepend</code></h4>
       <p>Push an item onto the beginning of an array.</p>
-      <pre><code>Arr::prepend($array, $value, $key = null)</code></pre>
+      <pre><code>$array = ['one', 'two', 'three', 'four'];
+
+$array = Arr::prepend($array, 'zero');
+
+// $array: ['zero', 'one', 'two', 'three', 'four']</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-pull"><code>Arr::pull</code></h4>
       <p>Get a value from the array, and remove it.</p>
-      <pre><code>Arr::pull(&$array, $key, $default = null)</code></pre>
+      <pre><code>$array = ['name' => 'Desk', 'price' => 100];
+
+$name = Arr::pull($array, 'name');
+
+// $name: Desk
+
+// $array: ['price' => 100]</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-set"><code>Arr::set</code></h4>
       <p>Set an array item to a given value using "dot" notation.<br/>
         If no key is given to the method, the entire array will be replaced.</p>
-      <pre><code>Arr::set(&$array, $key, $value)</code></pre>
+      <pre><code>$array = ['products' => ['desk' => ['price' => 100]]];
+
+Arr::set($array, 'products.desk.price', 200);
+
+// ['products' => ['desk' => ['price' => 200]]]</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-sortRecursive"><code>Arr::sortRecursive</code></h4>
       <p>Recursively sort an array by keys and values.</p>
-      <pre><code>Arr::sortRecursive($array)</code></pre>
+      <pre><code>$array = [
+    [
+        'Roman',
+        'Ark',
+        'Li',
+    ],
+    [
+        'PHP',
+        'Ruby',
+        'JavaScript',
+    ],
+];
+
+$array = Arr::sortRecursive($array);
+
+/*
+    [
+        [
+            'Li',
+            'Roman',
+            'Ark',
+        ],
+        [
+            'JavaScript',
+            'PHP',
+            'Ruby',
+        ]
+    ];
+*/</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-where"><code>Arr::where</code></h4>
       <p>Filter the array using the given callback.</p>
-      <pre><code>Arr::where($array, callable $callback)</code></pre>
+      <pre><code>$array = [100, '200', 300, '400', 500];
+
+$array = Arr::where($array, function ($value, $key) {
+    return is_string($value);
+});
+
+// [1 => 200, 3 => 400]</code></pre>
     </div>
     <div>
       <h4 data-anchor="arr-map"><code>Arr::map</code></h4>
       <p>Map an array recursively</p>
-      <pre><code>Arr::map($callback, array $array, $recursive = false)</code></pre>
+      <pre><code>$array = ['foo' => ['Abc', 'dEf', 'GHI']];
+
+$mapped = Arr::map('strtolower', $array);
+
+// ['foo' => ['abc', 'def', 'ghi']]
+</code></pre>
     </div>
 
     <h2>Object</h2>
     <div>
       <h4 data-anchor="obj-fill"><code>Obj::fill</code></h4>
       <p>Fill in data where it's missing.</p>
-      <pre><code>Obj::fill(&$target, $key, $value)</code></pre>
+      <pre><code>$object = new stdClass();
+
+Obj::fill($object, 'foo', 'bar');
+
+// $object->foo = 'bar';
+
+Obj::fill($object, 'foo', 'baz');
+
+// $object->foo = 'bar';
+</code></pre>
     </div>
     <div>
       <h4 data-anchor="obj-read"><code>Obj::read</code></h4>
-      <p>
-      </p>
-      <pre><code>Obj::read($object, $property, $default = null)</code></pre>
+      <p>Get an item from an object.</p>
+      <pre><code>$object = new stdClass();
+$object->foo = 'bar';
+$object->baz = null;
+
+$value = Obj::read($object, 'foo', 'default');
+
+// 'bar'
+
+$value = Obj::read($object, 'baz', 'default');
+
+// null
+
+$value = Obj::read($object, 'dot', 'default');
+
+// 'default'</code></pre>
     </div>
     <div>
       <h4 data-anchor="obj-fetch"><code>Obj::fetch</code></h4>
-      <p>
-      </p>
-      <pre><code>Obj::fetch($object, $property, $default = null)</code></pre>
+      <p>Get an item, no null, from an object.</p>
+      <pre><code>$object = new stdClass();
+$object->foo = 'bar';
+$object->baz = null;
+
+$value = Obj::fetch($object, 'foo', 'default');
+
+// 'bar'
+
+$value = Obj::fetch($object, 'baz', 'default');
+
+// 'default'
+
+$value = Obj::fetch($object, 'dot', 'default');
+
+// 'default'</code></pre>
     </div>
     <div>
       <h4 data-anchor="obj-get"><code>Obj::get</code></h4>
       <p>Get an item from an array or object using "dot" notation.</p>
-      <pre><code>Obj::get($target, $key, $default = null)</code></pre>
+      <pre><code>$object = new stdClass();
+$object->foo = new stdClass();
+$object->foo->bar = 'baz';
+
+$value = Obj::get($object, 'foo.bar');
+
+// 'baz'</code></pre>
     </div>
     <div>
       <h4 data-anchor="obj-set"><code>Obj::set</code></h4>
       <p>Set an item on an array or object using dot notation.</p>
-      <pre><code>Obj::set(&$target, $key, $value, $overwrite = true)</code></pre>
+      <pre><code>$object = new stdClass();
+
+Obj::set($object, 'foo.bar', 'baz');
+
+// $object->foo->bar === 'baz'</code></pre>
     </div>
     <div>
       <h4 data-anchor="obj-value"><code>Obj::value</code></h4>
       <p>Return the default value of the given value.</p>
-      <pre><code>Obj::value($value)</code></pre>
+      <pre><code>$value = Obj::value(123);
+
+// 123
+
+$value = Obj::value(function(){
+    return 'abc';
+});
+
+// 'abc'</code></pre>
     </div>
     <h2>String</h2>
     <div>
       <h4 data-anchor="str-ascii"><code>Str::ascii</code></h4>
       <p>Transliterate a UTF-8 value to ASCII.</p>
-      <pre><code>Str::ascii($value)</code></pre>
+      <pre><code>$value = Str::ascii('señor');
+
+// senor</code></pre>
     </div>
     <div>
       <h4 data-anchor="str-camel"><code>Str::camel</code></h4>
       <p>Convert a value to camel case.</p>
-      <pre><code>Str::camel($value)</code></pre>
+      <pre><code>$value = Str::camel('foo_bar');
+
+// fooBar</code></pre>
     </div>
     <div>
       <h4 data-anchor="str-contains"><code>Str::contains</code></h4>
       <p>Determine if a given string contains a given substring.</p>
-      <pre><code>Str::contains($haystack, $needles)</code></pre>
+      <pre><code>$value = Str::contains('foo bar', 'foo');
+
+// true</code></pre>
     </div>
     <div>
       <h4 data-anchor="str-endsWith"><code>Str::endsWith</code></h4>
       <p>Determine if a given string ends with a given substring.</p>
-      <pre><code>Str::endsWith($haystack, $needles)</code></pre>
+      <pre><code>$result = Str::endsWith('foo bar', 'bar');
+
+// true</code></pre>
     </div>
     <div>
       <h4 data-anchor="str-finish"><code>Str::finish</code></h4>
       <p>Cap a string with a single instance of a given value.</p>
-      <pre><code>Str::finish($value, $cap)</code></pre>
+      <pre><code>$adjusted = Str::finish('this/string', '/');
+
+// this/string/
+
+$adjusted = Str::finish('this/string/', '/');
+
+// this/string/</code></pre>
     </div>
     <div>
       <h4 data-anchor="str-is"><code>Str::is</code></h4>
       <p>Determine if a given string matches a given pattern.</p>
-      <pre><code>Str::is($pattern, $value)</code></pre>
+      <pre><code>$matches = Str::is('foo*', 'foobar');
+
+// true
+
+$matches = Str::is('baz*', 'foobar');
+
+// false</code></pre>
     </div>
     <div>
       <h4 data-anchor="str-length"><code>Str::length</code></h4>
       <p>Return the length of the given string.</p>
-      <pre><code>Str::length($value)</code></pre>
+      <pre><code>$length = Str::length('foo');
+
+// 3</code></pre>
     </div>
     <div>
       <h4 data-anchor="str-levenshtein"><code>Str::levenshtein</code></h4>
@@ -275,34 +509,54 @@
     <div>
       <h4 data-anchor="str-limit"><code>Str::limit</code></h4>
       <p>Limit the number of characters in a string.</p>
-      <pre><code>Str::limit($value, $limit = 100, $end = '...')</code></pre>
+      <pre><code>$truncated = Str::limit('The quick brown fox jumps over the lazy dog', 20);
+
+// The quick brown fox...</code></pre>
+      <p>You may also pass a third argument to change the string that will be appended to the end:</p>
+      <pre><code>$truncated = Str::limit('The quick brown fox jumps over the lazy dog', 20, ' (...)');
+
+// The quick brown fox (...)</code></pre>
     </div>
     <div>
       <h4 data-anchor="str-lower"><code>Str::lower</code></h4>
       <p>Convert the given string to lower-case.</p>
-      <pre><code>Str::lower($value)</code></pre>
+      <pre><code>$lower = Str::lower('Foo Bar');
+
+// 'foo bar'</code></pre>
     </div>
     <div>
       <h4 data-anchor="str-words"><code>Str::words</code></h4>
       <p>Limit the number of words in a string.</p>
-      <pre><code>Str::words($value, $words = 100, $end = '...')</code></pre>
+      <pre><code>$value = Str::words('foo bar baz', 2);
+
+// 'foo bar...'</code></pre>
+
+      <p>You may also pass a third argument to change the string that will be appended to the end:</p>
+      <pre><code>$value = Str::words('foo bar baz', 2, '(...)');
+
+// 'foo bar(...)'</code></pre>
     </div>
     <div>
       <h4 data-anchor="str-parseCallback"><code class="language-php">Str::parseCallback</code></h4>
-      <p>Parse a Class::method style callback into class and method.</p>
-      <pre><code class="language-php">Str::parseCallback($callback, $default)</code></pre>
+      <p>Parse a "Class@method" style callback into class and method.</p>
+      <pre><code class="language-php">$callable = Str::parseCallback("Foo@bar");
+
+// ['Foo', 'bar']</code></pre>
     </div>
     <div>
       <h4 data-anchor="str-random"><code class="language-php">Str::random</code></h4>
-      <p>Generate a more truly "random" alpha-numeric string.</p>
-      <pre><code class="language-php">Str::random($length = 16)</code></pre>
+      <p>Generate a more truly "random" alpha-numeric string. <br/>This function call <code>random_bytes</code>,
+        or <code>Sodium\randombytes_buf</code>,
+        or <code>openssl_random_pseudo_bytes</code>,
+        or <code>mcrypt_create_iv</code>,
+        or <code>Phalcon\Security\Random::bytes</code>
+      </p>
+      <pre><code class="language-php">$random = Str::random(16);</code></pre>
     </div>
     <div>
       <h4 data-anchor="str-quickRandom"><code class="language-php">Str::quickRandom</code></h4>
-      <p>Generate a "random" alpha-numeric string.
-
-        Should not be considered sufficient for cryptography, etc.</p>
-      <pre><code class="language-php">Str::quickRandom($length = 16)</code></pre>
+      <p>Generate a "random" alpha-numeric string. Should not be considered sufficient for cryptography, etc.</p>
+      <pre><code class="language-php">$random = Str::quickRandom(16)</code></pre>
     </div>
     <div>
       <h4 data-anchor="str-replaceFirst"><code class="language-php">Str::replaceFirst</code></h4>
