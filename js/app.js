@@ -39,7 +39,7 @@
   };
 
   var Template = {
-    __current: null,
+    current: null,
     init: function () {
       $(window).on("popstate", function () {
         Template.show(location.hash.match(/^\#\!([^@]+)/)[1]);
@@ -51,11 +51,11 @@
       }
     },
     show: function (template) {
-      if(Template.__current === template){
+      if(Template.current === template){
         return;
       }
 
-      Template.__current = template;
+      Template.current = template;
 
       Sidenav.select($('a[href="#!' + template + '"]'));
 
@@ -97,9 +97,74 @@
     }
   };
 
+    var Summary = {
+      init: function () {
+        Template.onShow(Summary.generate)
+      },
+      generate: function () {
+        if (!$('.summary.generate').length) {
+          return;
+        }
+
+        var o = [], h2, h3;
+
+        $('h2, h3, h4').each(function () {
+          switch (this.tagName) {
+            case 'H2':
+              o.push(h2 = {
+                name: this.innerHTML,
+                slug: this.innerText.toLowerCase().replace(/[^a-zA-Z\d]/g, '-'),
+                items: []
+              });
+              h3 = null;
+              break;
+            case 'H3':
+              h2.items.push(h3 = {
+                name: this.innerHTML,
+                slug: this.innerText.toLowerCase().replace(/[^a-zA-Z\d]/g, '-'),
+                items: []
+              });
+              break;
+            case 'H4':
+              (h3 || h2).items.push({
+                name: this.innerHTML,
+                slug: this.innerText.toLowerCase().replace(/[^a-zA-Z\d]/g, '-'),
+                items: []
+              });
+              break;
+          }
+
+          $(this).attr('data-anchor', this.innerText.toLowerCase().replace(/[^a-zA-Z\d]/g, '-'))
+        });
+
+        function _gen_li(o) {
+          var li = '<li><a data-hanchor="'+ o.slug + '">' + o.name + '</a>';
+
+          if(o.items.length){
+            li += '<ul>';
+            for(var i = 0, l = o.items.length; i < l; i++){
+              li += _gen_li(o.items[i]);
+            }
+            li += '</ul>';
+          }
+
+          return li + '</li>'
+        }
+
+        var lis = '';
+
+        for(var i = 0, l = o.length; i < l; i++){
+          lis += _gen_li(o[i]);
+        }
+
+        $('.summary.generate').html(lis);
+      }
+    };
+
   var Main = {
     init: function () {
       M.AutoInit();
+      Summary.init();
       Sidenav.init();
       HAnchor.init();
 
