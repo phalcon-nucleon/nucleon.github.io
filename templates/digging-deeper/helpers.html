@@ -74,6 +74,14 @@
         <a data-hanchor="str-ucfirst">ucfirst</a>
       </p>
     </div>
+    <h3>Path</h3>
+    <p> via <code>Neutrino\Support\Path</code></p>
+    <div class="method-list">
+      <p>
+        <a data-hanchor="path-normalize">normalize</a>
+        <a data-hanchor="path-findRelative">findRelative</a>
+      </p>
+    </div>
     <h2>Array</h2>
     <div>
       <h4 data-anchor="arr-accessible"><code>Arr::accessible</code></h4>
@@ -443,6 +451,7 @@ $value = Obj::value(function(){
 
 // 'abc'</code></pre>
     </div>
+
     <h2>String</h2>
     <div>
       <h4 data-anchor="str-ascii"><code>Str::ascii</code></h4>
@@ -503,8 +512,19 @@ $matches = Str::is('baz*', 'foobar');
     </div>
     <div>
       <h4 data-anchor="str-levenshtein"><code>Str::levenshtein</code></h4>
-      <p></p>
-      <pre><code>Str::levenshtein($word, $words, $order = SORT_ASC, $sort_flags = SORT_REGULAR)</code></pre>
+      <p>Sort a words list by their levenshtein distance of word.</p>
+      <pre><code>$words = Str::levenshtein('abc', ['aac', 'bca', 'abc', 'abd', 'xzy']);
+
+/*
+[
+  'abc' => 0,
+  'aac' => 1,
+  'abd' => 1,
+  'bca' => 2,
+  'xzy' => 3,
+]
+*/</code></pre>
+
     </div>
     <div>
       <h4 data-anchor="str-limit"><code>Str::limit</code></h4>
@@ -561,57 +581,84 @@ $matches = Str::is('baz*', 'foobar');
     <div>
       <h4 data-anchor="str-replaceFirst"><code class="language-php">Str::replaceFirst</code></h4>
       <p>Replace the first occurrence of a given value in the string.</p>
-      <pre><code class="language-php">Str::replaceFirst($search, $replace, $subject)</code></pre>
+      <pre><code class="language-php">$replaced = Str::replaceFirst('the', 'a', 'the quick brown fox jumps over the lazy dog');
+
+// a quick brown fox jumps over the lazy dog</code></pre>
     </div>
     <div>
       <h4 data-anchor="str-replaceLast"><code class="language-php">Str::replaceLast</code></h4>
       <p>Replace the last occurrence of a given value in the string.</p>
-      <pre><code class="language-php">Str::replaceLast($search, $replace, $subject)</code></pre>
+      <pre><code class="language-php">$replaced = Str::replaceLast('the', 'a', 'the quick brown fox jumps over the lazy dog');
+
+// the quick brown fox jumps over a lazy dog</code></pre>
     </div>
     <div>
       <h4 data-anchor="str-upper"><code class="language-php">Str::upper</code></h4>
       <p>Convert the given string to upper-case.</p>
-      <pre><code class="language-php">Str::upper($value)</code></pre>
-    </div>
-    <div>
-      <h4 data-anchor="str-title"><code class="language-php">Str::title</code></h4>
-      <p>Convert the given string to title case.</p>
-      <pre><code class="language-php">Str::title($value)</code></pre>
+      <pre><code class="language-php">$lower = Str::upper('Foo Bar');
+
+// 'FOO BAR'</code></pre>
     </div>
     <div>
       <h4 data-anchor="str-slug"><code class="language-php">Str::slug</code></h4>
       <p>Generate a URL friendly "slug" from a given string.</p>
-      <pre><code class="language-php">Str::slug($title, $separator = '-')</code></pre>
+      <pre><code class="language-php">$slug = Str::slug('Nucleon Framework', '-');
+
+// nucleon-framework</code></pre>
     </div>
     <div>
       <h4 data-anchor="str-snake"><code class="language-php">Str::snake</code></h4>
       <p>Convert a string to snake case.</p>
-      <pre><code class="language-php">Str::snake($value, $delimiter = '_')</code></pre>
+      <pre><code class="language-php">$lower = Str::snake('fooBar');
+
+// 'foo_bar'</code></pre>
+      <div>
+        <h4 data-anchor="str-studly"><code class="language-php">Str::studly</code></h4>
+        <p>Convert a value to studly caps case.</p>
+        <pre><code class="language-php">$converted = Str::studly('foo_bar');
+
+// FooBar</code></pre>
+      </div>
+      <div>
+        <h4 data-anchor="str-capitalize"><code class="language-php">Str::capitalize</code></h4>
+        <p>Convert a value to Capitalize case.</p>
+        <pre><code class="language-php">$converted = Str::capitalize('foo bar');
+
+// 'Foo Bar'</code></pre>
+      </div>
     </div>
     <div>
       <h4 data-anchor="str-startsWith"><code class="language-php">Str::startsWith</code></h4>
       <p>Determine if a given string starts with a given substring.</p>
-      <pre><code class="language-php">Str::startsWith($haystack, $needles)</code></pre>
+      <pre><code class="language-php">$value = Str::startsWith('this/string', '/');
+
+// false
+
+$value = Str::startsWith('this/string', ['/', 't']);
+
+// true</code></pre>
     </div>
     <div>
-      <h4 data-anchor="str-studly"><code class="language-php">Str::studly</code></h4>
-      <p>Convert a value to studly caps case.</p>
-      <pre><code class="language-php">Str::studly($value)</code></pre>
+      <h4 data-anchor="str-title"><code class="language-php">Str::title</code></h4>
+      <p>Convert the given string to title case. This function use <code>mb_convert_case</code>.</p>
+      <pre><code class="language-php">$lower = Str::title('foo bar');
+
+// 'Foo Bar'</code></pre>
     </div>
     <div>
-      <h4 data-anchor="str-capitalize"><code class="language-php">Str::capitalize</code></h4>
-      <p>Convert a value to Capitalize case.</p>
-      <pre><code class="language-php">Str::capitalize($value)</code></pre>
+      <h4 data-anchor="str-ucfirst"><code class="language-php">Str::ucfirst</code></h4>
+      <p>Make a string's first character uppercase.</p>
+      <pre><code class="language-php">Str::ucfirst($string)</code></pre>
     </div>
     <div>
       <h4 data-anchor="str-substr"><code class="language-php">Str::substr</code></h4>
       <p>Returns the portion of string specified by the start and length parameters.</p>
       <pre><code class="language-php">Str::substr($string, $start, $length = null)</code></pre>
     </div>
+
+    <h2>Path</h2>
     <div>
-      <h4 data-anchor="str-ucfirst"><code class="language-php">Str::ucfirst</code></h4>
-      <p>Make a string's first character uppercase.</p>
-      <pre><code class="language-php">Str::ucfirst($string)</code></pre>
+
     </div>
   </div>
 </div>
