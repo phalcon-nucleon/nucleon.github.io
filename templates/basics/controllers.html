@@ -1,5 +1,12 @@
 <div class="row">
   <div class="col s12">
     <h1>controllers.html</h1>
+
+    <p><code>\Neutrino\Http\Controller</code> is an abstract class who extends <code>\Phalcon\Mvc\Controller</code>.<br /> This class allow you to use Middleware.</p>
+    <p>If you don't need to use middleware, you can extends directly <code>\Phalcon\Mvc\Controller</code></p>
+    <blockquote class="notice">
+      In <code>\Phalcon\Mvc\Controller</code> <code>__construct</code> is <code>final</code>. <br />
+      It's a performance hack with Zephir. If you need to build a controller with the <code>__construct</code> method, you just must implement <code>\Phalcon\Mvc\ControllerInterface</code>, and build you own controller.
+    </blockquote>
   </div>
 </div>

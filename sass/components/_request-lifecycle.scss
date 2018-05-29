@@ -4,7 +4,7 @@ ul.request-lifecycle {
     padding-left: 25px;
 
     &:before {
-      content:"";
+      content: "";
       display: block;
       position: absolute;
       width: 1px;
@@ -29,16 +29,21 @@ ul.request-lifecycle {
         background-color: #5a5a5a;
       }
 
-      .action{
-        font-weight: 500}
+      .action {
+        font-weight: 500
+      }
 
-      .event{
-        font-weight: 300; color:#333}
+      .event {
+        font-weight: 300;
+        color: #333
+      }
 
-      .middleware{
-        small{
+      .middleware {
+        small {
           font-weight: 300;
-          color:#333}}
+          color: #333
+        }
+      }
     }
   }
 }

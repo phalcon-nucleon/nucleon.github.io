@@ -3,16 +3,24 @@
     <ul class="summary generate"></ul>
   </div>
   <div class="col s12">
-    <h2>Request Lifecycle</h2>
+    <h2>Intro</h2>
+    <p>
+      The HTTP Kernel is a fullstack framework. <br/>
+      The kernel is <code>\Neutrino\Http\Kernel</code> extends <code>\Phalcon\Mvc\Application</code> <br/>
+      This kernel implement Dependency Injection, Router, Dispatcher, events management logic, template engine (via
+      Volt).
+    </p>
 
+    <h2>Request Lifecycle</h2>
     <ul class="request-lifecycle">
+      <li><code>public/index.php</code></li>
       <li><span class="action">bootstrap</span>
         <ul>
-          <li>compiled files</li>
+          <li>required compiled files (if exist)</li>
           <li>autoload (phalcon/composer)</li>
         </ul>
       </li>
-      <li><span class="action">make application</span>
+      <li><span class="action">make http-app <code>App\Kernels\Http\Kernel</code></span>
         <ul>
           <li>Kernel Bootstrap
             <ul>
@@ -27,29 +35,39 @@
           <li>Register Modules</li>
         </ul>
       </li>
-      <li><span class="action">run application</span>
+      <li><span class="action">run http-app</span>
         <ul>
           <li><span class="event">[kernel::boot]</span></li>
-          <li><span class="action">application->handle</span>
+          <li><span class="action">http-app->handle</span>
             <ul>
               <li><span class="middleware">ApplicationMiddleware::init <small>[application::boot]</small></span></li>
               <li><span class="action">Router::match</span></li>
-              <li><span class="middleware">ApplicationMiddleware::before <small>[application::beforeHandleRequest]</small></span></li>
+              <li><span class="middleware">ApplicationMiddleware::before <small>[application::beforeHandleRequest]</small></span>
+              </li>
               <li><span class="action">Dispatcher::dispatch</span>
                 <ul>
-                  <li><span class="middleware">DispatcherMiddleware::init <small>[dispatch:beforeDispatchLoop]</small></span></li>
-                  <li><span class="middleware">DispatcherMiddleware::before <small>[dispatch:beforeDispatch]</small></span></li>
+                  <li><span class="middleware">DispatcherMiddleware::init <small>[dispatch:beforeDispatchLoop]</small></span>
+                  </li>
+                  <li><span class="middleware">DispatcherMiddleware::before <small>[dispatch:beforeDispatch]</small></span>
+                  </li>
                   <li><span class="action">Make Handler (Controller)</span></li>
-                  <li><span class="middleware">ControllerMiddleware::before <small>[dispatcher::beforeExecuteRoute]</small></span></li>
+                  <li><span class="middleware">ControllerMiddleware::before <small>[dispatcher::beforeExecuteRoute]</small></span>
+                  </li>
                   <li><span class="action">handler->execute()</span></li>
-                  <li><span class="middleware">ControllerMiddleware::after <small>[dispatcher::afterExecuteRoute]</small></span></li>
-                  <li><span class="middleware">ControllerMiddleware::finish <small>[dispatch:afterDispatch]</small></span></li>
-                  <li><span class="middleware">DispatcherMiddleware::after <small>[dispatch:afterDispatch]</small></span></li>
-                  <li><span class="middleware">DispatcherMiddleware::finish <small>[dispatch:afterDispatchLoop]</small></span></li>
+                  <li><span class="middleware">ControllerMiddleware::after <small>[dispatcher::afterExecuteRoute]</small></span>
+                  </li>
+                  <li><span class="middleware">ControllerMiddleware::finish <small>[dispatch:afterDispatch]</small></span>
+                  </li>
+                  <li><span class="middleware">DispatcherMiddleware::after <small>[dispatch:afterDispatch]</small></span>
+                  </li>
+                  <li><span class="middleware">DispatcherMiddleware::finish <small>[dispatch:afterDispatchLoop]</small></span>
+                  </li>
                 </ul>
               </li>
-              <li><span class="middleware">ApplicationMiddleware::after <small>[application::afterHandleRequest]</small></span></li>
-              <li><span class="middleware">ApplicationMiddleware::finish <small>[application::beforeSendResponse]</small></span></li>
+              <li><span class="middleware">ApplicationMiddleware::after <small>[application::afterHandleRequest]</small></span>
+              </li>
+              <li><span class="middleware">ApplicationMiddleware::finish <small>[application::beforeSendResponse]</small></span>
+              </li>
               <li><span class="action">Send Response</span></li>
             </ul>
           </li>
@@ -59,7 +77,7 @@
     </ul>
 
     <h2>Controllers / Middlewares / Modules</h2>
-    <p>All controllers / middlewares / modules, for HTTP Kernels are in <code>{project_dir}/app/Kernels/Http</code></p>
+    <p>All controllers / middlewares / modules, for HTTP Kernel are in <code>{project_dir}/app/Kernels/Http</code></p>
 
     <h3>Controllers</h3>
     <p>Controllers gone in <code>{project_dir}/app/Kernels/Http/Controller</code></p>
@@ -74,7 +92,7 @@
     <a href="/#!architecture-concepts/modules-concepts.html" class="btn-small">Read more about Modules</a>
 
     <h2>Routes</h2>
-    <p>Routes for HTTP Kernels are specified in <code>{project_dir}/routes/http.php</code></p>
+    <p>Routes for HTTP Kernel are specified in <code>{project_dir}/routes/http.php</code></p>
     <a href="/#!basics/routing.html" class="btn-small">Read more about Routing</a>
   </div>
 </div>
