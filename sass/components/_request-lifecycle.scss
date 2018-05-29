@@ -1,0 +1,44 @@
+ul.request-lifecycle {
+  &, & ul {
+    position: relative;
+    padding-left: 25px;
+
+    &:before {
+      content:"";
+      display: block;
+      position: absolute;
+      width: 1px;
+      top: 10px;
+      bottom: 10px;
+      left: 10px;
+      background-color: #5a5a5a;
+    }
+
+    & li {
+      list-style-type: none;
+      position: relative;
+
+      &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        height: 1px;
+        top: 10px;
+        left: -15px;
+        width: 10px;
+        background-color: #5a5a5a;
+      }
+
+      .action{
+        font-weight: 500}
+
+      .event{
+        font-weight: 300; color:#333}
+
+      .middleware{
+        small{
+          font-weight: 300;
+          color:#333}}
+    }
+  }
+}
