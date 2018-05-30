@@ -40,7 +40,7 @@
       </tbody>
     </table>
 
-    <blockquote class="info">Application middleware are register in the kernel, in property $middlewares.</blockquote>
+    <blockquote class="notice">Application middleware are register in the kernel, in property $middlewares.</blockquote>
 
     <pre><code>namespace App\Kernels\Http;
 
@@ -74,7 +74,7 @@ class Kernel extends Neutrino\Foundation\Http\Kernel
       </tbody>
     </table>
 
-    <blockquote class="info">Dispatcher middleware are register in the kernel, in property $middlewares.</blockquote>
+    <blockquote class="notice">Dispatcher middleware are register in the kernel, in property $middlewares.</blockquote>
 
     <pre><code>namespace App\Kernels\Http;
 
@@ -117,6 +117,9 @@ class Kernel extends Neutrino\Foundation\Http\Kernel
 ]);</code></pre>
 
     <h4>Via the Controller</h4>
+    <blockquote class="warning">
+      Middleware via Controller is only accessible on HTTP Kernel.
+    </blockquote>
     <p>Controller middleware can be register directly in the controller, in the <code>onConstruct</code> method.</p>
 
     <p>Here we register a middleware on all methods of <code>ProfileController</code></p>
@@ -137,6 +140,8 @@ class Kernel extends Neutrino\Foundation\Http\Kernel
 {
     protected function onConstruct()
     {
+        parent::onConstruct();
+
         $this->middleware(\Neutrino\Http\Middleware\Csrf::class)
             // CSRF middleware only on loginAction
             ->only(['login']);
@@ -145,7 +150,6 @@ class Kernel extends Neutrino\Foundation\Http\Kernel
             ->expect(['login']);
     }
 }</code></pre>
-
     <h2>Create Middleware</h2>
     <p>You can create your own middleware by inheriting <code>Middleware\Application</code>, <code>Middleware\Dispatcher</code>, or <code>Middleware\Controller</code>.</p>
     <p>The management of associated events does this simply by implementing the interfaces :</p>
@@ -189,5 +193,11 @@ class RedirectIfAuthenticated extends ControllerMiddleware implements BeforeInte
         return true;
     }
 }</code></pre>
+
+    <h2>Middleware in Micro Kernel</h2>
+    <blockquote class="warning">
+    In Micro Kernel, ApplicationMiddleware & DispatcherMiddleware is not available.<br/>
+    ControllerMiddleware has only <code>before</code> & <code>after</code> methods available.
+    </blockquote>
   </div>
 </div>
