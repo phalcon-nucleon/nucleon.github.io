@@ -10,7 +10,7 @@ $view = $this->getDI()->get('view');</code></pre>
 
     <h2>Creating Views</h2>
     <blockquote class="info">Looking for more information on how to write Volt templates?<br/>
-      Check out the full <a href="https://docs.phalconphp.com/en/3.3/volt" target="_blank">Volt documentation</a> to get started.</blockquote>
+      Check out the full <a href="#!digging-deeper/volt.html">Volt documentation</a> to get started.</blockquote>
 
     <p>Views contain the HTML served by your application and separate your controller / application logic from your presentation logic.
       Views are stored in the <code>resources/views</code> directory.
@@ -31,7 +31,7 @@ $view = $this->getDI()->get('view');</code></pre>
     <p>The first argument is mandatory, it corresponds to the sub-directory.
       The second argument corresponds to the name of the view file, in <code>resources/views</code> or <code>resources/views/{sub-directory}</code>.
       The third argument is an array of data that should be made available to the view.
-      In this case, we are passing the name variable, which is displayed in the view using <a href="https://docs.phalconphp.com/en/3.3/volt" target="_blank">Volt syntax</a>.</p>
+      In this case, we are passing the name variable, which is displayed in the view using <a href="#!digging-deeper/volt.html">Volt syntax</a>.</p>
 
     <p>Of course, views may also be nested within sub-directories of the <code>resources/views</code> directory.
       For example, if your view is stored at  resources/views/front/auth/login.volt, you may reference it like so:</p>
@@ -65,5 +65,22 @@ $this->view->render('', 'greeting');</code></pre>
 $this->view->render('', 'greeting');
 $this->view->finish();
 $content = $this->view->getContent();</code></pre>
+
+    <h2>Templates Engine</h2>
+    <p>By default, the <code>view</code> service has the <code>volt</code> template engine.</p>
+    <p>View support multiple engine, so you can also use the <code>Phalcon\Mvc\View\Engine\Php</code> <code>.phtml</code> engine. Just define the engine and extension to use <code>config/view.php</code>.</p>
+    <pre><code>
+    /*
+     +---------------------------------------------------------------
+     | Engines
+     +---------------------------------------------------------------
+     |
+     | This value define the engines to use for generate templates
+     */
+    'engines' => [
+        '.volt' => Volt\VoltEngineRegister::class,
+        '.phtml' => Phalcon\Mvc\View\Engine\Php::class,
+    ],
+</code></pre>
   </div>
 </div>
