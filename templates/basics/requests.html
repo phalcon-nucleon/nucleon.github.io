@@ -92,12 +92,12 @@ $json = $request->getJsonRawBody(true);  // {"foo":"bar"} => $json['foo'] = 'bar
     <h2>Cookie</h2>
     <h4>Retrieving Cookies From Requests</h4>
     <p>By default, cookies are automatically encrypted before being sent to the client and are decrypted when retrieved from the user.
-      This protection prevents unauthorized users to see the cookies' contents in the client (browser)</p>
+      This protection prevents unauthorized users to see the cookies contents in the client (browser).</p>
     <p>Cookie are managed by the <code>cookie</code> service :</p>
-    <pre><code>$cookie = $this->cookie;
-$cookie = $this->getDI()->get('cookie');</code></pre>
+    <pre><code>$cookies = $this->cookies;
+$cookie = $this->getDI()->get('cookies');</code></pre>
     <p>To retrieve a cookie value from the request, use the <code>get</code> method on <code>cookie</code> service :</p>
-    <pre><code>$cookie->get('name');</code></pre>
+    <pre><code>$cookies->get('name');</code></pre>
 
     <h2>Files</h2>
     <h3>Retrieving Uploaded Files</h3>

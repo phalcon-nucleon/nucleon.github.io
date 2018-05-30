@@ -1,5 +1,121 @@
 <div class="row">
   <div class="col s12">
-    <h1>responses.html</h1>
+    <ul class="summary generate"></ul>
+  </div>
+  <div class="col s12">
+    <h2>Creating Responses</h2>
+    <h4>Strings & Arrays</h4>
+    <p>All routes and controllers should return a response to be sent back to the user's browser. </p>
+    <p>Nucleon with Phalcon provides several different ways to return responses. The most basic response is returning a string from a route or controller. The framework will automatically convert the string into a full HTTP response:</p>
+    <pre><code>class HomeController extends Nucleon\Http\Controller{
+    public function indexAction(){
+        return 'Hello world';
+    }
+}</code></pre>
+    <h4>Response Objects</h4>
+    <p>Typically, you won't just be returning simple strings or arrays from your route actions.
+      Instead, you will be returning full <code>Phalcon\Http\Response</code> instances or <a href="#!basics/views.html">views</a>.</p>
+    <p>Returning a full <code>Response</code> instance allows you to customize the response's HTTP status code and headers :</p>
+
+    <pre><code>class HomeController extends Nucleon\Http\Controller{
+    public function indexAction(){
+        return $this->response
+            ->setContent('Hello world')
+            ->setStatusCode(200)
+            ->setHeader('Content-Type', 'text/plain');
+  }
+}</code></pre>
+
+    <h4>Attaching Headers To Responses</h4>
+    <p>Keep in mind that most response methods are chainable, allowing for the fluent construction of response instances. For example, you may use the <code>setHeader</code> method to add a series of headers to the response before sending it back to the user:</p>
+
+    <pre><code>class HomeController extends Nucleon\Http\Controller{
+    public function indexAction(){
+        return $this->response
+            ->setContent('Hello world')
+            ->setHeader('Content-Type', $type)
+            ->setHeader('X-Header-One', 'Header Value')
+            ->setHeader('X-Header-Two', 'Header Value');
+  }
+}</code></pre>
+
+    <h4>Attaching Cookies To Responses</h4>
+    <p>Cookie are managed by the <code>cookie</code> service :</p>
+    <pre><code>$cookie = $this->cookie;
+$cookie = $this->getDI()->get('cookie');</code></pre>
+    <p>For attach cookies to the response, use the <code>setCookies</code> method, with the <code>cookies</code> services :</p>
+
+    <pre><code>class HomeController extends Nucleon\Http\Controller{
+    public function indexAction(){
+        return $this->response
+            ->setContent('Hello world')
+            ->setHeader('Content-Type', $type)
+            ->setCookies(
+                $this->cookies->set('name', 'value', $minute)
+            );
+  }
+}</code></pre>
+
+    <p>The <code>set</code> method on <code>cookies</code> services also accepts a few more arguments which are used less frequently.
+      Generally, these arguments have the same purpose and meaning as the arguments that would be given to PHP's native
+      <a href="https://secure.php.net/manual/en/function.setcookie.php" target="_blank">setcookie</a> method:</p>
+    <pre><code>$this->cookies->set($name, $value, $expire, $path, $secure, $domain, $httpOnly);</code></pre>
+
+    <h4>Cookies & Encryption</h4>
+    <p>By default, cookies are automatically encrypted before being sent to the client and are decrypted when retrieved from the user.
+      This protection prevents unauthorized users to see the cookies contents in the client (browser).</p>
+    <p>The <code>useEncryption</code> method allow you to disable encryption : </p>
+    <pre><code>$this->cookies->useEncryption(false);</code></pre>
+
+    <h3>Automatic response send</h3>
+    <p>Nucleon & Phalcon should automatically send the defined response in the Dependency Injection, if you are not returning a response in the controller.
+    So you do not have to return a response object. You just have to define the response property.</p>
+    <pre><code>class HomeController extends Nucleon\Http\Controller{
+    public function indexAction(){
+        $this->response
+            ->setStatusCode(201)
+            ->setContent('Created');
+    }
+}</code></pre>
+
+    <h2>Redirects</h2>
+    <p>The <code>redirect</code> method will return a response with the proper headers needed to redirect the user to another URL :</p>
+    <pre><code>return $this->response->redirect('/home/dashboard');</code></pre>
+
+    <h3>Redirecting To Named Routes</h3>
+    <p>All internal URIs are generated using the url service (by default <code>Phalcon\Mvc\Url</code>).
+      This example demonstrates how you can redirect using a route you have defined in your application:</p>
+    <pre><code>return $this->response->redirect(['for' => 'home']);</code></pre>
+
+    <p>If your route has parameters, you may pass with the first arguments:</p>
+    <pre><code>// For a route with the following URI: profile/{id}
+
+return $this->response->redirect(['for' => 'profile', 'id' => 1]);</code></pre>
+
+    <h3>Redirecting To External Domains</h3>
+    <p>Sometimes you may need to redirect to a domain outside of your application.
+      You may do so by calling the <code>redirect</code> method, with <code>true</code> in the second arguments:</p>
+    <pre><code>return $this->response->redirect('https://www.google.com', true);</code></pre>
+
+    <h2>Other Response Types</h2>
+    <h3>JSON Responses</h3>
+    <p>The <code>setJsonContent</code> method will automatically set the <code>Content-Type</code> header to <code>application/json</code>,
+      as well as convert the given array to JSON using the <code>json_encode</code> PHP function:</p>
+    <pre><code>return $this->response->setJsonContent([
+    'name' => 'Abigail',
+    'state' => 'CA'
+]);</code></pre>
+
+    <h3>View Responses</h3>
+    <p>If you need control over the response's status and headers but also need to return a <a href="#!basics/views.html">view</a> as the response's content,
+      define first the response, and then render the view :</p>
+
+    <pre><code>$this->response->setStatusCode(404);
+$this->view->render('home', 'index');</code></pre>
+
+    <h3>File Responses</h3>
+    <p>The <code>setFileToSend</code> method may be used to send a file, such as PDF, and initiating a download.
+      This method accepts the path to the file as its first argument and attachment name as its second argument:</p>
+    <pre><code>return $this->response->setFileToSend('path', 'name');</code></pre>
   </div>
 </div>
