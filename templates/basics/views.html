@@ -1,5 +1,69 @@
 <div class="row">
   <div class="col s12">
-    <h1>views.html</h1>
+    <ul class="summary generate"></ul>
+  </div>
+  <div class="col s12">
+    <h2>View Service</h2>
+    <p>View are managed by the <code>view</code> service. This is an instance of <code>Phalcon\Mvc\View</code>.</p>
+    <pre><code>$view = $this->view;
+$view = $this->getDI()->get('view');</code></pre>
+
+    <h2>Creating Views</h2>
+    <blockquote class="info">Looking for more information on how to write Volt templates?<br/>
+      Check out the full <a href="https://docs.phalconphp.com/en/3.3/volt" target="_blank">Volt documentation</a> to get started.</blockquote>
+
+    <p>Views contain the HTML served by your application and separate your controller / application logic from your presentation logic.
+      Views are stored in the <code>resources/views</code> directory.
+      A simple view might look something like this:</p>
+
+    <pre><code class="language-twig">&lt;!-- View stored in resources/views/greeting.volt --&gt;
+
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Hello, {{ name }}&lt;/h1&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <p>Since this view is stored at <code>resources/views/greeting.volt</code>, we may return it using the <code>render</code> method like so:</p>
+
+    <pre><code>$this->view->render('', 'greeting', ['name' => 'James']);</code></pre>
+
+    <p>The first argument is mandatory, it corresponds to the sub-directory.
+      The second argument corresponds to the name of the view file, in <code>resources/views</code> or <code>resources/views/{sub-directory}</code>.
+      The third argument is an array of data that should be made available to the view.
+      In this case, we are passing the name variable, which is displayed in the view using <a href="https://docs.phalconphp.com/en/3.3/volt" target="_blank">Volt syntax</a>.</p>
+
+    <p>Of course, views may also be nested within sub-directories of the <code>resources/views</code> directory.
+      For example, if your view is stored at  resources/views/front/auth/login.volt, you may reference it like so:</p>
+    <pre><code>$this->view->render('front/auth', 'login');</code></pre>
+
+    <h5>Determining If A View Exists</h5>
+    <p>If you need to determine if a view exists, you may use the <code>exists</code> method.
+      The <code>exists</code> method will return <code>true</code> if the view exists:</p>
+
+    <pre><code>$this->view->exists('front/auth/login.volt');</code></pre>
+
+    <h2>Passing Data To Views</h2>
+    <p>As you saw in the previous examples, you may pass an array of data to views:</p>
+    <pre><code>$this->view->render('', 'greeting', ['name' => 'James']);</code></pre>
+
+    <p>As an alternative to passing a complete array of data to the view helper function, you may use the <code>setVar</code> method to add individual pieces of data to the view:</p>
+    <pre><code>$this->view
+    ->setVar('name', 'James')
+    ->render('', 'greeting');</code></pre>
+
+    <p>You also can pass argument with dynamic property set : </p>
+    <pre><code>$this->view->name = 'James';
+$this->view->render('', 'greeting');</code></pre>
+
+    <h2>Rendering</h2>
+    <blockquote class="warning">
+      The view <code>render</code> method, automatic output the rendered content.
+    </blockquote>
+    <p>If you want to get the content as string, you should wrap the <code>render</code> method, in view <code>start</code> & <code>finish</code> methods :</p>
+    <pre><code>$this->view->start();
+$this->view->render('', 'greeting');
+$this->view->finish();
+$content = $this->view->getContent();</code></pre>
   </div>
 </div>
