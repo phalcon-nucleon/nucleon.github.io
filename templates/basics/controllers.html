@@ -1,12 +1,112 @@
 <div class="row">
   <div class="col s12">
-    <h1>controllers.html</h1>
+    <ul class="summary generate"></ul>
+  </div>
+  <div class="col s12">
+    <h2>Intro</h2>
+    <p>Instead of defining all of your request handling logic as Closures in route files, you may wish to organize this behavior using Controller classes. Controllers can group related request handling logic into a single class.</p>
+    <h3>HTTP Kernel</h3>
+    <p>Controllers are stored in the <code>app/Kernels/Http/Controllers directory.</code></p>
 
-    <p><code>\Neutrino\Http\Controller</code> is an abstract class who extends <code>\Phalcon\Mvc\Controller</code>.<br /> This class allow you to use Middleware.</p>
-    <p>If you don't need to use middleware, you can extends directly <code>\Phalcon\Mvc\Controller</code></p>
-    <blockquote class="notice">
-      In <code>\Phalcon\Mvc\Controller</code> <code>__construct</code> is <code>final</code>. <br />
-      It's a performance hack with Zephir. If you need to build a controller with the <code>__construct</code> method, you just must implement <code>\Phalcon\Mvc\ControllerInterface</code>, and build you own controller.
+    <h3>Micro Kernel</h3>
+    <p>Controllers are stored in the <code>app/Micro/Http/Controllers directory.</code></p>
+
+    <h2>Basic Controllers</h2>
+    <h3>Defining Controllers</h3>
+    <p>Below is an example of a basic controller class.
+      Note that the controller extends the base controller class included with Nucleon.
+      The base class provides a few convenience methods such as the middleware method, which may be used to attach middleware to controller actions:</p>
+
+    <pre><code>namespace App\Kernels\Http\Controllers;
+
+use App\Core\Models\User;
+use Neutrino\Http\Controller;
+
+class UserController extends Controller
+{
+    /**
+     * Show the profile for the given user.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function showAction($id)
+    {
+        return $this->view->render('user','profile',  ['user' => User::find($id)]);
+    }
+}</code></pre>
+    <p>You can define a route to this controller action like so:</p>
+    <pre><code>$router->addGet('user/{id}', [
+        'controller' => 'user',
+        'action'     => 'show',
+    ]);</code></pre>
+
+    <blockquote class="info">
+      Controllers are not required to extend <code>Neutrino\Http\Controller</code>. However, you will not have access to
+      convenience features such as <code>middleware</code>. <br/>
+      If you don't need to use middleware, you can extend directly <code>Phalcon\Mvc\Controller</code>
     </blockquote>
+    <blockquote class="notice">
+      In <code>Phalcon\Mvc\Controller</code>, <code>__construct</code> is <code>final</code>. <br />
+      It's a performance hack with Zephir. If you need to build a controller with the <code>__construct</code> method, you just need to implement <code>Phalcon\Mvc\ControllerInterface</code>, and build you own controller.
+    </blockquote>
+
+    <h3>Controllers & Namespaces</h3>
+    <p>It is very important to note that we did not need to specify the full controller namespace when defining the controller route.</p>
+    <p>If you choose to nest your controllers deeper into the <code>App\Kernels\Http\Controllers</code> directory, use the specific class name relative to the <code>App\Kernels\Http\Controllers</code> root namespace. So, if your full controller class is <code>App\Kernels\Http\Controllers\Photos\AdminController</code>, you should register routes to the controller like so:</p>
+    <pre><code>$router->addGet('foo', [
+        'namespace' => 'App\Kernels\Http\Controllers\Photos',
+        'controller' => 'admin',
+        'action'     => 'method',
+    ]);</code></pre>
+
+    <h2>Controller Middleware</h2>
+    <p><a href="#!basics/middleware.html">Middleware</a> may be assigned to the controller's routes in your route files:</p>
+    <pre><code>$router->addGet('foo', [
+        'controller' => 'user',
+        'action'     => 'show',
+        'middleware' => \Neutrino\Auth\Middleware\Authenticate::class
+    ]);</code></pre>
+    <p>However, it is more convenient to specify middleware within your controller's constructor. Using the <code>middleware</code> method from your controller's constructor, you may easily assign middleware to the controller's action. You may even restrict the middleware to only certain methods on the controller class:</p>
+    <pre><code>class UserController extends Neutrino\Http\Controller
+{
+    /**
+     * Instantiate a new controller instance.
+     *
+     * @return void
+     */
+    public function onConstruct()
+    {
+        parent::onConstruct();
+
+        $this->middleware(\Neutrino\Auth\Middleware\Authenticate::class);
+
+        $this->middleware(\Neutrino\Http\Middleware\Csrf::class)
+            ->only(['login']);
+
+        $this->middleware(\Neutrino\Auth\Middleware\Authenticate::class)
+            ->expect(['store']);
+    }
+}</code></pre>
+    <blockquote class="warning">
+      Middleware in <code>onConstruct</code> method, is only available for HTTP Kernel.
+    </blockquote>
+
+    <h2>Dependency Injection & Controllers</h2>
+    <p>By inheriting the class <code>Neutrino\Http\Controller</code> or <code>Phalcon\Mvc\Controller</code>, your
+      controller will inherit the class <code>Phalcon\Di\Injectable</code>. Thus you will have access to all the
+      services of the application via:</p>
+    <pre><code>$this->{'service.name'};
+// or via Di
+$this->getDI()->get('service.name');</code></pre>
+    Example:
+    <pre><code>class UserController extends Neutrino\Http\Controller
+{
+    public function showAction()
+    {
+        $this->request;
+        $this->getDI()->get('request');
+    }
+}</code></pre>
   </div>
 </div>
