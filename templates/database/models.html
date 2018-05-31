@@ -3,6 +3,11 @@
     <ul class="summary generate"></ul>
   </div>
   <div class="col s12">
+    <blockquote>
+      <p>Here we just saw Nucleon addition, and basic usage.<br/>
+        <a href="https://docs.phalconphp.com/en/3.3/db-models" target="_blank">Read the full phalcon model documentation here</a></p>
+    </blockquote>
+
     <h2>Working with Models</h2>
     <p>A model represents the information (data) of the application and the rules to manipulate that data.
       Models are primarily used for managing the rules of interaction with a corresponding database table.
@@ -31,8 +36,7 @@ class User extends Model
     <p>To avoid this request, and thus improve the performances, we will define ourselves the structure in the <code>initialize</code> method.</p>
 
     <p>The <code>initialize</code> method will be a single time during the execution.</p>
-    <pre><code>
-class User extends Model
+    <pre><code>class User extends Model
 {
     public function initialize() {
         parent::initialize();
@@ -41,8 +45,7 @@ class User extends Model
 
     <h5>Define the table</h5>
     <p>The <code>setSource</code> method should be use to define the table for the model.</p>
-    <pre><code>
-class User extends Model
+    <pre><code>class User extends Model
 {
     public function initialize() {
         parent::initialize();
@@ -51,12 +54,10 @@ class User extends Model
     }
 }</code></pre>
 
+    <h5>Define Columns</h5>
+    <p>The <code>column</code> method should be use to define the columns.</p>
 
-    <h5>Define the Primary Key</h5>
-    <p>The <code>primary</code> method should be use to define the primary column used.</p>
-
-    <pre><code>
-use Phalcon\Column;
+    <pre><code>use Phalcon\Column;
 
 class User extends Model
 {
@@ -65,10 +66,17 @@ class User extends Model
 
         $this->setSource('users');
         $this->primary('id', Column::TYPE_INTEGER);
+        $this->column('name', Column::TYPE_VARCHAR);
+        $this->column('email', Column::TYPE_VARCHAR);
+        $this->column('password', Column::TYPE_VARCHAR);
+        $this->column('remember_token', Column::TYPE_VARCHAR, [
+            'nullable' => true
+        ]);
     }
 }</code></pre>
 
-    <p>The first argument is the primary column name. The second argument is the type of column.</p>
+    <p>The first argument is the primary column name.</p>
+    <p>The second argument is the type of column.</p>
     <table class="small">
       <thead>
       <tr>
@@ -148,46 +156,6 @@ class User extends Model
       </tbody>
     </table>
 
-
-    <h5>Define a Multiple Primary Key</h5>
-    <p>For define a primary key with multiple column, you should use the <code>primary</code> method on each primary column, with the option <code>multiple</code></p>
-
-    <pre><code>
-use Phalcon\Column;
-
-class BookAuthor extends Model
-{
-    public function initialize() {
-        parent::initialize();
-
-        $this->setSource('books_authors');
-        $this->primary('book_id', Column::TYPE_INTEGER, ['multiple' => true]);
-        $this->primary('author_id', Column::TYPE_INTEGER, ['multiple' => true]);
-    }
-}</code></pre>
-
-    <h5>Define Columns</h5>
-    <p>The <code>column</code> method should be use to define the columns.</p>
-
-    <pre><code>
-use Phalcon\Column;
-
-class User extends Model
-{
-    public function initialize() {
-        parent::initialize();
-
-        $this->setSource('users');
-        $this->primary('id', Column::TYPE_INTEGER);
-        $this->column('name', Column::TYPE_VARCHAR);
-        $this->column('email', Column::TYPE_VARCHAR);
-        $this->column('password', Column::TYPE_VARCHAR);
-        $this->column('remember_token', Column::TYPE_VARCHAR, [
-            'nullable' => true
-        ]);
-    }
-}</code></pre>
-
     <p>The third argument of the <code>column</code> method, accept an of options for define particularity of column :</p>
     <table class="small">
       <thead>
@@ -220,5 +188,120 @@ class User extends Model
       </tr>
       </tbody>
     </table>
+
+
+    <h5>Define the Primary Key</h5>
+    <p>The <code>primary</code> method should be use to define the primary column used.</p>
+
+    <pre><code>use Phalcon\Column;
+
+class User extends Model
+{
+    public function initialize() {
+        parent::initialize();
+
+        $this->setSource('users');
+        $this->primary('id', Column::TYPE_INTEGER);
+    }
+}</code></pre>
+
+    <h5>Define a Multiple Primary Key</h5>
+    <p>For define a primary key with multiple column, you should use the <code>primary</code> method on each primary column, with the option <code>multiple</code></p>
+
+    <pre><code>
+use Phalcon\Column;
+
+class BookAuthor extends Model
+{
+    public function initialize() {
+        parent::initialize();
+
+        $this->setSource('books_authors');
+        $this->primary('book_id', Column::TYPE_INTEGER, ['multiple' => true]);
+        $this->primary('author_id', Column::TYPE_INTEGER, ['multiple' => true]);
+    }
+}</code></pre>
+
+    <h3>Public properties vs. Setters/Getters</h3>
+    <p>Models can be implemented public properties,
+      meaning that each property can be read/updated from any part of the code that has instantiated that model class:</p>
+    <pre><code>class User extends Model
+{
+    public $id;
+
+    public $name;
+
+    public $email;
+}</code></pre>
+
+    <p>Another implementation is to use getters and setter functions, which control which properties are publicly available for that model. The benefit of using getters and setters is that the developer can perform transformations and validation checks on the values set for the model, which is impossible when using public properties. Additionally getters and setters allow for future changes without changing the interface of the model class. So if a field name changes, the only change needed will be in the private property of the model referenced in the relevant getter/setter and nowhere else in the code.</p>
+
+    <pre><code>class User extends Model
+{
+    protected $id;
+
+    protected $name;
+
+    protected $email;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        if ($id < 0) {
+            throw new \InvalidArgumentException("Id can't be negative");
+        }
+        $this->id = $id;
+
+        return $this;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $len = strlen($name);
+
+        if ($len < 4) {
+            throw new \InvalidArgumentException("Name is too short");
+        }
+        if ($len > 32) {
+            throw new \InvalidArgumentException("Name is too long");
+        }
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function setEmail($email)
+    {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new \InvalidArgumentException("Email is invalid");
+        }
+        $this->email = $email;
+
+        return $this;
+    }
+}</code></pre>
+    <p>Public properties provide less complexity in development. However getters/setters can heavily increase the testability, extensibility and maintainability of applications. Developers can decide which strategy is more appropriate for the application they are creating, depending on the needs of the application. The ORM is compatible with both schemes of defining properties.</p>
+
+    <h2>Finding Records</h2>
+    <h3>Model::find</h3>
+    <h3>Model::findFirst</h3>
+    <h3>Model::findBy{$property}</h3>
+    <h3>Model::findFirstBy{$property}</h3>
+    <h3>Model::findFirst</h3>
+    <h3>Model::query</h3>
   </div>
 </div>
