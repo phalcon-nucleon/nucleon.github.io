@@ -188,8 +188,9 @@
       }, 300);
     }
   };
-  $(document).ready(Main.init);
-  $(window).on('load', Main.ready);
+
+  Main.init();
+  Main.ready();
 
   if (window.navigator.userAgent.indexOf("MSIE ")) {
     (function () {
