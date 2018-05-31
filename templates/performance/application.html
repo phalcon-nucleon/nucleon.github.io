@@ -63,6 +63,6 @@ $router->mount($frontend);</code></pre>
     <p>Will become :</p>
     <pre><code class="language-php">$router->add('/', ['controller' => 'home', 'action' => 'index'], 'GET');
 $router->add('/', ['controller' => 'home', 'action' => 'postIndex'], 'POST');
-$router->add('/index', ['namespace' => 'My\Namespace', 'module' => 'Frontend', 'controller' => 'home', 'action' => 'postIndex'], 'GET');</code></pre>
+$router->add('/index', ['namespace' => 'My\Namespace', 'module' => 'Frontend', 'controller' => 'index', 'action' => 'index'], 'GET');</code></pre>
   </div>
 </div>
