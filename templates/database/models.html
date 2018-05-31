@@ -3,6 +3,222 @@
     <ul class="summary generate"></ul>
   </div>
   <div class="col s12">
-    <h1>models.html</h1>
+    <h2>Working with Models</h2>
+    <p>A model represents the information (data) of the application and the rules to manipulate that data.
+      Models are primarily used for managing the rules of interaction with a corresponding database table.
+      In most cases, each table in your database will correspond to one model in your application.
+      The bulk of your application's business logic will be concentrated in the models.</p>
+
+    <p><code>Neutrino\Model</code> is the base for all models in a Nucleon application. <code>Neutrino\Model</code> extend the <code>Phalcon\Mvc\Model</code> class.
+      It provides database independence, basic CRUD functionality, advanced finding capabilities, and the ability to relate models to one another, among other services.
+      <code>Neutrino\Model</code> avoids the need of having to use SQL statements because it translates methods dynamically to the respective database engine operations.</p>
+
+    <h3>Creating Model</h3>
+    <p>Models are stored in the <code>app/Core/Models</code> directory.<br/>
+    This is a proposal place to store models. You can place your models any where, or add a level if your application as many model type,
+      like <code>Entity</code>, <code>Dto</code>, <code>Document</code>, ...</p>
+    <pre><code>namespace App\Core\Models;
+
+use Neutrino\Model;
+
+class User extends Model
+{
+
+}</code></pre>
+
+    <h3>Define Table / Columns / Relationship</h3>
+    <p>The definition of the model can be done automatically by phalcon, however it implies that an SQL query is done for each model, at each initialization.</p>
+    <p>To avoid this request, and thus improve the performances, we will define ourselves the structure in the <code>initialize</code> method.</p>
+
+    <p>The <code>initialize</code> method will be a single time during the execution.</p>
+    <pre><code>
+class User extends Model
+{
+    public function initialize() {
+        parent::initialize();
+    }
+}</code></pre>
+
+    <h5>Define the table</h5>
+    <p>The <code>setSource</code> method should be use to define the table for the model.</p>
+    <pre><code>
+class User extends Model
+{
+    public function initialize() {
+        parent::initialize();
+
+        $this->setSource('users');
+    }
+}</code></pre>
+
+
+    <h5>Define the Primary Key</h5>
+    <p>The <code>primary</code> method should be use to define the primary column used.</p>
+
+    <pre><code>
+use Phalcon\Column;
+
+class User extends Model
+{
+    public function initialize() {
+        parent::initialize();
+
+        $this->setSource('users');
+        $this->primary('id', Column::TYPE_INTEGER);
+    }
+}</code></pre>
+
+    <p>The first argument is the primary column name. The second argument is the type of column.</p>
+    <table class="small">
+      <thead>
+      <tr>
+        <th>Const</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>Column::TYPE_INTEGER</code></td>
+        <td>Integer abstract type</td>
+      </tr>
+      <tr>
+        <td><code>Column::TYPE_DATE</code></td>
+        <td>Date abstract type</td>
+      </tr>
+      <tr>
+        <td><code>Column::TYPE_VARCHAR</code></td>
+        <td>Varchar abstract type</td>
+      </tr>
+      <tr>
+        <td><code>Column::TYPE_DECIMAL</code></td>
+        <td>Decimal abstract type</td>
+      </tr>
+      <tr>
+        <td><code>Column::TYPE_DATETIME</code></td>
+        <td>Datetime abstract type</td>
+      </tr>
+      <tr>
+        <td><code>Column::TYPE_CHAR</code></td>
+        <td>Char abstract type</td>
+      </tr>
+      <tr>
+        <td><code>Column::TYPE_TEXT</code></td>
+        <td>Text abstract data type</td>
+      </tr>
+      <tr>
+        <td><code>Column::TYPE_FLOAT</code></td>
+        <td>Float abstract data type</td>
+      </tr>
+      <tr>
+        <td><code>Column::TYPE_BOOLEAN</code></td>
+        <td>Boolean abstract data type</td>
+      </tr>
+      <tr>
+        <td><code>Column::TYPE_DOUBLE</code></td>
+        <td>Double abstract data type</td>
+      </tr>
+      <tr>
+        <td><code>Column::TYPE_TINYBLOB</code></td>
+        <td>Tinyblob abstract data type</td>
+      </tr>
+      <tr>
+        <td><code>Column::TYPE_BLOB</code></td>
+        <td>Blob abstract data type</td>
+      </tr>
+      <tr>
+        <td><code>Column::TYPE_MEDIUMBLOB</code></td>
+        <td>Mediumblob abstract data type</td>
+      </tr>
+      <tr>
+        <td><code>Column::TYPE_LONGBLOB</code></td>
+        <td>Longblob abstract data type</td>
+      </tr>
+      <tr>
+        <td><code>Column::TYPE_BIGINTEGER</code></td>
+        <td>Big integer abstract data type</td>
+      </tr>
+      <tr>
+        <td><code>Column::TYPE_JSON</code></td>
+        <td>Json abstract type</td>
+      </tr>
+      <tr>
+        <td><code>Column::TYPE_JSONB</code></td>
+        <td>Json blob abstract type</td>
+      </tr>
+      </tbody>
+    </table>
+
+
+    <h5>Define a Multiple Primary Key</h5>
+    <p>For define a primary key with multiple column, you should use the <code>primary</code> method on each primary column, with the option <code>multiple</code></p>
+
+    <pre><code>
+use Phalcon\Column;
+
+class BookAuthor extends Model
+{
+    public function initialize() {
+        parent::initialize();
+
+        $this->setSource('books_authors');
+        $this->primary('book_id', Column::TYPE_INTEGER, ['multiple' => true]);
+        $this->primary('author_id', Column::TYPE_INTEGER, ['multiple' => true]);
+    }
+}</code></pre>
+
+    <h5>Define Columns</h5>
+    <p>The <code>column</code> method should be use to define the columns.</p>
+
+    <pre><code>
+use Phalcon\Column;
+
+class User extends Model
+{
+    public function initialize() {
+        parent::initialize();
+
+        $this->setSource('users');
+        $this->primary('id', Column::TYPE_INTEGER);
+        $this->column('name', Column::TYPE_VARCHAR);
+        $this->column('email', Column::TYPE_VARCHAR);
+        $this->column('password', Column::TYPE_VARCHAR);
+        $this->column('remember_token', Column::TYPE_VARCHAR, [
+            'nullable' => true
+        ]);
+    }
+}</code></pre>
+
+    <p>The third argument of the <code>column</code> method, accept an of options for define particularity of column :</p>
+    <table class="small">
+      <thead>
+      <tr>
+        <th>Option</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code style="white-space: nowrap">'default' => $value</code></td>
+        <td>Applies default value at create on column</td>
+      </tr>
+      <tr>
+        <td><code style="white-space: nowrap">'nullable' => true</code></td>
+        <td>Allow to have an empty value on column</td>
+      </tr>
+      <tr>
+        <td><code style="white-space: nowrap">'map' => $property</code></td>
+        <td>Define to property to fill on Model. If empty, the property will be the same of the column name.</td>
+      </tr>
+      <tr><th colspan="2">Primary Only</th></tr>
+      <tr>
+        <td><code style="white-space: nowrap">'autoIncrement' => true</code></td>
+        <td>Specify if the primary key is auto increment by the SGBD</td>
+      </tr>
+      <tr>
+        <td><code style="white-space: nowrap">'multiple' => true</code></td>
+        <td>Specify if the primary key is a multiple column key</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>
