@@ -58,7 +58,7 @@
 {{ post.content|striptags }}
 {{ name|capitalize|trim }}</code></pre>
     <p>The following is the list of available built-in filters in Volt:</p>
-    <table>
+    <table class="small">
       <thead>
       <tr>
         <th>Filter</th>
@@ -383,7 +383,7 @@ Will throw `Fatal error: Uncaught Phalcon\Mvc\View\Exception: Syntax error, unex
 
     <h3>Loop Context</h3>
     <p>A special variable is available inside <code>for</code> loops providing you information about</p>
-    <table>
+    <table class="small">
       <thead>
       <tr>
         <th>Variable</th>
@@ -453,7 +453,7 @@ Will throw `Fatal error: Uncaught Phalcon\Mvc\View\Exception: Syntax error, unex
 
 {% set age *= 5 %}</code></pre>
     <p>The following operators are available:</p>
-    <table>
+    <table class="small">
       <thead>
       <tr>
         <th>Operator</th>
@@ -493,7 +493,7 @@ Will throw `Fatal error: Uncaught Phalcon\Mvc\View\Exception: Syntax error, unex
 
     <h3>Literals</h3>
     <p>The following literals are supported:</p>
-    <table>
+    <table class="small">
       <thead>
       <tr>
         <th>Filter</th>
@@ -548,7 +548,7 @@ Will throw `Fatal error: Uncaught Phalcon\Mvc\View\Exception: Syntax error, unex
 
     <h3>Math</h3>
     <p>You may make calculations in templates using the following operators:</p>
-    <table>
+    <table class="small">
       <thead>
       <tr>
         <th style="text-align: center;">Operator</th>
@@ -581,7 +581,7 @@ Will throw `Fatal error: Uncaught Phalcon\Mvc\View\Exception: Syntax error, unex
 
     <h3>Comparisons</h3>
     <p>The following comparison operators are available:</p>
-    <table>
+    <table class="small">
       <thead>
       <tr>
         <th style="text-align: center;">Operator</th>
@@ -630,7 +630,7 @@ Will throw `Fatal error: Uncaught Phalcon\Mvc\View\Exception: Syntax error, unex
 
     <h3>Logic</h3>
     <p>Logic operators are useful in the <code>if</code> expression evaluation to combine multiple tests:</p>
-    <table>
+    <table class="small">
       <thead>
       <tr>
         <th style="text-align: center;">Operator</th>
@@ -659,7 +659,7 @@ Will throw `Fatal error: Uncaught Phalcon\Mvc\View\Exception: Syntax error, unex
 
     <h3>Other Operators</h3>
     <p>Additional operators seen the following operators are available:</p>
-    <table>
+    <table class="small">
       <thead>
       <tr>
         <th>Operator</th>
@@ -724,7 +724,7 @@ Will throw `Fatal error: Uncaught Phalcon\Mvc\View\Exception: Syntax error, unex
     {% endif %}
 {% endfor %}</code></pre>
     <p>The following built-in tests are available in Volt:</p>
-    <table>
+    <table class="small">
       <thead>
       <tr>
         <th>Test</th>
@@ -900,7 +900,7 @@ Will throw `Fatal error: Uncaught Phalcon\Mvc\View\Exception: Syntax error, unex
 &lt;?= $this->tag->endForm() ?&gt;</code></pre>
     <p>To call a <a href="/en/3.3/api/Phalcon_Tag">Phalcon\Tag</a> helper, you only need to call an uncamelized version
       of the method:</p>
-    <table>
+    <table class="small">
       <thead>
       <tr>
         <th>Method</th>
@@ -997,7 +997,7 @@ Will throw `Fatal error: Uncaught Phalcon\Mvc\View\Exception: Syntax error, unex
 
     <h2>Functions</h2>
     <p>The following built-in functions are available in Volt:</p>
-    <table>
+    <table class="small">
       <thead>
       <tr>
         <th>Name</th>
@@ -1049,6 +1049,10 @@ Will throw `Fatal error: Uncaught Phalcon\Mvc\View\Exception: Syntax error, unex
         <td>Applies <code>Neutrino\Debug\VarDump::dump</code> function to the value</td>
       </tr>
       <tr>
+        <td><code>str_{fn}</code></td>
+        <td>Applies <code>Neutrino\Support\Str::{fn}</code> function to the value</td>
+      </tr>
+      <tr>
         <td><code>csrf_field</code></td>
         <td>Generate a hidden input field, with the csrf_token in value</td>
       </tr>
@@ -1057,10 +1061,6 @@ Will throw `Fatal error: Uncaught Phalcon\Mvc\View\Exception: Syntax error, unex
         <td>Return the csrf_token value. Useful for implement your own field:
           <pre style="margin-bottom:0"><code class="language-twig">&lt;meta name="x-csrf-token" content="{{ csrf_token() }}"&gt;</code></pre>
         </td>
-      </tr>
-      <tr>
-        <td><code>str_{fn}</code></td>
-        <td>Applies <code>Neutrino\Support\Str::{fn}</code> function to the value</td>
       </tr>
       </tbody>
     </table>
@@ -1099,7 +1099,7 @@ Will throw `Fatal error: Uncaught Phalcon\Mvc\View\Exception: Syntax error, unex
     <h3>Partial vs Include</h3>
     <p>Keep the following points in mind when choosing to use the <code>partial</code> function or <code>include</code>:
     </p>
-    <table>
+    <table class="small">
       <thead>
       <tr>
         <th>Type</th>
@@ -1108,28 +1108,24 @@ Will throw `Fatal error: Uncaught Phalcon\Mvc\View\Exception: Syntax error, unex
       </thead>
       <tbody>
       <tr>
-        <td><code>partial</code></td>
+        <td rowspan="3" style="vertical-align:text-top"><code>partial</code></td>
         <td>allows you to include templates made in Volt and in other template engines as well</td>
       </tr>
       <tr>
-        <td></td>
         <td>allows you to pass an expression like a variable allowing to include the content of other view dynamically
         </td>
       </tr>
       <tr>
-        <td></td>
         <td>is better if the content that you have to include changes frequently</td>
       </tr>
       <tr>
-        <td><code>includes</code></td>
+        <td rowspan="3" style="vertical-align:text-top"><code>includes</code></td>
         <td>copies the compiled content into the view which improves the performance</td>
       </tr>
       <tr>
-        <td></td>
         <td>only allows to include templates made with Volt</td>
       </tr>
       <tr>
-        <td></td>
         <td>requires an existing template at compile time</td>
       </tr>
       </tbody>

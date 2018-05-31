@@ -1,4 +1,8 @@
 (function (window, document, $, M) {
+  function slug(str){
+    return str.toLowerCase().replace(/[^a-zA-Z\d]/g, '-').replace(/-+/g, '-');
+  }
+
   var Loader = {
     show: function () {
       $('.preloader').addClass('active');
@@ -107,7 +111,7 @@
           case 'H2':
             o.push(h2 = {
               name: this.innerHTML,
-              slug: this.innerText.toLowerCase().replace(/[^a-zA-Z\d]/g, '-'),
+              slug: slug(this.innerText),
               items: []
             });
             h3 = null;
@@ -115,20 +119,20 @@
           case 'H3':
             h2.items.push(h3 = {
               name: this.innerHTML,
-              slug: this.innerText.toLowerCase().replace(/[^a-zA-Z\d]/g, '-'),
+              slug: slug(this.innerText),
               items: []
             });
             break;
           case 'H4':
             (h3 || h2).items.push({
               name: this.innerHTML,
-              slug: this.innerText.toLowerCase().replace(/[^a-zA-Z\d]/g, '-'),
+              slug: slug(this.innerText),
               items: []
             });
             break;
         }
 
-        $(this).attr('data-anchor', this.innerText.toLowerCase().replace(/[^a-zA-Z\d]/g, '-'))
+        $(this).attr('data-anchor', slug(this.innerText))
       });
 
       function _gen_li(o) {

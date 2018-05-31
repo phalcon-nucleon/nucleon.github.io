@@ -7,29 +7,28 @@
     </blockquote>
     <h2>Intro</h2>
     <p>Migrations are like version control for your database.</p>
-    <p>The Neutrino <code>Schema\Builder</code> provides database agnostic support for creating and manipulating tables across all of
+    <p>The Nucleon <code>Schema\Builder</code> provides database agnostic support for creating and manipulating tables across all of
       Phalcon's supported database systems.</p>
 
     <h2>Generating Migrations</h2>
     <p>To create a migration, use the <code>make:migration</code> quark command:</p>
     <pre><code>php quark make:migration create_users_table</code></pre>
-    <p>The new migration will be placed in your <code>/migrations</code> directory. Each migration file name contains a timestamp which
-      allows Neutrino
-      to determine the order of the migrations.</p>
+    <p>The new migration will be placed in your <code>/migrations</code> directory.
+      Each migration file name contains a timestamp which allows Nucleon to determine the order of the migrations.</p>
     <pre><code>php quark make:migration create_users_table --create=users
 
 php quark make:migration add_votes_to_users_table --table=users</code></pre>
 
-    <p>If you would like to specify a custom output path for the generated migration, you may use the <code>--path</code> option when
-      executing the
-      <code>make:migration</code> command. The given path should be relative to your application's base path.</p>
+    <p>If you would like to specify a custom output path for the generated migration,
+      you may use the <code>--path</code> option when executing the<code>make:migration</code> command.
+      The given path should be relative to your application's base path.</p>
 
     <h2>Migration Structure</h2>
     <p>A migration class contains two methods: <code>up</code> and <code>down</code>. The up method is used to add new tables, columns, or
       indexes to your database, while the <code>down</code> method should simply reverse the operations performed by the <code>up</code>
       method.</p>
 
-    <p>Within both of these methods you may use the Neutrino schema builder to expressively create and modify tables. To learn about all of
+    <p>Within both of these methods you may use the Nucleon schema builder to expressively create and modify tables. To learn about all of
       the methods available on the <code>Schema\Builder</code>, <a href="#!database/migrations.html@create-tables">check out its
         documentation</a>.
       For example, this migration example creates a <code>flights</code> table:</p>
@@ -158,7 +157,7 @@ if ($builder->hasColumn('users', 'email')) {
 
 $builder->dropIfExists('users');</code></pre>
     <p><strong>Renaming Tables With Foreign Keys</strong> Before renaming a table, you should verify that any foreign key constraints on the
-      table have an explicit name in your migration files instead of letting Neutrino assign a convention based name. Otherwise, the foreign
+      table have an explicit name in your migration files instead of letting Nucleon assign a convention based name. Otherwise, the foreign
       key constraint name will refer to the old table name.</p>
 
     <h2>Columns</h2>
@@ -484,7 +483,7 @@ $builder->table('users', function (Schema\Blueprint $table) {
     <p>You may even pass an array of columns to an index method to create a compound (or composite) index:</p>
     <pre><code>$table->index(['account_id', 'created_at']);</code></pre>
 
-    <p>Neutrino will automatically generate a reasonable index name, but you may pass a second argument to the method to specify the name yourself:</p>
+    <p>Nucleon will automatically generate a reasonable index name, but you may pass a second argument to the method to specify the name yourself:</p>
     <pre><code>$table->unique('email', 'unique_email');</code></pre>
     <h4>Available Index Types</h4>
 
@@ -516,7 +515,7 @@ $builder->table('users', function (Schema\Blueprint $table) {
     </table>
     
     <h3>Dropping Indexes</h3>
-    <p>To drop an index, you must specify the index's name. By default, Neutrino automatically assigns a reasonable name to the indexes.
+    <p>To drop an index, you must specify the index's name. By default, Nucleon automatically assigns a reasonable name to the indexes.
       Simply concatenate the table name, the name of the indexed column, and the index type. Here are some examples:</p>
 
     <table class="small">
@@ -548,7 +547,7 @@ $builder->table('users', function (Schema\Blueprint $table) {
 });</code></pre>
 
     <h3>Foreign Key Constraints</h3>
-    <p>Neutrino also provides support for creating foreign key constraints, which are used to force referential integrity at the database
+    <p>Nucleon also provides support for creating foreign key constraints, which are used to force referential integrity at the database
       level.
       For example, let's define a <code>user_id</code> column on the posts table that references the <code>id</code> column on a users
       table:</p>
