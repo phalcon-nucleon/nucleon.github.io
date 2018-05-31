@@ -171,6 +171,10 @@
       Template.onShow(function () {
         Prism.highlightAll()
       });
+      Template.onShow(function () {
+        var $elem = $('#slide-out').find('li.active > a[data-template]');
+        document.title = $elem.parents('.no-padding').find('> a > span:first').text() + ': ' + $elem.text() + ' - Nucleon - PHP Framework build with Phalcon';
+      })
     },
     ready: function () {
       Template.ready();
