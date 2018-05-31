@@ -147,6 +147,7 @@ $success = $db->insert(
     [1, 'James'],
     ['id', 'name']
 );
+
 // Other syntax
 $success = $db->insertAsDict(
     'users',
@@ -168,6 +169,7 @@ $success = $db->update(
     ['Jordan'],
     'id = 1' // Warning! In this case values are not escaped
 );
+
 // Other syntax
 $success = $db->updateAsDict(
     'users',
@@ -201,4 +203,116 @@ $success = $db->delete(
 // Raw SQL
 $success = $db->execute('DELETE FROM users WHERE `id` = ?', [1]);</code></pre>
   </div>
+
+  <h5>Running A General Statement</h5>
+  <p>The <code>execute</code> method should be used to execute statement in the database</p>
+  <pre><code>$success = $db->execute('SET @var_name = expr;');</code></pre>
+
+  <h3>Listening For Query Events</h3>
+  <p>A <code>event manager</code> can be attached to the <code>db</code> service for listen query events.</p>
+  <pre><code>
+use Neutrino\Constants\Events;
+use Phalcon\Db;
+use Phalcon\Events\Event;
+use Phalcon\Events\Manager as EventManager;
+
+$em = new EventManager();
+$em->attach(Events\Db::BEFORE_QUERY, function (Event $event, Db\Adapter\Pdo $db) {
+    $db->getSQLStatement();
+    $db->getSqlVariables();
+    $db->getSQLBindTypes();
+});
+$db->setEventsManager($em);</code></pre>
+
+  <table class="small">
+    <thead>
+    <tr>
+      <td>Const</td>
+      <td>Event</td>
+      <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        <code class="small">Neutrino\Constants\Events\Db::BEFORE_QUERY</code>
+      </td>
+      <td>
+        <code>db:beforeQuery</code>
+      </td>
+      <td>Catch query before execution</td>
+    </tr>
+    <tr>
+      <td>
+      <code class="small">Neutrino\Constants\Events\Db::AFTER_QUERY</code>
+      </td>
+      <td>
+        <code>db:afterQuery</code>
+      </td>
+      <td>Catch query after execution</td>
+    </tr>
+    <tr>
+      <td>
+        <code class="small">Neutrino\Constants\Events\Db::BEGIN_TRANSACTION</code>
+      </td>
+      <td>
+        <code>db:beginTransaction</code>
+      </td>
+      <td>Transaction started</td>
+    </tr>
+    <tr>
+      <td>
+        <code class="small">Neutrino\Constants\Events\Db::COMMIT_TRANSACTION</code>
+      </td>
+      <td>
+        <code>db:commitTransaction</code>
+      </td>
+      <td>Transaction commit</td>
+    </tr>
+    <tr>
+      <td>
+        <code class="small">Neutrino\Constants\Events\Db::ROLLBACK_TRANSACTION</code>
+      </td>
+      <td>
+        <code>db:rollbackTransaction</code>
+      </td>
+      <td>Transaction rollback</td>
+    </tr>
+    <tr>
+      <td>
+        <code class="small">Neutrino\Constants\Events\Db::CREATE_SAVEPOINT</code>
+      </td>
+      <td>
+        <code>db:createSavepoint</code>
+      </td>
+      <td>Save point created</td>
+    </tr>
+    <tr>
+      <td>
+        <code class="small">Neutrino\Constants\Events\Db::RELEASE_SAVEPOINT</code>
+      </td>
+      <td>
+        <code>db:releaseSavepoint</code>
+      </td>
+      <td>Save point released</td>
+    </tr>
+    <tr>
+      <td>
+        <code class="small">Neutrino\Constants\Events\Db::ROLLBACK_SAVEPOINT</code>
+      </td>
+      <td>
+        <code>db:rollbackSavepoint</code>
+      </td>
+      <td>Save point rollback</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h2>Database Transactions</h2>
+  <p>If you would like to begin a transaction manually and have complete control over rollbacks and commits, you may use the <code>begin</code> method on the <code>db</code> service:</p>
+  <pre><code>$db->begin();</code></pre>
+  <p>You can rollback the transaction via the <code>rollback</code> method:</p>
+  <pre><code>$db->rollback();</code></pre>
+  <p>Lastly, you can commit a transaction via the <code>commit</code> method:</p>
+  <pre><code>$db->commit();</code></pre>
 </div>
