@@ -1,0 +1,268 @@
+<div class="row">
+  <div class="col s12">
+    <ul class="summary generate"></ul>
+  </div>
+  <div class="col s12">
+
+    <blockquote>
+      <p>Here we just saw basic usage.</p>
+      <p>
+        <a class="btn" target="_blank" href="https://docs.phalconphp.com/en/3.3/db-models-relationships">
+          Read the full phalcon model relationships documentation here
+        </a>
+      </p>
+    </blockquote>
+
+    <h2>Defining relationships</h2>
+    <table class="small">
+      <thead>
+      <tr>
+        <th>Method</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>hasMany</code></td>
+        <td>Defines a 1-n relationship</td>
+      </tr>
+      <tr>
+        <td><code>hasOne</code></td>
+        <td>Defines a 1-1 relationship</td>
+      </tr>
+      <tr>
+        <td><code>belongsTo</code></td>
+        <td>Defines a n-1 relationship</td>
+      </tr>
+      <tr>
+        <td><code>hasManyToMany</code></td>
+        <td>Defines a n-n relationship</td>
+      </tr>
+      </tbody>
+    </table>
+    <h3>belongsTo, hasOne,hasManyToMany </h3>
+    <p>Relationships must be defined in the <code>initialize</code> method of a model.
+      The methods <code>belongsTo</code>, <code>hasOne</code>, <code>hasMany</code>
+      define the relationship between one or more fields from the current model to fields in another model.
+      Each of these methods requires 3 parameters: local fields, referenced model, referenced fields.</p>
+    <p>The following schema shows 3 tables whose relations will serve us as an example regarding relationships:</p>
+    <pre><code class="language-sql">CREATE TABLE books (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  name varchar(70) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE books_categories (
+  book_id int(10) NOT NULL,
+  category_id int(10) NOT NULL,
+  PRIMARY KEY (book_id, category_id)
+);
+
+CREATE TABLE categories (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  name varchar(70) NOT NULL,
+  PRIMARY KEY (id)
+);</code></pre>
+    <p>The models with their relations could be implemented as follows:</p>
+    <pre><code>namespace App\Core\Models\Entity;
+
+use Neutrino\Model;
+use Phalcon\Db\Column;
+
+/**
+ * @method \Phalcon\Mvc\Model\Resultset|BookCategory[] getBookCategory($criteria = null)
+ * @property-read \Phalcon\Mvc\Model\Resultset|BookCategory[] $bookCategory
+ */
+class Book extends Model
+{
+
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->primary('id', Column::TYPE_INTEGER, ['autoIncrement' => true]);
+        $this->column('name', Column::TYPE_VARCHAR);
+
+        $this->hasMany('id', BookCategory::class, 'book_id');
+    }
+}</code></pre>
+    <pre><code>namespace App\Core\Models\Entity;
+
+use Neutrino\Model;
+use Phalcon\Db\Column;
+
+/**
+ * @method Book getBook()
+ * @property-read Book $book
+ * @method Category getCategory()
+ * @property-read Category $category
+ */
+class BookCategory extends Model
+{
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->primary('book_id', Column::TYPE_INTEGER, ['multiple' => true]);
+        $this->primary('category_id', Column::TYPE_INTEGER, ['multiple' => true]);
+
+        $this->belongsTo('book_id', Book::class, 'id');
+        $this->belongsTo('category_id', Category::class, 'id');
+    }
+
+}</code></pre>
+    <pre><code>namespace App\Core\Models\Entity;
+
+use Neutrino\Model;
+use Phalcon\Db\Column;
+
+/**
+ * @method \Phalcon\Mvc\Model\Resultset|BookCategory[] getBookCategory($criteria = null)
+ * @property-read \Phalcon\Mvc\Model\Resultset|BookCategory[] $bookCategory
+ */
+class Category extends Model
+{
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->primary('id', Column::TYPE_INTEGER, ['autoIncrement' => true]);
+        $this->column('name', Column::TYPE_VARCHAR);
+
+        $this->hasMany('id', BookCategory::class, 'category_id');
+    }
+}</code></pre>
+    <p>The first parameter indicates the field of the local model used in the relationship; the second indicates the name of the referenced model and the third the field name in the referenced model. You could also use arrays to define multiple fields in the relationship.</p>
+
+    <p>Phalcon uses the magic methods <code>__set</code>/<code>__get</code>/<code>__call</code> to store or retrieve
+      related data using relationships.</p>
+    <p>By accessing an attribute with the same name as the relationship will retrieve all its related record(s).</p>
+
+    <pre><code>$book = Book::findFirst();
+
+foreach($book->bookCategory as $bookCategory){
+    $category = $bookCategory->category;
+}</code></pre>
+    <p>Also, you can use a magic getter:</p>
+    <pre><code>$book = Book::findFirst();
+// All the related records
+$book->getBookCategory();
+// Passing criteria
+$book->getBookCategory(['limit' => 5]);</code></pre>
+
+    <h3>hasManyToMany</h3>
+    <p>Many to many relationships require 3 models and define the attributes involved in the relationship:</p>
+    <pre><code>namespace App\Core\Models\Entity;
+
+use Neutrino\Model;
+use Phalcon\Db\Column;
+
+/**
+ * @method \Phalcon\Mvc\Model\Resultset|Category[] getCategories($criteria = null)
+ * @property-read \Phalcon\Mvc\Model\Resultset|Category[] $categories
+ */
+class Book extends Model
+{
+
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->primary('id', Column::TYPE_INTEGER, ['autoIncrement' => true]);
+        $this->column('name', Column::TYPE_VARCHAR);
+
+        $this->hasManyToMany('id', BookCategory::class, 'book_id', 'category_id', Category::class, 'id', ['alias' => 'categories']);
+    }
+}</code></pre>
+    <pre><code>namespace App\Core\Models\Entity;
+
+use Neutrino\Model;
+use Phalcon\Db\Column;
+
+/**
+ * @method Book getBook()
+ * @property-read Book $book
+ * @method Category getCategory()
+ * @property-read Category $category
+ */
+class BookCategory extends Model
+{
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->primary('book_id', Column::TYPE_INTEGER, ['multiple' => true]);
+        $this->primary('category_id', Column::TYPE_INTEGER, ['multiple' => true]);
+
+        $this->belongsTo('book_id', Book::class, 'id');
+        $this->belongsTo('category_id', Category::class, 'id');
+    }
+
+}</code></pre>
+    <pre><code>namespace App\Core\Models\Entity;
+
+use Neutrino\Model;
+use Phalcon\Db\Column;
+
+/**
+ * @method \Phalcon\Mvc\Model\Resultset|Book[] getBooks($criteria = null)
+ * @property-read \Phalcon\Mvc\Model\Resultset|Book[] $books
+ */
+class Category extends Model
+{
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->primary('id', Column::TYPE_INTEGER, ['autoIncrement' => true]);
+        $this->column('name', Column::TYPE_VARCHAR);
+
+        $this->hasManyToMany('id', BookCategory::class, 'category_id', 'book_id', Book::class, 'id', ['alias' => 'books']);
+    }
+}</code></pre>
+
+<p>We can now directly access to categories from a book : </p>
+
+    <pre><code>$book = Book::findFirst();
+
+foreach($book->categories as $category){
+    // $category instanceof Category
+}</code></pre>
+
+    <h2>Queries behind</h2>
+    <p>Those differents relationships implice to make differents types of queries : </p>
+    <table>
+      <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Implicit Method</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Belongs-To</td>
+        <td>Returns a model instance of the related record directly</td>
+        <td>findFirst</td>
+      </tr>
+      <tr>
+        <td>Has-One</td>
+        <td>Returns a model instance of the related record directly</td>
+        <td>findFirst</td>
+      </tr>
+      <tr>
+        <td>Has-Many</td>
+        <td>Returns a collection of model instances of the referenced model</td>
+        <td>find</td>
+      </tr>
+      <tr>
+        <td>Has-Many-to-Many</td>
+        <td>Returns a collection of model instances of the referenced model, it implicitly does 'inner joins' with the involved models</td>
+        <td>(complex query)</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <p>In all case, you should correctly set your index, and foreign key relations, for get the best performance.</p>
+  </div>
+</div>
