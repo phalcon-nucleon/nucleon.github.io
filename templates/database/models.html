@@ -4,9 +4,12 @@
   </div>
   <div class="col s12">
     <blockquote>
-      <p>Here we just saw Nucleon addition, and basic usage.<br/>
-        <a href="https://docs.phalconphp.com/en/3.3/db-models" target="_blank">Read the full phalcon model documentation
-          here</a></p>
+      <p>Here we just saw Nucleon addition, and basic usage.</p>
+      <p>
+        <a class="btn" target="_blank" href="https://docs.phalconphp.com/en/3.3/db-models">
+          Read the full phalcon model documentation here
+        </a>
+      </p>
     </blockquote>
 
     <h2>Working with Models</h2>
@@ -521,6 +524,16 @@ if($user->delete()){
 }</code></pre>
 
     <h2>Model Events</h2>
+
+    <blockquote>
+      <p>Here we just saw basic usage.</p>
+      <p>
+        <a class="btn" target="_blank" href="https://docs.phalconphp.com/en/3.3/db-models-events">
+          Read full Phalcon Model Events documentation here
+        </a>
+      </p>
+    </blockquote>
+
     <p>Many events are raised when actions are done on models, Here we saw the different events :</p>
     <table class="small">
       <thead>
@@ -532,12 +545,14 @@ if($user->delete()){
       </tr>
       </thead>
       <tbody>
+      <tr><th colspan="4">When Fetch</th></tr>
       <tr>
         <td>fetch</td>
         <td><code>afterFetch</code></td>
         <td>no</td>
         <td>Raised after obtaining a record from the database</td>
       </tr>
+      <tr><th colspan="4">When Saving</th></tr>
       <tr>
         <td>create</td>
         <td><code>beforeValidationOnCreate</code></td>
@@ -594,6 +609,12 @@ if($user->delete()){
       </tr>
       <tr>
         <td>save</td>
+        <td><code>validation</code></td>
+        <td>yes</td>
+        <td>Raised before validation on fields when creating / updating.</td>
+      </tr>
+      <tr>
+        <td>save</td>
         <td><code>afterValidation</code></td>
         <td>yes</td>
         <td>Raised after validation on fields when creating / updating.</td>
@@ -616,6 +637,7 @@ if($user->delete()){
         <td>already stopped</td>
         <td>Raised after fields validation fails</td>
       </tr>
+      <tr><th colspan="4">When Deleting</th></tr>
       <tr>
         <td>delete</td>
         <td><code>beforeDelete</code></td>
@@ -632,49 +654,84 @@ if($user->delete()){
     </table>
 
     <h5>Waterfall</h5>
+    <h6>fetch records</h6>
     <ul class="request-lifecycle">
-      <li>fetch records
+      <li>Execute DB Select</li>
+      <li><code>Model::afterFetch</code></li>
+      <li>return</li>
+    </ul>
+    <h6>save records</h6>
+    <ul class="request-lifecycle">
+      <li>Validation
         <ul>
-          <li>Execute DB Select</li>
-          <li><code>Model::afterFetch</code></li>
-          <li>return</li>
+          <li><code>beforeValidation</code></li>
+          <li><code>beforeValidationOnCreate</code> / <code>beforeValidationOnUpdate</code></li>
+          <li><code>validation</code></li>
+          <li>Validate fields</li>
+          <li><code>afterValidationOnCreate</code> / <code>afterValidationOnUpdate</code></li>
+          <li><code>afterValidation</code></li>
         </ul>
       </li>
-    </ul>
-    <ul class="request-lifecycle">
-      <li>save records
+      <li>Query
         <ul>
-          <li>Validation
-            <ul>
-              <li><code>beforeValidation</code></li>
-              <li><code>beforeValidationOnCreate</code> / <code>beforeValidationOnUpdate</code></li>
-              <li>Validate fields</li>
-              <li><code>afterValidationOnCreate</code> / <code>afterValidationOnUpdate</code></li>
-              <li><code>afterValidation</code></li>
-            </ul>
-          </li>
-          <li>Query
-            <ul>
-              <li><code>beforeSave</code></li>
-              <li><code>beforeCreate</code> / <code>beforeUpdate</code></li>
-              <li>Execute DB Insert / Update</li>
-              <li><code>afterCreate</code> / <code>afterUpdate</code></li>
-              <li><code>afterSave</code></li>
-            </ul>
-          </li>
-          <li>returns</li>
+          <li><code>beforeSave</code></li>
+          <li><code>beforeCreate</code> / <code>beforeUpdate</code></li>
+          <li>Execute DB Insert / Update</li>
+          <li><code>afterCreate</code> / <code>afterUpdate</code></li>
+          <li><code>afterSave</code></li>
         </ul>
       </li>
+      <li>returns</li>
     </ul>
+    <h6>delete records</h6>
     <ul class="request-lifecycle">
-      <li>delete record
-        <ul>
-          <li><code>beforeDelete</code></li>
-          <li>Execute DB Delete</li>
-          <li><code>afterDelete</code></li>
-          <li>returns</li>
-        </ul>
-      </li>
+      <li><code>beforeDelete</code></li>
+      <li>Execute DB Delete</li>
+      <li><code>afterDelete</code></li>
+      <li>returns</li>
     </ul>
+
+    <pre><code>class User extends Model
+{
+    public $id;
+
+    public $name;
+
+    public $status;
+
+    public function validation()
+    {
+        if (in_array('DELETED', $this->status)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function beforeDelete()
+    {
+        if (!in_array('DELETED', $this->status)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function beforeSave()
+    {
+        $this->status = implode(',', $this->status);
+    }
+
+    public function afterFetch()
+    {
+        $this->status = implode(',', $this->status);
+    }
+
+    public function afterSave()
+    {
+        $this->afterFetch();
+    }
+}
+</code></pre>
   </div>
 </div>
