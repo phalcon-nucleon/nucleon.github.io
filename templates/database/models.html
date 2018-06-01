@@ -5,7 +5,8 @@
   <div class="col s12">
     <blockquote>
       <p>Here we just saw Nucleon addition, and basic usage.<br/>
-        <a href="https://docs.phalconphp.com/en/3.3/db-models" target="_blank">Read the full phalcon model documentation here</a></p>
+        <a href="https://docs.phalconphp.com/en/3.3/db-models" target="_blank">Read the full phalcon model documentation
+          here</a></p>
     </blockquote>
 
     <h2>Working with Models</h2>
@@ -14,13 +15,17 @@
       In most cases, each table in your database will correspond to one model in your application.
       The bulk of your application's business logic will be concentrated in the models.</p>
 
-    <p><code>Neutrino\Model</code> is the base for all models in a Nucleon application. <code>Neutrino\Model</code> extend the <code>Phalcon\Mvc\Model</code> class.
-      It provides database independence, basic CRUD functionality, advanced finding capabilities, and the ability to relate models to one another, among other services.
-      <code>Neutrino\Model</code> avoids the need of having to use SQL statements because it translates methods dynamically to the respective database engine operations.</p>
+    <p><code>Neutrino\Model</code> is the base for all models in a Nucleon application. <code>Neutrino\Model</code>
+      extend the <code>Phalcon\Mvc\Model</code> class.
+      It provides database independence, basic CRUD functionality, advanced finding capabilities, and the ability to
+      relate models to one another, among other services.
+      <code>Neutrino\Model</code> avoids the need of having to use SQL statements because it translates methods
+      dynamically to the respective database engine operations.</p>
 
     <h3>Creating Model</h3>
     <p>Models are stored in the <code>app/Core/Models</code> directory.<br/>
-    This is a proposal place to store models. You can place your models any where, or add a level if your application as many model type,
+      This is a proposal place to store models. You can place your models any where, or add a level if your application
+      as many model type,
       like <code>Entity</code>, <code>Dto</code>, <code>Document</code>, ...</p>
     <pre><code>namespace App\Core\Models;
 
@@ -32,8 +37,10 @@ class User extends Model
 }</code></pre>
 
     <h3>Define Table / Columns / Relationship</h3>
-    <p>The definition of the model can be done automatically by phalcon, however it implies that an SQL query is done for each model, at each initialization.</p>
-    <p>To avoid this request, and thus improve the performances, we will define ourselves the structure in the <code>initialize</code> method.</p>
+    <p>The definition of the model can be done automatically by phalcon, however it implies that an SQL query is done
+      for each model, at each initialization.</p>
+    <p>To avoid this request, and thus improve the performances, we will define ourselves the structure in the <code>initialize</code>
+      method.</p>
 
     <p>The <code>initialize</code> method will be a single time during the execution.</p>
     <pre><code>class User extends Model
@@ -156,7 +163,8 @@ class User extends Model
       </tbody>
     </table>
 
-    <p>The third argument of the <code>column</code> method, accept an of options for define particularity of column :</p>
+    <p>The third argument of the <code>column</code> method, accept an of options for define particularity of column :
+    </p>
     <table class="small">
       <thead>
       <tr>
@@ -177,7 +185,9 @@ class User extends Model
         <td><code style="white-space: nowrap">'map' => $property</code></td>
         <td>Define to property to fill on Model. If empty, the property will be the same of the column name.</td>
       </tr>
-      <tr><th colspan="2">Primary Only</th></tr>
+      <tr>
+        <th colspan="2">Primary Only</th>
+      </tr>
       <tr>
         <td><code style="white-space: nowrap">'autoIncrement' => true</code></td>
         <td>Specify if the primary key is auto increment by the SGBD</td>
@@ -206,7 +216,8 @@ class User extends Model
 }</code></pre>
 
     <h5>Define a Multiple Primary Key</h5>
-    <p>For define a primary key with multiple column, you should use the <code>primary</code> method on each primary column, with the option <code>multiple</code></p>
+    <p>For define a primary key with multiple column, you should use the <code>primary</code> method on each primary
+      column, with the option <code>multiple</code></p>
 
     <pre><code>
 use Phalcon\Column;
@@ -224,7 +235,8 @@ class BookAuthor extends Model
 
     <h3>Public properties vs. Setters/Getters</h3>
     <p>Models can be implemented public properties,
-      meaning that each property can be read/updated from any part of the code that has instantiated that model class:</p>
+      meaning that each property can be read/updated from any part of the code that has instantiated that model
+      class:</p>
     <pre><code>class User extends Model
 {
     public $id;
@@ -232,9 +244,16 @@ class BookAuthor extends Model
     public $name;
 
     public $email;
+
+    public $age;
 }</code></pre>
 
-    <p>Another implementation is to use getters and setter functions, which control which properties are publicly available for that model. The benefit of using getters and setters is that the developer can perform transformations and validation checks on the values set for the model, which is impossible when using public properties. Additionally getters and setters allow for future changes without changing the interface of the model class. So if a field name changes, the only change needed will be in the private property of the model referenced in the relevant getter/setter and nowhere else in the code.</p>
+    <p>Another implementation is to use getters and setter functions, which control which properties are publicly
+      available for that model. The benefit of using getters and setters is that the developer can perform
+      transformations and validation checks on the values set for the model, which is impossible when using public
+      properties. Additionally getters and setters allow for future changes without changing the interface of the model
+      class. So if a field name changes, the only change needed will be in the private property of the model referenced
+      in the relevant getter/setter and nowhere else in the code.</p>
 
     <pre><code>class User extends Model
 {
@@ -243,6 +262,8 @@ class BookAuthor extends Model
     protected $name;
 
     protected $email;
+
+    protected $age;
 
     public function getId()
     {
@@ -293,15 +314,367 @@ class BookAuthor extends Model
 
         return $this;
     }
+
+    public function getAge()
+    {
+        return $this->age;
+    }
+
+    public function setAge($age)
+    {
+        if ($age < 0) {
+            throw new \InvalidArgumentException("Age can't be negative");
+        }
+        $this->age = $age;
+
+        return $this;
+    }
 }</code></pre>
-    <p>Public properties provide less complexity in development. However getters/setters can heavily increase the testability, extensibility and maintainability of applications. Developers can decide which strategy is more appropriate for the application they are creating, depending on the needs of the application. The ORM is compatible with both schemes of defining properties.</p>
+    <p>Public properties provide less complexity in development. However getters/setters can heavily increase the
+      testability, extensibility and maintainability of applications. Developers can decide which strategy is more
+      appropriate for the application they are creating, depending on the needs of the application. The ORM is
+      compatible with both schemes of defining properties.</p>
 
     <h2>Finding Records</h2>
-    <h3>Model::find</h3>
-    <h3>Model::findFirst</h3>
-    <h3>Model::findBy{$property}</h3>
-    <h3>Model::findFirstBy{$property}</h3>
-    <h3>Model::findFirst</h3>
-    <h3>Model::query</h3>
+    <h4>Model::find & Model::findFirst</h4>
+    <p>Both <code>Model::find</code> and <code>Model::findFirst</code> methods
+      accepts <code>string</code> query, or an associative array specifying the search criteria : </p>
+    <pre><code>$users = User::find('name = "James"');
+$users = User::find([
+    'name = "James"',
+    'order' => 'age'
+]);
+$users = User::find([
+    'condition' => 'name = :name:',
+    'bind' => [
+        'name' => 'James'
+    ],
+    'order' => 'age'
+]);
+$user = User::findFirst('name = "James"');
+$user = User::findFirst([
+    'name = "James"',
+    'order' => 'age'
+]);
+$user = User::findFirst([
+    'condition' => 'name = :name:',
+    'bind' => [
+        'name' => 'James'
+    ],
+    'order' => 'age'
+]);</code></pre>
+    <p>The available query options are:</p>
+    <table class="small">
+      <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+        <th>Example</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>conditions</code></td>
+        <td>Search conditions for the find operation. Is used to extract only those records that fulfill a specified
+          criterion. By default <a href="/hr/3.3/api/Phalcon_Mvc_Model">Phalcon\Mvc\Model</a> assumes the first
+          parameter are the conditions.
+        </td>
+        <td><code>'conditions' =&gt; "name LIKE 'steve%'"</code></td>
+      </tr>
+      <tr>
+        <td><code>columns</code></td>
+        <td>Return specific columns instead of the full columns in the model. When using this option an incomplete
+          object is returned
+        </td>
+        <td><code>'columns' =&gt; 'id, name'</code></td>
+      </tr>
+      <tr>
+        <td><code>bind</code></td>
+        <td>Bind is used together with options, by replacing placeholders and escaping values thus increasing security
+        </td>
+        <td><code>'bind' =&gt; ['status' =&gt; 'A', 'type' =&gt; 'some-time']</code></td>
+      </tr>
+      <tr>
+        <td><code>bindTypes</code></td>
+        <td>When binding parameters, you can use this parameter to define additional casting to the bound parameters
+          increasing even more the security
+        </td>
+        <td><code>'bindTypes' =&gt; [Column::BIND_PARAM_STR, Column::BIND_PARAM_INT]</code></td>
+      </tr>
+      <tr>
+        <td><code>order</code></td>
+        <td>Is used to sort the resultset. Use one or more fields separated by commas.</td>
+        <td><code>'order' =&gt; 'name DESC, status'</code></td>
+      </tr>
+      <tr>
+        <td><code>limit</code></td>
+        <td>Limit the results of the query to results to certain range</td>
+        <td><code>'limit' =&gt; 10</code></td>
+      </tr>
+      <tr>
+        <td><code>offset</code></td>
+        <td>Offset the results of the query by a certain amount</td>
+        <td><code>'offset' =&gt; 5</code></td>
+      </tr>
+      <tr>
+        <td><code>group</code></td>
+        <td>Allows to collect data across multiple records and group the results by one or more columns</td>
+        <td><code>'group' =&gt; 'name, status'</code></td>
+      </tr>
+      <tr>
+        <td><code>for_update</code></td>
+        <td>With this option, <a href="/hr/3.3/api/Phalcon_Mvc_Model">Phalcon\Mvc\Model</a> reads the latest available
+          data, setting exclusive locks on each row it reads
+        </td>
+        <td><code>'for_update' =&gt; true</code></td>
+      </tr>
+      <tr>
+        <td><code>shared_lock</code></td>
+        <td>With this option, <a href="/hr/3.3/api/Phalcon_Mvc_Model">Phalcon\Mvc\Model</a> reads the latest available
+          data, setting shared locks on each row it reads
+        </td>
+        <td><code>'shared_lock' =&gt; true</code></td>
+      </tr>
+      <tr>
+        <td><code>cache</code></td>
+        <td>Cache the resultset, reducing the continuous access to the relational system</td>
+        <td><code>'cache' =&gt; ['lifetime' =&gt; 3600, 'key' =&gt; 'my-find-key']</code></td>
+      </tr>
+      <tr>
+        <td><code>hydration</code></td>
+        <td>Sets the hydration strategy to represent each returned record in the result</td>
+        <td><code>'hydration' =&gt; Resultset::HYDRATE_OBJECTS</code></td>
+      </tr>
+      </tbody>
+    </table>
+    <h5>Model::find</h5>
+    <p><code>Model::find</code> method will return an instance of <code>Phalcon\Mvc\Model\Resultset\Simple</code> :</p>
+    <pre><code>$users = Model::find();
+foreach($users as $user){
+    $user->name;
+}</code></pre>
+    <h5>Model::findFirst</h5>
+    <p><code>Model::find</code> method will return an instance the model :</p>
+    <pre><code>$user = Model::findFirst();
+$user->name;</code></pre>
+    <h5>Model::findBy&lt;property-name&gt; & Model::findFirstBy&lt;property-name&gt;</h5>
+    <p>There is the <code>findBy&lt;property-name&gt;</code> and <code>findFirstBy&lt;property-name&gt;</code> methods.
+      These methods expands on the <code>find</code> and <code>findFirst</code> methods mentioned earlier.
+      It allows you to quickly perform a retrieval from a table by using the property name in the method itself and
+      passing it a parameter that contains the data you want to search for in that column.
+      An example is in order, so taking our User model mentioned earlier:</p>
+    <pre><code>$users = User::findByName('James');
+$user = User::findFirstByName('James');</code></pre>
+    <h4>Model::query</h4>
+    <p>The <code>Model::query</code> method returns a <code>Phalcon\Mvc\Model\Criteria</code> object that is friendly
+      with IDE autocompleters.</p>
+    <pre><code>$users = User::query()
+    ->where('name = :name:')
+    ->andWhere('age > :age:')
+    ->bind([
+        'name' => 'James',
+        'age' => 10,
+    ])
+    ->order('age')
+    ->execute();</code></pre>
+    <p>All the queries are internally handled as <a href="#!database/queries-phql.html">PHQL</a> queries.
+      PHQL is a high-level, object-oriented and SQL-like language.
+      This language provide you more features to perform queries like joining other models, define groupings, add
+      aggregations etc.</p>
+
+    <h2>Creating/Updating/Deleting Model</h2>
+    <h3>Create model</h3>
+    <p>For create a model, you should use the <code>Model:create</code> method, or <code>Model::save</code> method :</p>
+    <pre><code>$user = new User;
+$user->name = "James";
+$user->age = 32;
+
+if($user->create()){ // or $user->save()
+    // success
+} else {
+    // fail
+    $user->getMessages();
+}</code></pre>
+
+    <h3>Update model</h3>
+    <p>For update a model, you should use the <code>Model::update</code> method, or <code>Model::save</code> method :
+    </p>
+    <pre><code>$user = User::findFirst(1);
+$user->name = "Jordan";
+
+if($user->update()){ // or $user->save()
+    // success
+} else {
+    // fail
+    $user->getMessages();
+}</code></pre>
+
+    <h3>Delete model</h3>
+    <p>For delete a model, you should use the <code>Model::delete</code> method :</p>
+    <pre><code>$user = User::findFirst(1);
+
+if($user->delete()){
+    // success
+} else {
+    // fail
+    $user->getMessages();
+}</code></pre>
+
+    <h2>Model Events</h2>
+    <p>Many events are raised when actions are done on models, Here we saw the different events :</p>
+    <table class="small">
+      <thead>
+      <tr>
+        <th>Operation</th>
+        <th>Name</th>
+        <th>Stoppable</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>fetch</td>
+        <td><code>afterFetch</code></td>
+        <td>no</td>
+        <td>Raised after obtaining a record from the database</td>
+      </tr>
+      <tr>
+        <td>create</td>
+        <td><code>beforeValidationOnCreate</code></td>
+        <td>yes</td>
+        <td>Raised before validation on fields when creating.</td>
+      </tr>
+      <tr>
+        <td>create</td>
+        <td><code>afterValidationOnCreate</code></td>
+        <td>yes</td>
+        <td>Raised after validation on fields when creating.</td>
+      </tr>
+      <tr>
+        <td>create</td>
+        <td><code>beforeCreate</code></td>
+        <td>yes</td>
+        <td>Raised before creating a record in the database</td>
+      </tr>
+      <tr>
+        <td>create</td>
+        <td><code>afterCreate</code></td>
+        <td>no</td>
+        <td>Raised after creating a record in the database</td>
+      </tr>
+      <tr>
+        <td>update</td>
+        <td><code>beforeValidationOnUpdate</code></td>
+        <td>yes</td>
+        <td>Raised before validation on fields when updating.</td>
+      </tr>
+      <tr>
+        <td>update</td>
+        <td><code>afterValidationOnUpdate</code></td>
+        <td>yes</td>
+        <td>Raised after validation on fields when updating.</td>
+      </tr>
+      <tr>
+        <td>update</td>
+        <td><code>beforeUpdate</code></td>
+        <td>yes</td>
+        <td>Raised before updating a record in the database</td>
+      </tr>
+      <tr>
+        <td>update</td>
+        <td><code>afterUpdate</code></td>
+        <td>no</td>
+        <td>Raised after updating a record in the database</td>
+      </tr>
+      <tr>
+        <td>save</td>
+        <td><code>beforeValidation</code></td>
+        <td>yes</td>
+        <td>Raised before validation on fields when creating / updating.</td>
+      </tr>
+      <tr>
+        <td>save</td>
+        <td><code>afterValidation</code></td>
+        <td>yes</td>
+        <td>Raised after validation on fields when creating / updating.</td>
+      </tr>
+      <tr>
+        <td>save</td>
+        <td><code>beforeSave</code></td>
+        <td>yes</td>
+        <td>Raised before saving a record in the database</td>
+      </tr>
+      <tr>
+        <td>save</td>
+        <td><code>afterSave</code></td>
+        <td>no</td>
+        <td>Raised after saving a record in the database</td>
+      </tr>
+      <tr>
+        <td>save</td>
+        <td><code>onValidationFails</code></td>
+        <td>already stopped</td>
+        <td>Raised after fields validation fails</td>
+      </tr>
+      <tr>
+        <td>delete</td>
+        <td><code>beforeDelete</code></td>
+        <td>yes</td>
+        <td>Raised before the delete operation</td>
+      </tr>
+      <tr>
+        <td>delete</td>
+        <td><code>afterDelete</code></td>
+        <td>no</td>
+        <td>Raised after the delete operation</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h5>Waterfall</h5>
+    <ul class="request-lifecycle">
+      <li>fetch records
+        <ul>
+          <li>Execute DB Select</li>
+          <li><code>Model::afterFetch</code></li>
+          <li>return</li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="request-lifecycle">
+      <li>save records
+        <ul>
+          <li>Validation
+            <ul>
+              <li><code>beforeValidation</code></li>
+              <li><code>beforeValidationOnCreate</code> / <code>beforeValidationOnUpdate</code></li>
+              <li>Validate fields</li>
+              <li><code>afterValidationOnCreate</code> / <code>afterValidationOnUpdate</code></li>
+              <li><code>afterValidation</code></li>
+            </ul>
+          </li>
+          <li>Query
+            <ul>
+              <li><code>beforeSave</code></li>
+              <li><code>beforeCreate</code> / <code>beforeUpdate</code></li>
+              <li>Execute DB Insert / Update</li>
+              <li><code>afterCreate</code> / <code>afterUpdate</code></li>
+              <li><code>afterSave</code></li>
+            </ul>
+          </li>
+          <li>returns</li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="request-lifecycle">
+      <li>delete record
+        <ul>
+          <li><code>beforeDelete</code></li>
+          <li>Execute DB Delete</li>
+          <li><code>afterDelete</code></li>
+          <li>returns</li>
+        </ul>
+      </li>
+    </ul>
   </div>
 </div>
