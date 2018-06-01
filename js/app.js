@@ -66,6 +66,25 @@
       Loader.ajax({
         url: 'templates/' + template
       }).done(function (data) {
+
+        function split(splitters, str) {
+          for (var p, i = 0, l = splitters.length; i < l; i++) {
+            p = str.split(splitters[i]);
+            if (p.length > 1) {
+              return p;
+            }
+          }
+
+          return [str];
+        }
+
+        data = data.replace(/<code>\\?(Phalcon\\.+)<\/code>/gm, function (g, match) {
+
+          var c = split(['::', '-&gt;', '->'], match);
+
+          return '<a target="_blank" href="https://docs.phalconphp.com/en/3.3/api/' + c[0].replace(/^\\/, '').replace(/\\/g, '_') + '"><code>' + match + '</code></a>';
+        });
+
         window.scrollTo(0, 0);
 
         $('[data-template-title]').text(template.replace(/.+\/(.+).html/, '$1').replace(/[_-]/g, ' ').replace(/^(.)|\s+(.)/g, function ($1) {

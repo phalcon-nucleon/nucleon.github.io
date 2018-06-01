@@ -46,7 +46,9 @@ class User extends Model
       method.</p>
 
     <p>The <code>initialize</code> method will be a single time during the execution.</p>
-    <pre><code>class User extends Model
+    <pre><code>use Neutrino\Model;
+
+class User extends Model
 {
     public function initialize() {
         parent::initialize();
@@ -55,7 +57,9 @@ class User extends Model
 
     <h5>Define the table</h5>
     <p>The <code>setSource</code> method should be use to define the table for the model.</p>
-    <pre><code>class User extends Model
+    <pre><code>use Neutrino\Model;
+
+class User extends Model
 {
     public function initialize() {
         parent::initialize();
@@ -67,7 +71,8 @@ class User extends Model
     <h5>Define Columns</h5>
     <p>The <code>column</code> method should be use to define the columns.</p>
 
-    <pre><code>use Phalcon\Column;
+    <pre><code>use Neutrino\Model;
+use Phalcon\Db\Column;
 
 class User extends Model
 {
@@ -96,71 +101,71 @@ class User extends Model
       </thead>
       <tbody>
       <tr>
-        <td><code>Column::TYPE_INTEGER</code></td>
+        <td><code>Phalcon\Db\Column::TYPE_INTEGER</code></td>
         <td>Integer abstract type</td>
       </tr>
       <tr>
-        <td><code>Column::TYPE_DATE</code></td>
+        <td><code>Phalcon\Db\Column::TYPE_DATE</code></td>
         <td>Date abstract type</td>
       </tr>
       <tr>
-        <td><code>Column::TYPE_VARCHAR</code></td>
+        <td><code>Phalcon\Db\Column::TYPE_VARCHAR</code></td>
         <td>Varchar abstract type</td>
       </tr>
       <tr>
-        <td><code>Column::TYPE_DECIMAL</code></td>
+        <td><code>Phalcon\Db\Column::TYPE_DECIMAL</code></td>
         <td>Decimal abstract type</td>
       </tr>
       <tr>
-        <td><code>Column::TYPE_DATETIME</code></td>
+        <td><code>Phalcon\Db\Column::TYPE_DATETIME</code></td>
         <td>Datetime abstract type</td>
       </tr>
       <tr>
-        <td><code>Column::TYPE_CHAR</code></td>
+        <td><code>Phalcon\Db\Column::TYPE_CHAR</code></td>
         <td>Char abstract type</td>
       </tr>
       <tr>
-        <td><code>Column::TYPE_TEXT</code></td>
+        <td><code>Phalcon\Db\Column::TYPE_TEXT</code></td>
         <td>Text abstract data type</td>
       </tr>
       <tr>
-        <td><code>Column::TYPE_FLOAT</code></td>
+        <td><code>Phalcon\Db\Column::TYPE_FLOAT</code></td>
         <td>Float abstract data type</td>
       </tr>
       <tr>
-        <td><code>Column::TYPE_BOOLEAN</code></td>
+        <td><code>Phalcon\Db\Column::TYPE_BOOLEAN</code></td>
         <td>Boolean abstract data type</td>
       </tr>
       <tr>
-        <td><code>Column::TYPE_DOUBLE</code></td>
+        <td><code>Phalcon\Db\Column::TYPE_DOUBLE</code></td>
         <td>Double abstract data type</td>
       </tr>
       <tr>
-        <td><code>Column::TYPE_TINYBLOB</code></td>
+        <td><code>Phalcon\Db\Column::TYPE_TINYBLOB</code></td>
         <td>Tinyblob abstract data type</td>
       </tr>
       <tr>
-        <td><code>Column::TYPE_BLOB</code></td>
+        <td><code>Phalcon\Db\Column::TYPE_BLOB</code></td>
         <td>Blob abstract data type</td>
       </tr>
       <tr>
-        <td><code>Column::TYPE_MEDIUMBLOB</code></td>
+        <td><code>Phalcon\Db\Column::TYPE_MEDIUMBLOB</code></td>
         <td>Mediumblob abstract data type</td>
       </tr>
       <tr>
-        <td><code>Column::TYPE_LONGBLOB</code></td>
+        <td><code>Phalcon\Db\Column::TYPE_LONGBLOB</code></td>
         <td>Longblob abstract data type</td>
       </tr>
       <tr>
-        <td><code>Column::TYPE_BIGINTEGER</code></td>
+        <td><code>Phalcon\Db\Column::TYPE_BIGINTEGER</code></td>
         <td>Big integer abstract data type</td>
       </tr>
       <tr>
-        <td><code>Column::TYPE_JSON</code></td>
+        <td><code>Phalcon\Db\Column::TYPE_JSON</code></td>
         <td>Json abstract type</td>
       </tr>
       <tr>
-        <td><code>Column::TYPE_JSONB</code></td>
+        <td><code>Phalcon\Db\Column::TYPE_JSONB</code></td>
         <td>Json blob abstract type</td>
       </tr>
       </tbody>
@@ -206,7 +211,8 @@ class User extends Model
     <h5>Define the Primary Key</h5>
     <p>The <code>primary</code> method should be use to define the primary column used.</p>
 
-    <pre><code>use Phalcon\Column;
+    <pre><code>use Neutrino\Model;
+use Phalcon\Db\Column;
 
 class User extends Model
 {
@@ -222,8 +228,8 @@ class User extends Model
     <p>For define a primary key with multiple column, you should use the <code>primary</code> method on each primary
       column, with the option <code>multiple</code></p>
 
-    <pre><code>
-use Phalcon\Column;
+    <pre><code>use Neutrino\Model;
+use Phalcon\Db\Column;
 
 class BookAuthor extends Model
 {
@@ -240,7 +246,9 @@ class BookAuthor extends Model
     <p>Models can be implemented public properties,
       meaning that each property can be read/updated from any part of the code that has instantiated that model
       class:</p>
-    <pre><code>class User extends Model
+    <pre><code>use Neutrino\Model;
+
+class User extends Model
 {
     public $id;
 
@@ -258,7 +266,9 @@ class BookAuthor extends Model
       class. So if a field name changes, the only change needed will be in the private property of the model referenced
       in the relevant getter/setter and nowhere else in the code.</p>
 
-    <pre><code>class User extends Model
+    <pre><code>use Neutrino\Model;
+
+class User extends Model
 {
     protected $id;
 
@@ -691,7 +701,9 @@ if($user->delete()){
       <li>returns</li>
     </ul>
 
-    <pre><code>class User extends Model
+    <pre><code>use Neutrino\Model;
+
+class User extends Model
 {
     public $id;
 
