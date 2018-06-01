@@ -1,0 +1,13 @@
+@import "materialize/components/color-variables";
+
+$primary-color: #C8523B;
+
+$nav-border-color: color('grey', 'lighten-2');
+$navbar-font-color: $primary-color;
+
+$navbar-height: 94px;
+$navbar-height-mobile: 64px;
+
+$large-and-down: "only screen and (max-width : 1200px)" !default;
+
+$link-color: $primary-color;

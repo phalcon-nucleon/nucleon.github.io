@@ -1,0 +1,47 @@
+
+blockquote {
+  background-color: color('grey', 'lighten-4');
+  padding: 0.6rem 0 0.6rem 1.5rem;
+  position: relative;
+  min-height: 40px;
+
+  &:before {
+    @include material-icon();
+    font-size: 2rem;
+    position: absolute;
+    left: 0.5rem;
+    top: 0.5rem;
+  }
+
+  &.warning, &.info, &.notice {
+    padding-left: 3rem;
+  }
+  &.warning {
+    border-color: color('red', 'darken-2');
+    background-color: color('red', 'lighten-1');
+    color: white;
+
+    &:before {
+      content: 'error';
+    }
+  }
+  &.notice {
+    border-color: color('grey', 'darken-1');
+    &:before {
+      content: 'info';
+      color: color('grey', 'darken-1');
+    }
+  }
+  &.info {
+    border-color: color('blue', 'darken-2');
+    background-color: color('blue', 'lighten-1');
+    color: white;
+
+    &:before {
+      content: 'lightbulb_outline';
+    }
+    a {
+      color: color('deep-purple', 'darken-3');
+    }
+  }
+}

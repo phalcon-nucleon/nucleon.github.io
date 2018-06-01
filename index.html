@@ -1,23 +1,182 @@
 <html>
 <head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-<link rel="stylesheet" href="/css/styles.css">
-<script src="https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script>
-jQuery(document).ready(function(){
-	showdown.setFlavor('github');
-	
-	var converter = new showdown.Converter()
+  <title>Nucleon - PHP Framework build with Phalcon</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/brands.css" integrity="sha384-VGCZwiSnlHXYDojsRqeMn3IVvdzTx5JEuHgqZ3bYLCLUBV8rvihHApoA1Aso2TZA" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/fontawesome.css" integrity="sha384-GVa9GOgVQgOk+TNYXu7S/InPTfSDTtBalSgkgqQ7sCik56N9ztlkoTr2f/T44oKV" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/prism/prism.css">
+  <link rel="stylesheet" href="css/app.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	jQuery.ajax({url: 'https://raw.githubusercontent.com/phalcon-nucleon/nucleon/master/README.md'})
-	.done(function(data){
-		document.body.innerHTML = converter.makeHtml(data);
-	})
-})
-</script>
+  <link href="favicon.ico" rel="icon" type="image/x-icon"/>
 </head>
-<body class="markdown-body container">
+<body class="language-php">
 
+<ul id="slide-out" class="sidenav sidenav-fixed">
+  <li class="logo center-align">
+    <a id="logo-container" href="/" class="brand-logo">
+      <img src="img/nucleon.svg" height="57px">
+    </a>
+  </li>
+  <li class="version center-align">
+      <span>
+        1.3.0
+      </span>
+  </li>
+  <li class="divider"></li>
+  <li class="no-padding">
+    <ul class="collapsible collapsible-accordion no-autoinit">
+      <li class="no-padding">
+        <a class="collapsible-header"><span>Getting Started</span><i class="material-icons">keyboard_arrow_right</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="#!getting-started/installation.html" data-template>Installation</a></li>
+            <li><a href="#!getting-started/configuration.html" data-template>Configuration</a></li>
+            <li><a href="#!getting-started/directory-structure.html" data-template>Directory Structure</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="no-padding">
+        <a class="collapsible-header"><span>Architecture Concepts</span><i class="material-icons">keyboard_arrow_right</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="#!architecture-concepts/global-architecture.html" data-template>Global Architecture</a></li>
+            <li><a href="#!architecture-concepts/kernels-concepts.html" data-template>Kernels Concepts</a></li>
+            <li><a href="#!architecture-concepts/dependency-injection.html" data-template>Dependency Injection</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="no-padding">
+        <a class="collapsible-header"><span>Kernels Concepts</span><i class="material-icons">keyboard_arrow_right</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="#!kernels-concepts/http-kernel.html" data-template>Http Kernel</a></li>
+            <li><a href="#!kernels-concepts/micro-kernel.html" data-template>Micro Kernel</a></li>
+            <li><a href="#!kernels-concepts/cli-kernel.html" data-template>Cli Kernel</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="no-padding">
+        <a class="collapsible-header"><span>The Basics</span><i class="material-icons">keyboard_arrow_right</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="#!basics/routing.html" data-template>Routing</a></li>
+            <li><a href="#!basics/controllers.html" data-template>Controllers</a></li>
+            <li><a href="#!basics/middleware.html" data-template>Middleware</a></li>
+            <li><a href="#!basics/csrf-protection.html" data-template>CSRF Protection</a></li>
+            <li><a href="#!basics/requests.html" data-template>Requests</a></li>
+            <li><a href="#!basics/responses.html" data-template>Responses</a></li>
+            <li><a href="#!basics/views.html" data-template>Views</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="no-padding">
+        <a class="collapsible-header"><span>Database</span><i class="material-icons">keyboard_arrow_right</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="#!database/getting-started.html" data-template>Getting Started</a></li>
+            <li><a href="#!database/queries-phql.html" data-template>Queries & Phql</a></li>
+            <li><a href="#!database/models.html" data-template>Models</a></li>
+            <li><a href="#!database/relationships.html" data-template>Relationships</a></li>
+            <li><a href="#!database/repositories.html" data-template>Repositories</a></li>
+            <li><a href="#!database/migrations.html" data-template>Migrations</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="no-padding">
+        <a class="collapsible-header"><span>Digging deeper</span><i class="material-icons">keyboard_arrow_right</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="#!digging-deeper/quark-console.html" data-template>Quark Console</a></li>
+            <li><a href="#!digging-deeper/helpers.html" data-template>Helpers</a></li>
+            <li><a href="#!digging-deeper/volt.html" data-template>Volt</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="no-padding">
+        <a class="collapsible-header"><span>Performance</span><i class="material-icons">keyboard_arrow_right</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="#!performance/application.html" data-template>Application</a></li>
+            <li><a href="#!performance/php-and-server.html" data-template>PHP & Server</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="no-padding">
+        <a class="collapsible-header"><span>Debug</span><i class="material-icons">keyboard_arrow_right</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="#!debug/debugging.html" data-template>Debugging</a></li>
+            <li><a href="#!debug/var-dumper.html" data-template>Var Dumper</a></li>
+            <li><a href="#!debug/debug-toolbar.html" data-template>Debug toolbar</a></li>
+            <li><a href="#!debug/profilers.html" data-template>Profilers</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<header>
+  <nav>
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col m2 no-padding-on-medium hide-on-large-only">
+            <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          </div>
+          <div class="col m10 l12 no-padding-on-medium">
+            <h1 class="header" data-template-title>Nucleon</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <div class="flex-content">
+    <div class="container" data-template-container>
+      <div id="page-index" class="flex-wrapper flex-vcenter center-align full-vh full-hw">
+        <div class="flex-content">
+          <div><img src="img/nucleon.svg" class="main-logo" alt="Nucleon"></div>
+          <h1 class="flow-text center-align">Nucleon : Phalcon extended framework</h1>
+          <p class="flow-text center-align">Our philosophy is to make the web faster, with enjoyable development.</p>
+          <br/>
+          <p class="center"><a class="btn-large grey lighten-4 grey-text text-darken-3" href="https://github.com/phalcon-nucleon/nucleon"><i class="fab fa-github fa-lg"></i> Source on Github</a></p>
+          <br/>
+          <p class="flow-text center-align">
+            Build with <a href="https://phalconphp.com/" target="_blank"><img src="img/phalcon.svg" alt="Phalcon" height="48" style="top: 12px;position: relative"></a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="preloader">
+    <div class="preloader-wrapper big active">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+
+</footer>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/materialize.min.js"></script>
+<script src="js/prism.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,43 @@
+table {
+  &, td {
+    font-size: 1rem;
+  }
+}
+table.small {
+  th, td {
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+}
+table.auto-size {
+  width: auto;
+  max-width: 100%;
+}
+table.list {
+  margin-left: 40px;
+  tr {
+    border: none;
+    td, th {
+      padding: 0.3rem 0.5rem;
+      &:first-child {
+        display: list-item;
+      }
+    }
+  }
+}
+table.auto-size {
+  width: auto;
+  max-width: 100%;
+}
+table.list {
+  margin-left: 40px;
+  tr {
+    border: none;
+    td, th {
+      padding: 0.3rem 0.5rem;
+      &:first-child {
+        display: list-item;
+      }
+    }
+  }
+}

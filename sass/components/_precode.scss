@@ -1,0 +1,48 @@
+kbd, samp {
+  color: $primary-color;
+  background-color: rgba(color('grey', 'lighten-3'), 0.50) !important;
+  border-bottom: 2px solid rgba(color('grey', 'lighten-2'), 0.50);
+  border-radius: 3px;
+
+  padding: 0.3rem 0.3rem 0.1rem;
+  font-size: 90%;
+  white-space: nowrap;
+}
+blockquote {
+  kbd, samp {
+    background-color: color('grey', 'lighten-3') !important;
+    border-bottom: 2px solid color('grey', 'lighten-2');
+  }
+}
+pre {
+  padding: 0.5em;
+  border-bottom: 2px solid color('grey', 'lighten-3');
+  border-radius: 3px;
+
+  code {
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
+
+  &.inline {
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+
+    code {
+      padding: 0.3em;
+    }
+  }
+}
+td > pre {
+  margin: 0;
+}
+pre[class*="language-"] {
+  code {
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
+}

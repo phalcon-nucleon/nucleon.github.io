@@ -1,0 +1,125 @@
+<div class="row">
+  <div class="col s12">
+    <ul class="summary generate"></ul>
+  </div>
+  <div class="col s12">
+    <h2>Accessing The Request</h2>
+    <p>To obtain an instance of the current HTTP request via dependency injection, you should use
+      <code>$this->request</code> :</p>
+    <pre><code>class UserController extends Neutrino\Http\Controller
+{
+    public function showAction()
+    {
+        $request = $this->request;
+    }
+}</code></pre>
+
+    <h3>Request Path & Method</h3>
+    <p>The <code>Phalcon\Http\Request</code> instance provides a variety of methods for examining the HTTP request for
+      your application. We will discuss a few of the most important methods below.</p>
+
+    <h4>Retrieving The Request URL</h4>
+    <p>The <code>getURI</code> method returns the full request's url information. So, if the incoming request is
+      targeted at <code>http://domain.com/foo/bar?q=baz</code>, the path method will return <code>foo/bar?q=baz</code>:
+    </p>
+    <pre><code>$url = $request->getURI();</code></pre>
+
+    <h4>Retrieving The Request Method</h4>
+    <p>The <code>getMethod</code> method will return the HTTP verb for the request. You may use the
+      <code>isMethod</code> method to verify that the HTTP verb matches a given string:</p>
+    <pre><code>$method = $request->method();
+
+if ($request->isMethod('POST')) {
+    //
+}</code></pre>
+
+    <p>You also can use the methods helper <code>is{Method}</code> method to verify the HTTP verb :</p>
+    <pre><code>$request->isGet();
+$request->isPost();</code></pre>
+
+    <h2>Retrieving Input</h2>
+    <h4>Retrieving All Input Data</h4>
+    <p>You may also retrieve all of the input data as an <code>array</code> using the <code>get</code> method:</p>
+    <pre><code>$input = $request->get();</code></pre>
+
+    <h4>Retrieving An Input Value</h4>
+    <p>Using a few simple methods, you may access all of the user input from your <code>Phalcon\Http\Request</code>
+      instance without worrying about which HTTP verb was used for the request. Regardless of the HTTP verb, the <code>get</code>
+      method may be used to retrieve user input:</p>
+    <pre><code>$email = $request->get('user_email');</code></pre>
+    <p>You may pass a filter as the second argument to the <code>get</code> method. This filter will use the <code>Phalcon\Filter::sanitize</code>
+      method for filtering input :</p>
+    <pre><code>$email = $request->get('user_email', 'email');</code></pre>
+    <a class="btn-small" href="https://docs.phalconphp.com/en/3.3/filter">Read more about Filter</a>
+
+    <p>You may pass a default value as the third argument to the <code>get</code> method. This value will be returned if
+      the requested input value is not present on the request or if input value not satisfy the filter:</p>
+    <pre><code>// http://domain.com/?id=abc
+
+$request->get('id', null, 123);  // => 'abc'
+$request->get('id', 'int', 123); // => 123</code></pre>
+    <h4>Retrieving Input From The Query String</h4>
+    <p>While the <code>get</code> method retrieves values from entire request payload (including the query string), the
+      <code>getQuery</code> method will only retrieve values from the query string:</p>
+    <pre><code>$email = $request->getQuery('user_email');</code></pre>
+    <p>You may pass a filter as the second argument to the <code>getQuery</code> method. This filter will use the <code>Phalcon\Filter::sanitize</code>
+      method for filtering input :</p>
+    <pre><code>$email = $request->getQuery('user_email', 'email');</code></pre>
+    <p>You may pass a default value as the third argument to the <code>getQuery</code> method. This value will be
+      returned if the requested input value is not present on the request or if input value not satisfy the filter:</p>
+    <pre><code>// http://domain.com/?id=abc
+
+$request->getQuery('id', null, 123);  // => 'abc'
+$request->getQuery('id', 'int', 123); // => 123</code></pre>
+
+    <h4>Determining If An Input Value Is Present</h4>
+    <p>You should use the <code>has</code> method to determine if a value is present on the request. The has method
+      returns <code>true</code> if the value is present on the request:</p>
+    <pre><code>if ($request->has('id')){
+  //
+}</code></pre>
+    <h4>Retrieving JSON</h4>
+    <p>When sending JSON requests to your application, you may access the JSON data via the <code>getJsonRawBody</code>
+      method as long as the <code>Content-Type</code> header of the request is properly set to
+      <code>application/json</code>. <br/>
+      You may pass <code>true</code> or <code>false</code>, if you when to retrieve value as <code>array</code> or
+      <code>object</code>.
+    </p>
+    <pre><code>$json = $request->getJsonRawBody();
+$json = $request->getJsonRawBody(false); // {"foo":"bar"} => $json->foo = 'bar'
+$json = $request->getJsonRawBody(true);  // {"foo":"bar"} => $json['foo'] = 'bar' </code></pre>
+
+    <h2>Cookie</h2>
+    <h4>Retrieving Cookies From Requests</h4>
+    <p>By default, cookies are automatically encrypted before being sent to the client and are decrypted when retrieved from the user.
+      This protection prevents unauthorized users to see the cookies contents in the client (browser).</p>
+    <p>Cookie are managed by the <code>cookie</code> service :</p>
+    <pre><code>$cookies = $this->cookies;
+$cookie = $this->getDI()->get('cookies');</code></pre>
+    <p>To retrieve a cookie value from the request, use the <code>get</code> method on <code>cookie</code> service :</p>
+    <pre><code>$cookies->get('name');</code></pre>
+
+    <h2>Files</h2>
+    <h3>Retrieving Uploaded Files</h3>
+    <p>You may access uploaded files from a <code>Phalcon\Http\Request</code> instance using the <code>getUploadedFiles</code> method.
+      The <code>getUploadedFiles</code> method returns an array of <code>Phalcon\Http\Request\File</code>:</p>
+    <pre><code>$request->getUploadedFiles();</code></pre>
+
+    <p>You may determine if any file is present on the request using the hasFiles method, who's return the number of files uploaded:</p>
+    <pre><code>if ($request->hasFiles()){
+  //
+}</code></pre>
+
+    <h4>Validating Successful Uploads</h4>
+    <p>If you want to have only successful upload, just pass <code>true</code> to <code>getUploadedFiles</code> & <code>hasFiles</code> methods :</p>
+    <pre><code>$request->getUploadedFiles(true);
+
+if ($request->hasFiles(true)){
+  //
+}</code></pre>
+
+    <h4>Other File Methods</h4>
+    <p>There are a variety of methods available on <code>Phalcon\Http\Request\File</code> instances.
+      Check out the <a href="https://docs.phalconphp.com/en/3.3/api/Phalcon_Http_Request_File">API documentation for the class</a> for more information regarding these methods.</p>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+h1, h2, h3, h4, h5, h6 {
+  -webkit-font-smoothing: antialiased;
+  & > code[class*="language-"] {
+    font-size: 90%;
+  }
+}
+h2 {
+  font-size: 2.28rem;
+  position: relative;
+  &::before {
+    position: absolute;
+    content: "chevron_right";
+    left: -33px;
+    bottom: 0;
+    color: $primary-color;
+    @include material-icon();
+  }
+}
+h3 {
+  font-size: 1.68rem;
+}
+h4 {
+  font-size: 1.38rem;
+}
+h5 {
+  font-size: 1.14rem;
+  font-weight: 500;
+}
+h6 {
+  font-size: 1.04rem;
+  font-weight: 500;
+  font-variant: small-caps;
+}

@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="col s12">
+    <ul class="summary generate"></ul>
+  </div>
+  <div class="col s12">
+    <p class="flow-text">Nucleon provides a multi kernels structure. Two web kernels, and a console kernel.</p>
+
+    <table class="responsive-table">
+      <thead>
+      <tr>
+        <th></th>
+        <th>type</th>
+        <th>entry point</th>
+        <th>Nucleon Class</th>
+        <th>Phalcon Class</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th>HTTP Kernel (fullstack)</th>
+        <td>web</td>
+        <td><code>public/index.php</code></td>
+        <td><code>Neutrino\Foundation\Http\Kernel</code></td>
+        <td><code>Phalcon\Mvc\Application</code></td>
+      </tr>
+      <tr>
+        <th>Micro Kernel (micro)</th>
+        <td>web</td>
+        <td><code>public/micro.php</code></td>
+        <td><code>Neutrino\Foundation\Micro\Kernel</code></td>
+        <td><code>Phalcon\Mvc\Micro</code></td>
+      </tr>
+      <tr>
+        <th>Console Kernel</th>
+        <td>cli</td>
+        <td><code>quark</code></td>
+        <td><code>Neutrino\Foundation\Cli\Kernel</code></td>
+        <td><code>Phalcon\Cli\Console</code></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h2>Web Kernels</h2>
+    <p>The framework provides two web kernels, a fullstack-framework (<code>Http</code>), a micro-framework (<code>Micro</code>).<br/>
+      You can run one or the other, or have both kernels cohabit with a simple configuration of your web server.</p>
+    <p>Nucleon proposes a configuration where the API of your application will be processed by the micro kernels.
+      All routes starting with <code>/api/</code> will be processed by the micro kernels. You can change the default prefix by changing the configuration of your webserver.</p>
+
+    <p>Each kernels has its own entry point. Your webserver must redirect good routes to the entry point of the kernel of your choice.</p>
+
+    <h3>WebServer Dispatch Configuration</h3>
+    <h4>Nginx</h4>
+    <pre><code class="language-nginx">location ~ /api/(.*) {
+    # Dispatch on Micro Kernel
+    try_files $uri $uri/ /micro.php$is_args$query_string;
+}
+location / {
+    # Dispatch on Http Kernel
+    try_files $uri $uri/ /index.php$is_args$query_string;
+}</code></pre>
+
+    <h4>Apache</h4>
+    <pre><code class="language-apacheconf">RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+# Dispatch on Micro Kernel
+RewriteRule ^/?api/(.*)$ /micro.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+# Dispatch on Http Kernel
+RewriteRule ^(.*)$ /index.php [QSA,L]</code></pre>
+    <blockquote class="warning">Require <code>mod_rewrite</code></blockquote>
+
+    <h2>Console Kernel</h2>
+    <p>Console applications are executed from the command line. They are useful to create cron jobs, scripts, command utilities and more.</p>
+    <p>Nucleon introduce <a href="/templates/kernels-concepts/cli-kernel.html"><code>Quark</code></a>, a console application build with <code>Phalcon\Cli\Console</code>.</p>
+  </div>
+</div>

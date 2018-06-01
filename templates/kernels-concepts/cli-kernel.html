@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col s12">
+    <ul class="summary generate"></ul>
+  </div>
+  <div class="col s12">
+    <h2>Intro</h2>
+    <p>
+      The Cli Kernel is a Console framework. <br/>
+      The kernel is <code>Neutrino\Cli\Kernel</code> extends <code>Phalcon\Cli\Console</code><br/>
+      This kernel implement Dependency Injection, Router, Dispatcher, events management logic, and easy output.
+    </p>
+    <p>
+      The console application is easily usable with <code>quark</code>.
+    </p>
+    <p>
+      <a href="/#!digging-deeper/quark-console.html" class="btn-small">Read more about Quark Console</a>
+    </p>
+
+
+    <h2>Command Lifecycle</h2>
+    <ul class="request-lifecycle">
+      <li><code>quark {command}</code></li>
+      <li><span class="action">bootstrap</span>
+        <ul>
+          <li>required compiled files (if exist)</li>
+          <li>autoload (phalcon/composer)</li>
+        </ul>
+      </li>
+      <li><span class="action">make console <code>App\Kernels\Cli\Kernel</code></span>
+        <ul>
+          <li>Kernel Bootstrap
+            <ul>
+              <li>build <code>Phalcon\Di</code></li>
+              <li>build <code>Phalcon\Phalcon\Events\Manager</code> (if specified)</li>
+            </ul>
+          </li>
+          <li>Register Services</li>
+          <li>Register Global Events Listeners</li>
+          <li>Register Commands</li>
+        </ul>
+      </li>
+      <li><span class="action">run console</span>
+        <ul>
+          <li><span class="event">[kernel::boot]</span></li>
+          <li><span class="action">console->handle</span>
+            <ul>
+              <li><span class="action">Router::match</span></li>
+              <li><span class="action">Dispatcher::dispatch</span>
+                <ul>
+                  <li><span class="action">Make Handler (Task)</span></li>
+                  <li><span class="action">handler->execute()</span></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><span class="event">[kernel::terminate]</span></li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>Tasks</h2>
+    <p>All tasks for Cli Kernel are in <code>{project_dir}/app/Kernels/Cli/Tasks</code></p>
+
+    <h2>Routes</h2>
+    <p>Routes for Cli Kernel are specified in <code>{project_dir}/routes/cli.php</code></p>
+  </div>
+</div>

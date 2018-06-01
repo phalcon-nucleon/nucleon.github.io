@@ -1,0 +1,66 @@
+header, main, footer {
+  margin-left: 300px;
+}
+
+@media only screen and (max-width: 992px) {
+  header, main, footer {
+    margin-left: 0;
+  }
+}
+
+.sidenav {
+  & {
+    border-right: 1px solid $nav-border-color;
+  }
+  .logo {
+    margin: 20px 0;
+    .brand-logo {
+      background-color: transparent !important;
+    }
+  }
+
+  .collapsible-body ul li a {
+    padding-left: 40px;
+  }
+
+  a.collapsible-header {
+    position: relative;
+    &:after {
+      content: " ";
+      display: block;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      height: 0;
+      width: 250px;
+      border-bottom: 1px dashed #e0e0e0;
+    }
+  }
+
+  li.active > a, a.collapsible-header {
+    font-weight: 500;
+  }
+
+  li > a {
+    font-weight: 300;
+    & > i.material-icons {
+      float: right;
+      margin: 0;
+    }
+  }
+
+  &, &.sidenav-fixed {
+    .collapsible-body > ul:not(.collapsible) > li.active {
+      background-color: transparent;
+      a {
+        color: $primary-color;
+      }
+    }
+  }
+}
+.sidenav ,
+.sidenav.sidenav-fixed .collapsible-body > ul:not(.collapsible) > li.active {
+  a {
+    color: $primary-color;
+  }
+}
