@@ -1045,12 +1045,16 @@ Will throw `Fatal error: Uncaught Phalcon\Mvc\View\Exception: Syntax error, unex
         <th colspan="2">Nucleon additions</th>
       </tr>
       <tr>
-        <td><code>dump</code></td>
-        <td>Applies <code>Neutrino\Debug\VarDump::dump</code> function to the value</td>
+        <td><code>route</code></td>
+        <td>Generate a URL, by route name : <code class="language-twig">{{ route('route', ['arg': 1], ['query': 'comment']) }}</code></td>
       </tr>
       <tr>
         <td><code>str_{fn}</code></td>
         <td>Applies <code>Neutrino\Support\Str::{fn}</code> function to the value</td>
+      </tr>
+      <tr>
+        <td><code>dump</code></td>
+        <td>Applies <code>Neutrino\Debug\VarDump::dump</code> function to the value</td>
       </tr>
       <tr>
         <td><code>csrf_field</code></td>
