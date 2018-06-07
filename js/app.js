@@ -2,6 +2,7 @@
   function slug(str){
     return str.toLowerCase().replace(/[^a-zA-Z\d]/g, '-').replace(/-+/g, '-');
   }
+  var hasOwn = Object.prototype.hasOwnProperty;
 
   var Loader = {
     show: function () {
@@ -44,6 +45,7 @@
 
   var Template = {
     current: null,
+    version: null,
     init: function () {
       $(window).on("popstate", function () {
         Template.show(location.hash.match(/^\#\!([^@]+)/)[1]);
@@ -178,22 +180,106 @@
     }
   };
 
+  var Search = {
+    __data: {
+      "architecture-concepts/dependency-injection.html": ['di', 'dependency', 'injection', 'container'],
+      "architecture-concepts/global-architecture.html": ['start'],
+      "architecture-concepts/kernels-concepts.html": ['kernel', 'concept'],
+      "architecture-concepts/modules-concepts.html": ['module', 'concept'],
+      "basics/controllers.html": ['controller'],
+      "basics/csrf-protection.html": ['csrf', 'security'],
+      "basics/middleware.html": ['middleware'],
+      "basics/requests.html": ['request'],
+      "basics/responses.html": ['response'],
+      "basics/routing.html": ['routing', 'route'],
+      "basics/views.html": ['view', 'template'],
+      "database/getting-started.html": ['database'],
+      "database/migrations.html": ['migrations'],
+      "database/models.html": ['model', 'entity'],
+      "database/queries-phql.html": ['query', 'queries', 'phql'],
+      "database/relationships.html": ['relationships', 'relation'],
+      "database/repositories.html": ['repositories', 'repository'],
+      "debug/debug-toolbar.html": ['debug', 'helper'],
+      "debug/debugging.html": ['debug'],
+      "debug/profilers.html": ['profile'],
+      "debug/var-dumper.html": ['dump', 'debug'],
+      "digging-deeper/helpers.html": ['helpers', 'arr', 'str'],
+      "digging-deeper/quark-console.html": ['quark', 'console'],
+      "digging-deeper/volt.html": ['volt', 'template'],
+      "getting-started/configuration.html": ['start', 'configuration'],
+      "getting-started/directory-structure.html": ['start', 'structure'],
+      "getting-started/installation.html": ['start', 'installation'],
+      "kernels-concepts/cli-kernel.html": ['cli', 'kernel'],
+      "kernels-concepts/http-kernel.html": ['http', 'kernel'],
+      "kernels-concepts/micro-kernel.html": ['micro', 'kernel'],
+      "performance/application.html": ['performance'],
+      "performance/php-and-server.html": ['performance']
+    },
+    init: function () {
+      $('#search')
+        .on('keyup focus', function () {
+          Search.search($(this).val())
+        });
+
+      $('body').on('click', function (ev) {
+        var $target = $(ev.target);
+        if (!($target.is('.search') || $target.parents('.search').length)) {
+          $('.search-results').empty();
+        }
+      })
+    },
+    search: function (value) {
+      if (!value || !(value.trim())) {
+        return;
+      }
+
+      var datas = Search.__data;
+      var values = value.trim().split(' ');
+      var found = [];
+
+      var ref, refs, i, l;
+
+      for (refs = values, i = 0, l = refs.length; i < l; i++) {
+        ref = refs[i];
+
+        for (var template in datas) {
+          if (hasOwn.call(datas, template)) {
+            for (var keyword, keywords = datas[template], k = 0, kl = keywords.length; k < kl; k++) {
+              keyword = keywords[k];
+
+              if (ref.indexOf(keyword) !== -1 || keyword.indexOf(ref) !== -1) {
+                found.push(template);
+                break;
+              }
+            }
+          }
+        }
+      }
+
+      var $found = $('.search-results').empty();
+
+      for (refs = found, i = 0, l = refs.length; i < l; i++) {
+        ref = refs[i];
+        $found.append($('<p><small>' + ref + '</small></p>'))
+      }
+    }
+  };
+
   var Main = {
     init: function () {
       M.AutoInit();
       Summary.init();
       Sidenav.init();
       HAnchor.init();
-
+      Search.init();
       Template.init();
 
       Template.onShow(function () {
-        Prism.highlightAll()
-      });
-      Template.onShow(function () {
         var $elem = $('#slide-out').find('li.active > a[data-template]');
         document.title = $elem.parents('.no-padding').find('> a > span:first').text() + ': ' + $elem.text() + ' - Nucleon - PHP Framework build with Phalcon';
-      })
+      });
+
+      Template.onShow(Prism.highlightAll);
     },
     ready: function () {
       Template.ready();
