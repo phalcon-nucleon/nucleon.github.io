@@ -55,6 +55,23 @@ class User extends Model
     }
 }</code></pre>
 
+    <h5>Final <code>__construct</code></h5>
+    <blockquote class="warning">Constructor of <code>Model</code> is <code>final</code>.</blockquote>
+    <p>The constructor of <code>Model</code> is final. It's performance trick of phalcon, because it's use <code>zephir</code>.
+      If you want to perform initialization tasks for every instance created you can use the <code>onConstruct</code> method: </p>
+
+    <pre><code>use Neutrino\Model;
+
+class User extends Model
+{
+    public function initialize() {
+        // Executed Once
+    }
+    public function onConstruct() {
+        // Executed on each new object
+    }
+}</code></pre>
+
     <h5>Define the table</h5>
     <p>The <code>setSource</code> method should be use to define the table for the model.</p>
     <pre><code>use Neutrino\Model;
