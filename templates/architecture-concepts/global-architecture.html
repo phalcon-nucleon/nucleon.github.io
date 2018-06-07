@@ -19,52 +19,52 @@
 
     <p>Example :</p>
     <ul class="directory">
-      <li>app
+      <li><span>app</span>
         <ul>
-          <li>Core
+          <li><span>Core</span>
             <ul>
-              <li>Models
+              <li><span>Models</span>
                 <ul>
-                  <li><code class="small">User:class</code></li>
+                  <li class="leaf"><code class="small">User:class</code></li>
                 </ul>
               </li>
-              <li>Repositories
+              <li><span>Repositories</span>
                 <ul>
-                  <li><code class="small">UserRepositories::class use User::class</code></li>
+                  <li class="leaf"><code class="small">UserRepositories::class use User::class</code></li>
                 </ul>
               </li>
-              <li>Services
+              <li><span>Services</span>
                 <ul>
-                  <li><code class="small">UserService::class use UserRepositories::class</code><br/></li>
+                  <li class="leaf"><code class="small">UserService::class use UserRepositories::class</code><br/></li>
                 </ul>
               </li>
             </ul>
           </li>
-          <li>Kernels
+          <li><span>Kernels</span>
             <ul>
-              <li>Cli
+              <li><span>Cli</span>
                 <ul>
-                  <li>Tasks
+                  <li><span>Tasks</span>
                     <ul>
-                      <li><code class="small">UserCheckTask::class use UserService::deleteToOld</code></li>
+                      <li class="leaf"><code class="small">UserCheckTask::class use UserService::deleteToOld</code></li>
                     </ul>
                   </li>
                 </ul>
               </li>
-              <li>Http
+              <li><span>Http</span>
                 <ul>
-                  <li>Controllers
+                  <li><span>Controllers</span>
                     <ul>
-                      <li><code class="small">UserController::class use UserService::get, UserService::store</code></li>
+                      <li class="leaf"><code class="small">UserController::class use UserService::get, UserService::store</code></li>
                     </ul>
                   </li>
                 </ul>
               </li>
-              <li>Micro
+              <li><span>Micro</span>
                 <ul>
-                  <li>Controllers
+                  <li><span>Controllers</span>
                     <ul>
-                      <li><code class="small">ApiUserController::class use UserService::getComment</code></li>
+                      <li class="leaf"><code class="small">ApiUserController::class use UserService::getComment</code></li>
                     </ul>
                   </li>
                 </ul>

@@ -9,26 +9,24 @@ ul.directory {
       position: absolute;
       top: 0;
       left: 5px;
-      bottom: 12px;
+      bottom: 5px;
       width: 1px;
-      background: #999;
+      background: #e7e7e7;
     }
+  }
 
-    & li {
-      position: relative;
-      padding-left: 15px;
+  & li {
+    position: relative;
+    padding-left: 15px;
 
-      &:before {
-        content: "";
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 5px;
-        height: 12px;
-        width: 8px;
-        border-left: 1px solid;
-        border-bottom: 1px solid;
-        border-color: #999;
+    font-family: monospace;
+    font-size: 12px;
+    font-weight: 600;
+
+    &:not(.leaf) > span {
+      font-weight: 300;
+      &:after {
+        content: "/";
       }
     }
   }
