@@ -1,4 +1,43 @@
 (function (window, document, $, M) {
+  function levenshtein(a, b) {
+    if (a.length === 0) return b.length;
+    if (b.length === 0) return a.length;
+    var  tmp, i, j, la, lb, prev, val;
+
+    la = a.length;
+    lb = b.length;
+    // swap to save some memory O(min(a,b)) instead of O(a)
+    if (la > lb) {
+      tmp = a;
+      a = b;
+      b = tmp
+    }
+
+    var row = Array(la + 1);
+    // init the row
+    for (i = 0; i <= la; i++) {
+      row[i] = i
+    }
+
+    // fill in the rest
+    for (i = 1; i <= lb; i++) {
+      prev = i;
+      for (j = 1; j <= la; j++) {
+        if (b[i-1] === a[j-1]) {
+          val = row[j-1] // match
+        } else {
+          val = Math.min(row[j-1] + 1, // substitution
+            Math.min(prev + 1,     // insertion
+              row[j] + 1))  // deletion
+        }
+        row[j - 1] = prev;
+        prev = val
+      }
+      row[la] = prev
+    }
+    return row[la]
+  }
+
   function slug(str){
     return str.toLowerCase().replace(/[^a-zA-Z\d]/g, '-').replace(/-+/g, '-');
   }
@@ -184,8 +223,8 @@
     __data: {
       "architecture-concepts/dependency-injection.html": ['di', 'dependency', 'injection', 'container'],
       "architecture-concepts/global-architecture.html": ['start'],
-      "architecture-concepts/kernels-concepts.html": ['kernel', 'concept'],
-      "architecture-concepts/modules-concepts.html": ['module', 'concept'],
+      "architecture-concepts/kernels-concepts.html": ['kernel'],
+      "architecture-concepts/modules-concepts.html": ['module'],
       "basics/controllers.html": ['controller'],
       "basics/csrf-protection.html": ['csrf', 'security'],
       "basics/middleware.html": ['middleware'],
@@ -216,10 +255,13 @@
       "performance/php-and-server.html": ['performance']
     },
     init: function () {
-      $('#search')
-        .on('keyup focus', function () {
-          Search.search($(this).val())
-        });
+      $('#search').on('keyup focus', function () {
+        Search.search($(this).val())
+      });
+
+      $('.search').on('click', 'a', function(){
+        $('.search-results').empty();
+      });
 
       $('body').on('click', function (ev) {
         var $target = $(ev.target);
@@ -234,8 +276,8 @@
       }
 
       var datas = Search.__data;
-      var values = value.trim().split(' ');
-      var found = [];
+      var values = value.trim().toLowerCase().split(' ');
+      var found = {};
 
       var ref, refs, i, l;
 
@@ -248,7 +290,11 @@
               keyword = keywords[k];
 
               if (ref.indexOf(keyword) !== -1 || keyword.indexOf(ref) !== -1) {
-                found.push(template);
+                if (hasOwn.call(found, template)) {
+                  found[template] += levenshtein(keyword, template)
+                } else {
+                  found[template] = levenshtein(keyword, template)
+                }
                 break;
               }
             }
@@ -256,11 +302,20 @@
         }
       }
 
+      var sfound = [];
+      for (k in found) {
+        if (hasOwn.call(found, k)) sfound.push([k, found[k]])
+      }
+      sfound.sort(function (a, b) {
+        return b[1] - a[1];
+      });
+
+
       var $found = $('.search-results').empty();
 
-      for (refs = found, i = 0, l = refs.length; i < l; i++) {
-        ref = refs[i];
-        $found.append($('<p><small>' + ref + '</small></p>'))
+      for (i = 0, l = sfound.length; i < l; i++) {
+        ref = sfound[i][0];
+        $found.append($('<a href="#!'+ref+'">' + ref.replace(/.+\/([\w-]+.html)/, '$1') + '</a>'))
       }
     }
   };
