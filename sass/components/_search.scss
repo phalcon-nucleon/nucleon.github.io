@@ -17,6 +17,7 @@
       position: absolute;
       top: 20px;
       right: 15px;
+      color: rgba(0,0,0,0.54);
     }
 
     .search-results {
@@ -33,12 +34,14 @@
 
       a {
         display: block;
-        white-space: nowrap;
+        line-height: 44px;
+        height: 44px;
         max-width: 100%;
+        padding: 0 30px;
+        font-size: 12px;
+        white-space: nowrap;
         text-overflow: ellipsis;
         color: color("blue", "lighten-1");
-        padding: 5px 15px;
-        font-size:90%;
       }
     }
   }

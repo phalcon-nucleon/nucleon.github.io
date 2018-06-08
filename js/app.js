@@ -1,46 +1,30 @@
 (function (window, document, $, M) {
-  function levenshtein(a, b) {
-    if (a.length === 0) return b.length;
-    if (b.length === 0) return a.length;
-    var  tmp, i, j, la, lb, prev, val;
-
-    la = a.length;
-    lb = b.length;
-    // swap to save some memory O(min(a,b)) instead of O(a)
-    if (la > lb) {
-      tmp = a;
-      a = b;
-      b = tmp
+  $.fn.scrollTo = function () {
+    if ($(this).length) {
+      $('html, body').animate({
+        scrollTop: $(this).offset().top
+      }, 300);
     }
+  };
 
-    var row = Array(la + 1);
-    // init the row
-    for (i = 0; i <= la; i++) {
-      row[i] = i
-    }
-
-    // fill in the rest
-    for (i = 1; i <= lb; i++) {
-      prev = i;
-      for (j = 1; j <= la; j++) {
-        if (b[i-1] === a[j-1]) {
-          val = row[j-1] // match
-        } else {
-          val = Math.min(row[j-1] + 1, // substitution
-            Math.min(prev + 1,     // insertion
-              row[j] + 1))  // deletion
-        }
-        row[j - 1] = prev;
-        prev = val
-      }
-      row[la] = prev
-    }
-    return row[la]
+  if (window.navigator.userAgent.indexOf("MSIE ")) {
+    (function () {
+      var hash = location.hash;
+      $('body').on('click', function () {
+        setTimeout(function () {
+          if (hash !== location.hash) {
+            hash = location.hash;
+            $(window).trigger('popstate');
+          }
+        })
+      })
+    })()
   }
 
   function slug(str){
     return str.toLowerCase().replace(/[^a-zA-Z\d]/g, '-').replace(/-+/g, '-');
   }
+
   var hasOwn = Object.prototype.hasOwnProperty;
 
   var Loader = {
@@ -220,46 +204,39 @@
   };
 
   var Search = {
-    __data: {
-      "architecture-concepts/dependency-injection.html": ['di', 'dependency', 'injection', 'container'],
-      "architecture-concepts/global-architecture.html": ['start'],
-      "architecture-concepts/kernels-concepts.html": ['kernel'],
-      "architecture-concepts/modules-concepts.html": ['module'],
-      "basics/controllers.html": ['controller'],
-      "basics/csrf-protection.html": ['csrf', 'security'],
-      "basics/middleware.html": ['middleware'],
-      "basics/requests.html": ['request'],
-      "basics/responses.html": ['response'],
-      "basics/routing.html": ['routing', 'route'],
-      "basics/views.html": ['view', 'template'],
-      "database/getting-started.html": ['database'],
-      "database/migrations.html": ['migrations'],
-      "database/models.html": ['model', 'entity'],
-      "database/queries-phql.html": ['query', 'queries', 'phql'],
-      "database/relationships.html": ['relationships', 'relation'],
-      "database/repositories.html": ['repositories', 'repository'],
-      "debug/debug-toolbar.html": ['debug', 'helper'],
-      "debug/debugging.html": ['debug'],
-      "debug/profilers.html": ['profile'],
-      "debug/var-dumper.html": ['dump', 'debug'],
-      "digging-deeper/helpers.html": ['helpers', 'arr', 'str'],
-      "digging-deeper/quark-console.html": ['quark', 'console'],
-      "digging-deeper/volt.html": ['volt', 'template'],
-      "getting-started/configuration.html": ['start', 'configuration'],
-      "getting-started/directory-structure.html": ['start', 'structure'],
-      "getting-started/installation.html": ['start', 'installation'],
-      "kernels-concepts/cli-kernel.html": ['cli', 'kernel'],
-      "kernels-concepts/http-kernel.html": ['http', 'kernel'],
-      "kernels-concepts/micro-kernel.html": ['micro', 'kernel'],
-      "performance/application.html": ['performance'],
-      "performance/php-and-server.html": ['performance']
-    },
     init: function () {
-      $('#search').on('keyup focus', function () {
-        Search.search($(this).val())
+      var index = lunr(function () {
+        this.k1(1.4);
+        this.b(0.5);
+
+        this.field('title', {boost: 10});
+        this.field('body');
+        this.ref('href');
+
+        for (var ref in documents) {
+          if (hasOwn.call(documents, ref)) {
+            this.add({
+              href: ref,
+              title: ref.replace('[\w-]+.([\w-]+).html'),
+              body: documents[ref]
+            })
+          }
+        }
       });
 
-      $('.search').on('click', 'a', function(){
+      $('#search').on('keyup focus', function () {
+        var value = $(this).val();
+        if (value.length < 2) {
+          return;
+        }
+        var values = value.replace(/ +/g, ' ').split(' ');
+
+        value = values.join(' ') + ' ' + values.join('* ') + '*';
+
+        Search.render(index.search(value).slice(0, 6));
+      });
+
+      $('.search').on('click', 'a', function () {
         $('.search-results').empty();
       });
 
@@ -268,54 +245,13 @@
         if (!($target.is('.search') || $target.parents('.search').length)) {
           $('.search-results').empty();
         }
-      })
-    },
-    search: function (value) {
-      if (!value || !(value.trim())) {
-        return;
-      }
-
-      var datas = Search.__data;
-      var values = value.trim().toLowerCase().split(' ');
-      var found = {};
-
-      var ref, refs, i, l;
-
-      for (refs = values, i = 0, l = refs.length; i < l; i++) {
-        ref = refs[i];
-
-        for (var template in datas) {
-          if (hasOwn.call(datas, template)) {
-            for (var keyword, keywords = datas[template], k = 0, kl = keywords.length; k < kl; k++) {
-              keyword = keywords[k];
-
-              if (ref.indexOf(keyword) !== -1 || keyword.indexOf(ref) !== -1) {
-                if (hasOwn.call(found, template)) {
-                  found[template] += levenshtein(keyword, template)
-                } else {
-                  found[template] = levenshtein(keyword, template)
-                }
-                break;
-              }
-            }
-          }
-        }
-      }
-
-      var sfound = [];
-      for (k in found) {
-        if (hasOwn.call(found, k)) sfound.push([k, found[k]])
-      }
-      sfound.sort(function (a, b) {
-        return b[1] - a[1];
       });
-
-
+    },
+    render: function (founds) {
       var $found = $('.search-results').empty();
-
-      for (i = 0, l = sfound.length; i < l; i++) {
-        ref = sfound[i][0];
-        $found.append($('<a href="#!'+ref+'">' + ref.replace(/.+\/([\w-]+.html)/, '$1') + '</a>'))
+      for (var ref, i = 0, l = founds.length; i < l; i++) {
+        ref = founds[i].ref;
+        $found.append($('<a href="' + ref + '">' + ref.replace(/.+\/([\w-]+.html)/, '$1') + '</a>'))
       }
     }
   };
@@ -326,7 +262,6 @@
       Summary.init();
       Sidenav.init();
       HAnchor.init();
-      Search.init();
       Template.init();
 
       Template.onShow(function () {
@@ -335,35 +270,16 @@
       });
 
       Template.onShow(Prism.highlightAll);
+
+      Template.ready();
     },
     ready: function () {
-      Template.ready();
-    }
-  };
-
-  $.fn.scrollTo = function () {
-    if ($(this).length) {
-      $('html, body').animate({
-        scrollTop: $(this).offset().top
-      }, 300);
+      Search.init();
     }
   };
 
   Main.init();
-  Main.ready();
 
-  if (window.navigator.userAgent.indexOf("MSIE ")) {
-    (function () {
-      var hash = location.hash;
-      $('body').on('click', function () {
-        setTimeout(function () {
-          if (hash !== location.hash) {
-            hash = location.hash;
-            $(window).trigger('popstate');
-          }
-        })
-      })
-    })()
-  }
+  $(document).ready(Main.ready);
 
-})(window, document, jQuery, M);
+})(window, document, jQuery, M, lunr);
