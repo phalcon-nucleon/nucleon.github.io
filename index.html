@@ -29,6 +29,12 @@
     </ul>
   </li>
   <li class="divider"></li>
+  <li class="search">
+    <div class="search-wrapper">
+      <input class="browser-default" id="search" placeholder="Search" type="text" autocomplete="off"><i class="material-icons">search</i>
+      <div class="search-results"></div>
+    </div>
+  </li>
   <li class="no-padding">
     <ul class="collapsible collapsible-accordion no-autoinit">
       <li class="no-padding">
@@ -178,10 +184,46 @@
 <footer>
 
 </footer>
-
+<script>
+  window.documents = {
+    "#!architecture-concepts/dependency-injection.html": "di dependency injection container",
+    "#!architecture-concepts/global-architecture.html": "global application structure",
+    "#!architecture-concepts/kernels-concepts.html": "kernels concepts structure",
+    "#!architecture-concepts/modules-concepts.html": "modules concepts mvc hmvc structure",
+    "#!basics/controllers.html": "controller handling handler",
+    "#!basics/csrf-protection.html": "csrf security protection",
+    "#!basics/middleware.html": "middleware",
+    "#!basics/requests.html": "request",
+    "#!basics/responses.html": "response",
+    "#!basics/routing.html": "routing route",
+    "#!basics/views.html": "view template",
+    "#!database/getting-started.html": "database",
+    "#!database/migrations.html": "migrations versioning schema",
+    "#!database/models.html": "model entity",
+    "#!database/queries-phql.html": "query queries phql sql",
+    "#!database/relationships.html": "relationships relation",
+    "#!database/repositories.html": "repository",
+    "#!debug/debug-toolbar.html": "debug helper",
+    "#!debug/debugging.html": "debug",
+    "#!debug/profilers.html": "profile",
+    "#!debug/var-dumper.html": "dump debug",
+    "#!digging-deeper/helpers.html": "helpers array string object functions",
+    "#!digging-deeper/quark-console.html": "quark console",
+    "#!digging-deeper/volt.html": "volt template render",
+    "#!getting-started/configuration.html": "start configuration",
+    "#!getting-started/directory-structure.html": "start directory structure",
+    "#!getting-started/installation.html": "started installation",
+    "#!kernels-concepts/cli-kernel.html": "cli kernel console",
+    "#!kernels-concepts/http-kernel.html": "http kernel fullstack framework",
+    "#!kernels-concepts/micro-kernel.html": "micro kernel framework",
+    "#!performance/application.html": "performance",
+    "#!performance/php-and-server.html": "performance server"
+  }
+</script>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/materialize.min.js"></script>
 <script src="/js/prism.js"></script>
+<script src="/js/lunr.js"></script>
 <script src="/js/app.js"></script>
 </body>
 </html>

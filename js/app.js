@@ -1,7 +1,31 @@
 (function (window, document, $, M) {
+  $.fn.scrollTo = function () {
+    if ($(this).length) {
+      $('html, body').animate({
+        scrollTop: $(this).offset().top
+      }, 300);
+    }
+  };
+
+  if (window.navigator.userAgent.indexOf("MSIE ")) {
+    (function () {
+      var hash = location.hash;
+      $('body').on('click', function () {
+        setTimeout(function () {
+          if (hash !== location.hash) {
+            hash = location.hash;
+            $(window).trigger('popstate');
+          }
+        })
+      })
+    })()
+  }
+
   function slug(str){
     return str.toLowerCase().replace(/[^a-zA-Z\d]/g, '-').replace(/-+/g, '-');
   }
+
+  var hasOwn = Object.prototype.hasOwnProperty;
 
   var Loader = {
     show: function () {
@@ -44,6 +68,7 @@
 
   var Template = {
     current: null,
+    version: null,
     init: function () {
       $(window).on("popstate", function () {
         Template.show(location.hash.match(/^\#\!([^@]+)/)[1]);
@@ -178,51 +203,83 @@
     }
   };
 
+  var Search = {
+    init: function () {
+      var index = lunr(function () {
+        this.k1(1.4);
+        this.b(0.5);
+
+        this.field('title', {boost: 10});
+        this.field('body');
+        this.ref('href');
+
+        for (var ref in documents) {
+          if (hasOwn.call(documents, ref)) {
+            this.add({
+              href: ref,
+              title: ref.replace('[\w-]+.([\w-]+).html'),
+              body: documents[ref]
+            })
+          }
+        }
+      });
+
+      $('#search').on('keyup focus', function () {
+        var value = $(this).val();
+        if (value.length < 2) {
+          return;
+        }
+        var values = value.replace(/ +/g, ' ').split(' ');
+
+        value = values.join(' ') + ' ' + values.join('* ') + '*';
+
+        Search.render(index.search(value).slice(0, 6));
+      });
+
+      $('.search').on('click', 'a', function () {
+        $('.search-results').empty();
+      });
+
+      $('body').on('click', function (ev) {
+        var $target = $(ev.target);
+        if (!($target.is('.search') || $target.parents('.search').length)) {
+          $('.search-results').empty();
+        }
+      });
+    },
+    render: function (founds) {
+      var $found = $('.search-results').empty();
+      for (var ref, i = 0, l = founds.length; i < l; i++) {
+        ref = founds[i].ref;
+        $found.append($('<a href="' + ref + '">' + ref.replace(/.+\/([\w-]+.html)/, '$1') + '</a>'))
+      }
+    }
+  };
+
   var Main = {
     init: function () {
       M.AutoInit();
       Summary.init();
       Sidenav.init();
       HAnchor.init();
-
       Template.init();
 
       Template.onShow(function () {
-        Prism.highlightAll()
-      });
-      Template.onShow(function () {
         var $elem = $('#slide-out').find('li.active > a[data-template]');
         document.title = $elem.parents('.no-padding').find('> a > span:first').text() + ': ' + $elem.text() + ' - Nucleon - PHP Framework build with Phalcon';
-      })
+      });
+
+      Template.onShow(Prism.highlightAll);
+
+      Template.ready();
     },
     ready: function () {
-      Template.ready();
-    }
-  };
-
-  $.fn.scrollTo = function () {
-    if ($(this).length) {
-      $('html, body').animate({
-        scrollTop: $(this).offset().top
-      }, 300);
+      Search.init();
     }
   };
 
   Main.init();
-  Main.ready();
 
-  if (window.navigator.userAgent.indexOf("MSIE ")) {
-    (function () {
-      var hash = location.hash;
-      $('body').on('click', function () {
-        setTimeout(function () {
-          if (hash !== location.hash) {
-            hash = location.hash;
-            $(window).trigger('popstate');
-          }
-        })
-      })
-    })()
-  }
+  $(document).ready(Main.ready);
 
-})(window, document, jQuery, M);
+})(window, document, jQuery, M, lunr);
