@@ -28,14 +28,14 @@ p {
 }
 main {
   position: relative;
-  min-height: calc(100vh - #{$navbar-height});
+  min-height: calc(100vh - #{$navbar-height} - #{$footer-height} - 1px);
   @extend .flex-wrapper;
 
   .flex-content {
   }
 
   .full-hw {
-    min-height: calc(100vh - #{$navbar-height});
+    min-height: calc(100vh - #{$navbar-height} - #{$footer-height} - 1px);
   }
 
   .main-logo {
@@ -43,6 +43,21 @@ main {
     max-width: 250px;
   }
 }
+
+footer {
+  color: color('grey', 'darken-1');
+  background-color: color('grey', 'lighten-4');
+  border-top:1px solid color('grey', 'lighten-2');
+  padding:0 15px;
+  height:42px;
+  line-height:42px;
+
+  &:after {
+    content:" ";
+    clear:both;
+  }
+}
+
 ul.summary {
   font-size: 0.9rem;
   padding-left: 24px;
@@ -105,4 +120,9 @@ ul.summary {
     font-weight: 500;
     font-variant: small-caps;
   }
+}
+
+.overflowable {
+  max-width: 100%;
+  overflow: auto;
 }

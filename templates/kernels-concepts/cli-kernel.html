@@ -58,6 +58,48 @@
       </li>
     </ul>
 
+    <h2>Cli Kernel Class</h2>
+    <p><code>App\Kernels\Cli\Kernel</code> class have these properties :</p>
+    <table class="small">
+      <thead>
+      <tr>
+        <th>Property</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>$providers</code></td>
+        <td>Define the providers to load on bootstrap.<br/>
+          <b>You can add your's ServiceProvider here</b></td>
+      </tr>
+      <tr>
+        <td><code>$middlewares</code></td>
+        <td>Define the global middleware. Loaded on bootstrap.</td>
+      </tr>
+      <tr>
+        <td><code>$listeners</code></td>
+        <td>Define the global events listeners. Loaded on bootstrap.</td>
+      </tr>
+      <tr>
+        <td><code>$dependencyInjection</code></td>
+        <td>Define the Dependency Injection class to use.<br/>
+          Default: <code>Phalcon\Di\FactoryDefault\Cli</code></td>
+      </tr>
+      <tr>
+        <td><code>$eventsManagerClass</code></td>
+        <td>Define the events manager class to use.<br/>
+          Default: <code>Phalcon\Events\Manager</code></td>
+      </tr>
+      <tr>
+        <td><code>$errorHandlerLvl</code></td>
+        <td>Define the list of error handler to use.
+          Defaults : <code>Neutrino\Error\Writer\Phplog</code>, <code>Neutrino\Error\Writer\Logger</code>, <code>Neutrino\Error\Writer\Cli</code><br/>
+          <a href="#!basics/errors.html">Read more about Errors handlers here</a>
+      </tr>
+      </tbody>
+    </table>
+
     <h2>Tasks</h2>
     <p>All tasks for Cli Kernel are in <code>{project_dir}/app/Kernels/Cli/Tasks</code></p>
 

@@ -42,6 +42,10 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         color: color("blue", "lighten-1");
+
+        &:hover, &.hover{
+          background-color:color('grey', 'lighten-4')
+        }
       }
     }
   }

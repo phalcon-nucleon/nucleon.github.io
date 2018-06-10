@@ -53,6 +53,7 @@ APP_DEBUG === true
     </p>
 
     <h3>Special function</h3>
+    <div class="overflowable">
     <table class="responsive-table">
       <thead>
       <tr>
@@ -75,6 +76,7 @@ APP_DEBUG === true
       </tr>
       </tbody>
     </table>
+    </div>
 
     <h3>Environment Overloading</h3>
     The first file called is <code class="language-php">.const.ini</code>. If the variable <code class="language-php">APP_ENV</code> is defined in this file, dotconst will look for the file <code class="language-php">.const.{APP_ENV}.ini</code>, and override the base values. <br/>
