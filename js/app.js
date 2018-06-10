@@ -33,11 +33,11 @@
     return window.innerWidth > 600 && window.innerWidth <= 992;
   }
 
-  function isSmall () {
+  function isSmall() {
     return window.innerWidth <= 600
   }
 
-  function slug(str){
+  function slug(str) {
     return str.toLowerCase().replace(/[^a-zA-Z\d]/g, '-').replace(/-+/g, '-');
   }
 
@@ -80,10 +80,10 @@
       $slide.find('li.active > a[data-template]').parent().removeClass('active');
       $elem.parent().addClass('active');
       M.Collapsible.getInstance($elem.parents('.collapsible').get(0)).open($elem.parents('.no-padding').index());
-      if(isSmall() || isMedium()) {
+      if (isSmall() || isMedium()) {
         var inst = M.Sidenav.getInstance($slide[0]);
         inst.isOpen = true,
-        inst.close();
+          inst.close();
       }
     }
   };
@@ -247,7 +247,7 @@
       });
 
       $('#search').on('keyup focus', function (ev) {
-        switch(ev.keyCode){
+        switch (ev.keyCode) {
           case 37:
           case 39:
             return;
@@ -260,8 +260,8 @@
             if ($sel.length) {
               return Search.select($sel);
             } else {
-              $sel =  $('.search-results a:first-child');
-              if($sel.length){
+              $sel = $('.search-results a:first-child');
+              if ($sel.length) {
                 return Search.select($sel);
               }
             }
@@ -303,12 +303,12 @@
         $found.append($('<a href="' + ref + '">' + ref.replace(/.+\/([\w-]+.html)/, '$1') + '</a>'))
       }
     },
-    kup:function () {
+    kup: function () {
       var $a = $('.search-results a'),
         $sel = $a.filter('.hover');
 
       if ($sel.length) {
-        if($sel.prev().length){
+        if ($sel.prev().length) {
           $sel.prev().addClass('hover');
         } else {
           $a.last().addClass('hover');
@@ -318,12 +318,12 @@
         $a.last().addClass('hover');
       }
     },
-    kdown:function () {
+    kdown: function () {
       var $a = $('.search-results a'),
         $sel = $a.filter('.hover');
 
       if ($sel.length) {
-        if($sel.next().length){
+        if ($sel.next().length) {
           $sel.next().addClass('hover');
         } else {
           $a.first().addClass('hover');
@@ -334,7 +334,9 @@
       }
     },
     select: function ($sel) {
-      $sel && Template.show($sel.attr('href').substring(2));
+      if ($sel) {
+        location.hash = $sel.attr('href');
+      }
 
       $("#search").val('');
       $('.search-results').empty();
