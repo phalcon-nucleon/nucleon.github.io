@@ -269,6 +269,9 @@
 
         var value = $(this).val();
         if (value.length < 2) {
+          if(value.length === 0){
+            Search.empty();
+          }
           return;
         }
 
@@ -280,14 +283,13 @@
       });
 
       $('.search').on('click', 'a', function () {
-        $('.search-results').empty();
         Search.select();
       });
 
       $('body').on('click', function (ev) {
         var $target = $(ev.target);
         if (!($target.is('.search') || $target.parents('.search').length)) {
-          $('.search-results').empty();
+          Search.empty();
         }
       });
 
@@ -339,6 +341,9 @@
       }
 
       $("#search").val('');
+      Search.empty();
+    },
+    empty:function () {
       $('.search-results').empty();
     }
   };

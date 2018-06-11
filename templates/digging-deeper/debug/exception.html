@@ -1,0 +1,988 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>Error</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,300,400"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"/>
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style rel="stylesheet">
+    pre.sql{white-space: pre-line; word-break: break-all; font-size: 13px !important;margin:0}pre.sql .string{color:#a5d6a7 !important}pre.sql .table{color:#90caf9 !important}pre.sql .column{color:#ce93d8 !important}pre.sql .func{color:#fdd835 !important}pre.sql .keyw{color:#fb8c00 !important}
+    .php-error{padding:10px 15px;margin-bottom:10px}.php-error.debug{background-color:#4db6ac !important;color:#212121 !important}.php-error.info{background-color:#fff176 !important;color:#212121 !important}.php-error.notice{background-color:#ffd54f !important;color:#212121 !important}.php-error.warning{background-color:#ff8a65 !important;color:#212121 !important}.php-error.error{background-color:#b71c1c !important;color:#f5f5f5 !important}.php-error .type,.php-error .msg{font-family:monospace, monospace}.php-error .msg{margin:3px 0;word-break:break-all;white-space:pre-line}.php-error .file{font-size:80%}
+  </style>
+</head>
+<body class="grey darken-3 grey-text text-lighten-3">
+
+<div class="row">
+  <div class="col s12">
+    <ul class="tabs grey darken-4">
+      <li class="tab col s3">
+        <a class="active" href="#error">
+          Exceptions              <span class="chip">2</span>
+        </a>
+      </li>
+      <li class="tab col s3 disabled">
+        <a href="#php-errors">Errors <span class="chip">0</span></a>
+      </li>
+      <li class="tab col s3 ">
+        <a href="#events">Events <span class="chip">45</span></a>
+      </li>
+    </ul>
+  </div>
+  <div id="error" class="col s12">
+    <div class="card grey lighten-3">
+      <div class="card-content">
+              <span class="card-title red-text text-accent-4">
+                #1 <b>Exception</b>
+                <br/>
+                <small class="grey-text text-darken-4">
+                  <b>in : </b> app\Kernels\Http\Controllers\<b>HomeController.php</b>                  (line: 22)
+                </small>
+                <pre style="
+          word-break: break-all;
+          max-width:  100%;
+          margin: 0;
+          overflow: hidden;
+          white-space: pre-line;
+    "><small class="grey-text text-darken-3">Whoops !</small></pre>
+              </span>
+        <div>
+          <ul class="collection">
+            <li class="collection-item blue-grey lighten-3 white-text">
+                <span class="grey-text text-darken-3">
+                  <span class="red-text text-darken-4">App\Kernels\Http\Controllers\HomeController</span>-><span class="red-text text-darken-2">indexAction</span><span class="grey-text text-darken-1"></span>()                </span>
+              <br/>
+              <small class="grey-text text-darken-3">
+                in :
+                [internal function]                                                                                    </small>
+            </li>
+            <li class="collection-item blue-grey lighten-3 white-text">
+                <span class="grey-text text-darken-3">
+                  <span class="red-text text-darken-4">Phalcon\Dispatcher</span>-><span class="red-text text-darken-2">callActionMethod</span><span class="grey-text text-darken-1">(object(HomeController), 'indexAction', array)</span>                </span>
+              <br/>
+              <small class="grey-text text-darken-3">
+                in :
+                [internal function]                                                                                    </small>
+            </li>
+            <li class="collection-item blue-grey lighten-3 white-text">
+                <span class="grey-text text-darken-3">
+                  <span class="red-text text-darken-4">Phalcon\Dispatcher</span>-><span class="red-text text-darken-2">dispatch</span><span class="grey-text text-darken-1"></span>()                </span>
+              <br/>
+              <small class="grey-text text-darken-3">
+                in :
+                [internal function]                                                                                    </small>
+            </li>
+            <li class="collection-item blue-grey lighten-3 white-text">
+                <span class="grey-text text-darken-3">
+                  <span class="red-text text-darken-4">Phalcon\Mvc\Application</span>-><span class="red-text text-darken-2">handle</span><span class="grey-text text-darken-1"></span>()                </span>
+              <br/>
+              <small class="grey-text text-darken-3">
+                in :
+                vendor\nucleon\framework\src\Neutrino\Foundation\<b>Bootstrap.php</b> (line: 67)                                                                                    </small>
+            </li>
+            <li class="collection-item blue-grey lighten-3 white-text">
+                <span class="grey-text text-darken-3">
+                  <span class="red-text text-darken-4">Neutrino\Foundation\Bootstrap</span>-><span class="red-text text-darken-2">run</span><span class="grey-text text-darken-1">(object(Kernel))</span>                </span>
+              <br/>
+              <small class="grey-text text-darken-3">
+                in :
+                public\<b>index.php</b> (line: 16)                                                                                    </small>
+            </li>
+            <li class="collection-item blue-grey lighten-3 white-text">
+                <span class="grey-text text-darken-3">
+                  require('C:\Users...'[58])                </span>
+              <br/>
+              <small class="grey-text text-darken-3">
+                in :
+                public\<b>app_dev.php</b> (line: 18)                                                                                    </small>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card grey lighten-3">
+      <div class="card-content">
+              <span class="card-title red-text text-accent-4">
+                #2 <b>Exception</b>
+                <br/>
+                <small class="grey-text text-darken-4">
+                  <b>in : </b> app\Kernels\Http\Controllers\<b>HomeController.php</b>                  (line: 20)
+                </small>
+                <pre style="
+          word-break: break-all;
+          max-width:  100%;
+          margin: 0;
+          overflow: hidden;
+          white-space: pre-line;
+    "><small class="grey-text text-darken-3">something fail</small></pre>
+              </span>
+        <div>
+          <ul class="collection">
+            <li class="collection-item blue-grey lighten-3 white-text">
+                <span class="grey-text text-darken-3">
+                  <span class="red-text text-darken-4">App\Kernels\Http\Controllers\HomeController</span>-><span class="red-text text-darken-2">indexAction</span><span class="grey-text text-darken-1"></span>()                </span>
+              <br/>
+              <small class="grey-text text-darken-3">
+                in :
+                [internal function]                                                                                    </small>
+            </li>
+            <li class="collection-item blue-grey lighten-3 white-text">
+                <span class="grey-text text-darken-3">
+                  <span class="red-text text-darken-4">Phalcon\Dispatcher</span>-><span class="red-text text-darken-2">callActionMethod</span><span class="grey-text text-darken-1">(object(HomeController), 'indexAction', array)</span>                </span>
+              <br/>
+              <small class="grey-text text-darken-3">
+                in :
+                [internal function]                                                                                    </small>
+            </li>
+            <li class="collection-item blue-grey lighten-3 white-text">
+                <span class="grey-text text-darken-3">
+                  <span class="red-text text-darken-4">Phalcon\Dispatcher</span>-><span class="red-text text-darken-2">dispatch</span><span class="grey-text text-darken-1"></span>()                </span>
+              <br/>
+              <small class="grey-text text-darken-3">
+                in :
+                [internal function]                                                                                    </small>
+            </li>
+            <li class="collection-item blue-grey lighten-3 white-text">
+                <span class="grey-text text-darken-3">
+                  <span class="red-text text-darken-4">Phalcon\Mvc\Application</span>-><span class="red-text text-darken-2">handle</span><span class="grey-text text-darken-1"></span>()                </span>
+              <br/>
+              <small class="grey-text text-darken-3">
+                in :
+                vendor\nucleon\framework\src\Neutrino\Foundation\<b>Bootstrap.php</b> (line: 67)                                                                                    </small>
+            </li>
+            <li class="collection-item blue-grey lighten-3 white-text">
+                <span class="grey-text text-darken-3">
+                  <span class="red-text text-darken-4">Neutrino\Foundation\Bootstrap</span>-><span class="red-text text-darken-2">run</span><span class="grey-text text-darken-1">(object(Kernel))</span>                </span>
+              <br/>
+              <small class="grey-text text-darken-3">
+                in :
+                public\<b>index.php</b> (line: 16)                                                                                    </small>
+            </li>
+            <li class="collection-item blue-grey lighten-3 white-text">
+                <span class="grey-text text-darken-3">
+                  require('C:\Users...'[58])                </span>
+              <br/>
+              <small class="grey-text text-darken-3">
+                in :
+                public\<b>app_dev.php</b> (line: 18)                                                                                    </small>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="php-errors" class="col s12">
+    <div class="card grey darken-4">
+      <div class="card-content">
+        <div style="margin: 0;padding: 0;">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="events" class="col s12">
+    <div class="card grey darken-4">
+      <div class="card-content">
+        <table style="margin: 0;padding: 0;" class="bordered">
+          <thead>
+          <tr>
+            <th>-</th>
+            <th>type</th>
+            <th>src</th>
+            <th>data</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td style="padding: 5px 10px">
+              <small>0 ns</small>
+            </td>
+            <td style="padding: 5px 10px">
+              <small class="event">
+                REQUEST_TIME_FLOAT
+              </small>
+            </td>
+            <td style="padding: 5px 10px">
+            </td>
+            <td style="padding: 5px 10px">
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">36.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:
+                <span class="purple-text text-lighten-3">beforeServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('config', null)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">36.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:
+                <span class="purple-text text-lighten-3">afterServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('config', null, object(Config))</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:
+                <span class="purple-text text-lighten-3">beforeServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('router', null)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:
+                <span class="purple-text text-lighten-3">afterServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('router', null, object(Router))</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:
+                <span class="purple-text text-lighten-3">beforeMount</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Group)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:
+                <span class="purple-text text-lighten-3">beforeMount</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Group)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">kernel</span>:
+                <span class="purple-text text-lighten-3">boot</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Kernel)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title=""></small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">application</span>:
+                <span class="purple-text text-lighten-3">boot</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Kernel)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title=""></small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:
+                <span class="purple-text text-lighten-3">beforeCheckRoutes</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title=""></small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:
+                <span class="purple-text text-lighten-3">beforeServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('request', null)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:
+                <span class="purple-text text-lighten-3">afterServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('request', null, object(Request))</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:
+                <span class="purple-text text-lighten-3">beforeCheckRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:
+                <span class="purple-text text-lighten-3">notMatchedRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:
+                <span class="purple-text text-lighten-3">beforeCheckRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:
+                <span class="purple-text text-lighten-3">notMatchedRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:
+                <span class="purple-text text-lighten-3">beforeCheckRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:
+                <span class="purple-text text-lighten-3">notMatchedRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:
+                <span class="purple-text text-lighten-3">beforeCheckRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:
+                <span class="purple-text text-lighten-3">notMatchedRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:
+                <span class="purple-text text-lighten-3">beforeCheckRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:
+                <span class="purple-text text-lighten-3">notMatchedRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:
+                <span class="purple-text text-lighten-3">beforeCheckRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:
+                <span class="purple-text text-lighten-3">notMatchedRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:
+                <span class="purple-text text-lighten-3">beforeCheckRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:
+                <span class="purple-text text-lighten-3">matchedRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:
+                <span class="purple-text text-lighten-3">afterCheckRoutes</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title=""></small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:
+                <span class="purple-text text-lighten-3">beforeServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('dispatcher', null)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">41 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:
+                <span class="purple-text text-lighten-3">beforeServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('eventsManager', null)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">41 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:
+                <span class="purple-text text-lighten-3">afterServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('eventsManager', null, object(DebugEventsManagerWrapper))</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">41 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:
+                <span class="purple-text text-lighten-3">afterServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('dispatcher', null, object(Dispatcher))</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">41 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">application</span>:
+                <span class="purple-text text-lighten-3">beforeHandleRequest</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Kernel)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Dispatcher)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">41 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">dispatch</span>:
+                <span class="purple-text text-lighten-3">beforeDispatchLoop</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Dispatcher)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title=""></small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">41 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">dispatch</span>:
+                <span class="purple-text text-lighten-3">beforeDispatch</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Dispatcher)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title=""></small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">42.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:
+                <span class="purple-text text-lighten-3">beforeServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('App\Kern...'[43], null)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">42.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:
+                <span class="purple-text text-lighten-3">afterServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('App\Kern...'[43], null, object(HomeController))</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">42.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">dispatch</span>:
+                <span class="purple-text text-lighten-3">beforeExecuteRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Dispatcher)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title=""></small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">42.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">dispatch</span>:
+                <span class="purple-text text-lighten-3">afterInitialize</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Dispatcher)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title=""></small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">42.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">dispatch</span>:
+                <span class="purple-text text-lighten-3">afterBinding</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Dispatcher)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title=""></small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">42.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">dispatch</span>:
+                <span class="purple-text text-lighten-3">beforeException</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Dispatcher)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Exception)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">45.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:
+                <span class="purple-text text-lighten-3">beforeServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('logger', null)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">46 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:
+                <span class="purple-text text-lighten-3">afterServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('logger', null, object(File))</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">48.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:
+                <span class="purple-text text-lighten-3">beforeServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('flash', null)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">48.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:
+                <span class="purple-text text-lighten-3">afterServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('flash', null, object(Direct))</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">48.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:
+                <span class="purple-text text-lighten-3">beforeServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('escaper', null)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">48.5 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:
+                <span class="purple-text text-lighten-3">afterServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('escaper', null, object(Escaper))</small>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+</body>
+</html>

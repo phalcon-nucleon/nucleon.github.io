@@ -1,0 +1,236 @@
+<div class="row">
+  <div class="col s12">
+    <ul class="summary generate"></ul>
+  </div>
+  <div class="col s12">
+    <h2>Intro</h2>
+    <p>Nucleon provide a <code>debug</code> mode. Enable it with constant <code>APP_DEBUG === true</code> :</p>
+    <pre><code class="language-ini">; .const.ini
+[app]
+debug=true</code></pre>
+
+    <p>Debug provide the <code>debug toolbar</code>, and beautiful expection & error render. In debug mode, template cache is also disable.</p>
+
+    <h2>Var Dump</h2>
+    <p>Nucleon provide great tool for dump any value. You should the <code>Neutrino\Debug\VarDump::dump</code> method for
+      dump a value :</p>
+    <pre><code>$value = [
+  'int' => 123,
+  'str' => 'abc',
+  'arr' => [1, 2, 3],
+  'obj' => (object)['prop' => 'value']
+];
+Neutrino\Debug\VarDump::dump($value);</code></pre>
+    <p>Use also can use it in volt template :</p>
+    <pre><code class="language-twig">&lt;div>{{ dump(value) }}&lt;/div></code></pre>
+
+    <p>Dump example :</p>
+
+    <div class="browser">
+      <div class="browser-top">
+        <div class="circles">
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+      </div>
+      <div class="browser-body">
+        <iframe src="/templates/digging-deeper/debug/var-dumped.html" scrolling="none"></iframe>
+      </div>
+    </div>
+
+    <p><code>VarDump::dump</code> support any object & circular reference. You can dump anything you want with it, even the dependency injector !</p>
+
+    <h2>Debug toolbar</h2>
+    <p>In <code>debug</code> mode, a toolbar helper is added to all html response, whose contains many informations that may help you : </p>
+
+    <div class="browser">
+      <div class="browser-top">
+        <div class="circles">
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+      </div>
+      <div class="browser-body">
+        <iframe src="/templates/digging-deeper/debug/toolbar.html" scrolling="none"></iframe>
+      </div>
+    </div>
+    <table>
+      <thead>
+      <tr><th>-</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>200 home@index</td>
+        <td>
+          Display the http response code and the controller@action used.<br/>
+          Passing your mouse over will show the module used, the Controller Class, and route matched.
+        </td>
+      </tr>
+      <tr>
+        <td>71.02ms</td>
+        <td>
+          Time for serving the request
+        </td>
+      </tr>
+      <tr>
+        <td>2.36MB</td>
+        <td>
+          Memory used for request (Will be smaller in production, here are include data for debugging)
+        </td>
+      </tr>
+      <tr>
+        <td><i class="material-icons">bug_report</i></td>
+        <td>
+          Report any errors / warnings / notices
+        </td>
+      </tr>
+      <tr>
+        <td><svg xmlns="http://www.w3.org/2000/svg" fill="#000000" height="24" viewBox="0 0 24 24" width="24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/><path d="M0 0h24v24H0z" fill="none"/></svg></td>
+        <td>
+          Report views render time, add view not found (if any)
+        </td>
+      </tr>
+      <tr>
+        <td><i class="material-icons">timeline</i></td>
+        <td>
+          Application timeline. Show All event raised.
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">Other</td>
+      </tr>
+      <tr>
+        <td><i class="material-icons">storage</i></td>
+        <td>
+          <code>DB profiler</code> Show all db queries, if any.
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <h2>Profiler</h2>
+    <p>You can build your own profiler, add attach them the to the debug toolbar.</p>
+    <h5>Create the profiler</h5>
+    <p>You should use the <code>Neutrino\Debug\Debugger::registerProfiler</code> to create and register a new profiler :</p>
+    <pre><code>Debugger::registerProfiler('redis', '&lt;i class="material-icons">memory&lt;/i>');</code></pre>
+    <p>The first argument is the name of the profiler, the second argument contain the icons to display.</p>
+    <p><code>registerProfiler</code> method will return an instance of <code>Phalcon\Db\Profiler</code>.</p>
+    <h5>Link service to profiler</h5>
+    <p>Here you have an example of how link a service and a profiler :</p>
+
+    <pre><code>namespace App\Core\Services;
+
+use Phalcon\Events\EventsAwareInterface;
+use Phalcon\Events\ManagerInterface;
+
+class MyService implements EventsAwareInterface {
+
+    /** @var \Phalcon\Events\ManagerInterface */
+    private $eventsManager;
+
+    /**
+     * Sets the events manager
+     *
+     * @param ManagerInterface $eventsManager
+     */
+    public function setEventsManager(ManagerInterface $eventsManager)
+    {
+        $this->eventsManager = $eventsManager;
+    }
+
+    /**
+     * Returns the internal event manager
+     *
+     * @return ManagerInterface
+     */
+    public function getEventsManager()
+    {
+        return $this->eventsManager;
+    }
+
+    public function doSomething()
+    {
+        if ($this->eventsManager) {
+            $this->eventsManager->fire('my-service:before', $this);
+        }
+
+        // do stuff
+
+        if ($this->eventsManager) {
+            $this->eventsManager->fire('my-service:after', $this);
+        }
+    }
+}</code></pre>
+    <pre><code>namespace App\Kernels\Http;
+
+use Neutrino\Debug\Debugger;
+use Phalcon\Events\Manager;
+
+class Kernel extends HttpKernel
+{
+    // ...
+
+    public function boot()
+    {
+        parent::boot();
+
+        if (APP_DEBUG) {
+            $profiler = Debugger::registerProfiler('my-service', 'memory');
+
+            $myService = $this->getDI()->get('my-service');
+
+            $eventsManager = $myService->getEventsManager();
+
+            if (!$eventsManager) {
+                $eventsManager = new Manager();
+
+                $myService->setEventsManager($eventsManager);
+            }
+
+            $eventsManager->attach('my-service', function (Event $event) use ($profiler) {
+                $eventType = $event->getType();
+                $eventData = $event->getData();
+
+                if ($eventType === 'before') {
+                    // Start a profile
+                    $profiler->startProfile(
+                      $eventData['type']
+                    );
+                }
+                elseif ($eventType === 'after') {
+                    // Stop the active profile
+                    $profiler->stopProfile();
+                }
+            });
+        }
+    }
+}</code></pre>
+    <h2>Exception</h2>
+    <p>Here you have an example of rendering exceptions under nucleon.</p>
+    <pre><code>class HomeController extends Controller
+{
+    public function indexAction()
+    {
+        try {
+            // stuff
+            throw new \Exception("something fail");
+        } catch (\Exception $e) {
+            throw new \Exception("Whoops !", 0, $e);
+        }
+    }
+}</code></pre>
+    <div class="browser">
+      <div class="browser-top">
+        <div class="circles">
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+      </div>
+      <div class="browser-body">
+        <iframe class="big" src="/templates/digging-deeper/debug/exception.html" scrolling="none"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
