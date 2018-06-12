@@ -190,15 +190,11 @@ class Kernel extends HttpKernel
 
             $eventsManager->attach('my-service', function (Event $event) use ($profiler) {
                 $eventType = $event->getType();
-                $eventData = $event->getData();
 
                 if ($eventType === 'before') {
                     // Start a profile
-                    $profiler->startProfile(
-                      $eventData['type']
-                    );
-                }
-                elseif ($eventType === 'after') {
+                    $profiler->startProfile($eventType);
+                } elseif ($eventType === 'after') {
                     // Stop the active profile
                     $profiler->stopProfile();
                 }
