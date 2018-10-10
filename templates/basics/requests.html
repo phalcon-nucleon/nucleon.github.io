@@ -50,7 +50,7 @@ $request->isPost();</code></pre>
     <p>You may pass a filter as the second argument to the <code>get</code> method. This filter will use the <code>Phalcon\Filter::sanitize</code>
       method for filtering input :</p>
     <pre><code>$email = $request->get('user_email', 'email');</code></pre>
-    <a class="btn-small" href="https://docs.phalconphp.com/en/3.3/filter">Read more about Filter</a>
+    <a class="btn-small" data-phalcon-link="/filter">Read more about Filter</a>
 
     <p>You may pass a default value as the third argument to the <code>get</code> method. This value will be returned if
       the requested input value is not present on the request or if input value not satisfy the filter:</p>
@@ -120,6 +120,6 @@ if ($request->hasFiles(true)){
 
     <h4>Other File Methods</h4>
     <p>There are a variety of methods available on <code>Phalcon\Http\Request\File</code> instances.
-      Check out the <a href="https://docs.phalconphp.com/en/3.3/api/Phalcon_Http_Request_File">API documentation for the class</a> for more information regarding these methods.</p>
+      Check out the <a data-phalcon-link="/api/Phalcon_Http_Request_File">API documentation for the class</a> for more information regarding these methods.</p>
   </div>
 </div>

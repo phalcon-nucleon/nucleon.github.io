@@ -1,4 +1,10 @@
 (function (window, document, $, M) {
+  var PHALCON_DOCS_VERSION = "3.4";
+
+  function phdocs(path) {
+    return "https://docs.phalconphp.com/en/" + PHALCON_DOCS_VERSION + path;
+  }
+
   $.fn.scrollTo = function () {
     if ($(this).length) {
       $('html, body').animate({
@@ -82,8 +88,8 @@
       M.Collapsible.getInstance($elem.parents('.collapsible').get(0)).open($elem.parents('.no-padding').index());
       if (isSmall() || isMedium()) {
         var inst = M.Sidenav.getInstance($slide[0]);
-        inst.isOpen = true,
-          inst.close();
+        inst.isOpen = true;
+        inst.close();
       }
     }
   };
@@ -126,10 +132,9 @@
         }
 
         data = data.replace(/<code>\\?(Phalcon\\.+)<\/code>/gm, function (g, match) {
-
           var c = split(['::', '-&gt;', '->'], match);
 
-          return '<a target="_blank" href="https://docs.phalconphp.com/en/3.3/api/' + c[0].replace(/^\\/, '').replace(/\\/g, '_') + '"><code>' + match + '</code></a>';
+          return '<a target="_blank" href="' + phdocs('/api/' + c[0].replace(/^\\/, '').replace(/\\/g, '_')) + '"><code>' + match + '</code></a>';
         });
 
         window.scrollTo(0, 0);
@@ -269,7 +274,7 @@
 
         var value = $(this).val();
         if (value.length < 2) {
-          if(value.length === 0){
+          if (value.length === 0) {
             Search.empty();
           }
           return;
@@ -343,7 +348,7 @@
       $("#search").val('');
       Search.empty();
     },
-    empty:function () {
+    empty: function () {
       $('.search-results').empty();
     }
   };
@@ -359,6 +364,15 @@
       Template.onShow(function () {
         var $elem = $('#slide-out').find('li.active > a[data-template]');
         document.title = $elem.parents('.no-padding').find('> a > span:first').text() + ': ' + $elem.text() + ' - Nucleon - PHP Framework build with Phalcon';
+      });
+
+      Template.onShow(function () {
+        $('[data-phalcon-link]').each(function () {
+          var $this = $(this);
+
+          $this.attr('href', phdocs($this.data('phalcon-link')));
+          $this.attr('target', '_blank')
+        })
       });
 
       Template.onShow(Prism.highlightAll);

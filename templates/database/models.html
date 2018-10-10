@@ -6,7 +6,7 @@
     <blockquote>
       <p>Here we just saw Nucleon addition, and basic usage.</p>
       <p>
-        <a class="btn" target="_blank" href="https://docs.phalconphp.com/en/3.3/db-models">
+        <a class="btn" target="_blank" data-phalcon-link="/db-models">
           Read the full phalcon model documentation here
         </a>
       </p>
@@ -93,6 +93,14 @@ use Phalcon\Db\Column;
 
 class User extends Model
 {
+    public $id;
+    public $name;
+    public $email;
+    public $password;
+    public $remember_token;
+    public $create_at;
+    public $update_at;
+
     public function initialize() {
         parent::initialize();
 
@@ -252,6 +260,8 @@ use Phalcon\Db\Column;
 
 class User extends Model
 {
+    public $id;
+
     public function initialize() {
         parent::initialize();
 
@@ -269,6 +279,9 @@ use Phalcon\Db\Column;
 
 class BookAuthor extends Model
 {
+    public $book_id;
+    public $author_id;
+
     public function initialize() {
         parent::initialize();
 
@@ -287,11 +300,8 @@ class BookAuthor extends Model
 class User extends Model
 {
     public $id;
-
     public $name;
-
     public $email;
-
     public $age;
 }</code></pre>
 
@@ -307,11 +317,8 @@ class User extends Model
 class User extends Model
 {
     protected $id;
-
     protected $name;
-
     protected $email;
-
     protected $age;
 
     public function getId()
@@ -574,7 +581,7 @@ if($user->delete()){
     <blockquote>
       <p>Here we just saw basic usage.</p>
       <p>
-        <a class="btn" target="_blank" href="https://docs.phalconphp.com/en/3.3/db-models-events">
+        <a class="btn" target="_blank" data-phalcon-link="/db-models-events">
           Read full Phalcon Model Events documentation here
         </a>
       </p>
@@ -742,9 +749,7 @@ if($user->delete()){
 class User extends Model
 {
     public $id;
-
     public $name;
-
     public $status;
 
     public function validation()
