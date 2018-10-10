@@ -104,6 +104,13 @@ class User extends Model
         $this->column('remember_token', Column::TYPE_VARCHAR, [
             'nullable' => true
         ]);
+        $this->column('create_at', Column::TYPE_TIMESTAMP, [
+            'autoInsert' => true,
+        ]);
+        $this->column('update_at', Column::TYPE_TIMESTAMP, [
+            'autoInsert' => true,
+            'autoUpdate' => true,
+        ]);
     }
 }</code></pre>
 
@@ -136,6 +143,10 @@ class User extends Model
       <tr>
         <td><code>Phalcon\Db\Column::TYPE_DATETIME</code></td>
         <td>Datetime abstract type</td>
+      </tr>
+      <tr>
+        <td><code>Phalcon\Db\Column::TYPE_TIMESTAMP</code></td>
+        <td>Timestamp abstract type</td>
       </tr>
       <tr>
         <td><code>Phalcon\Db\Column::TYPE_CHAR</code></td>
@@ -209,6 +220,14 @@ class User extends Model
       <tr>
         <td><code style="white-space: nowrap">'map' => $property</code></td>
         <td>Define to property to fill on Model. If empty, the property will be the same of the column name.</td>
+      </tr>
+      <tr>
+        <td><code style="white-space: nowrap">'autoInsert' => true</code></td>
+        <td>Specify that property is auto inserted.</td>
+      </tr>
+      <tr>
+        <td><code style="white-space: nowrap">'autoUpdate' => true</code></td>
+        <td>Specify that property is auto updated.</td>
       </tr>
       <tr>
         <th colspan="2">Primary Only</th>
