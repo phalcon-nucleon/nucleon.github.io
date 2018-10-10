@@ -204,18 +204,23 @@ class Kernel extends HttpKernel
 }</code></pre>
     <h2>Exception</h2>
     <p>Here you have an example of rendering exceptions under nucleon.</p>
-    <pre><code>class HomeController extends Controller
+    <pre><code>namespace App\Kernels\Http\Controllers;
+
+class HomeController extends ControllerBase
 {
     public function indexAction()
     {
         try {
             // stuff
-            throw new \Exception("something fail");
+            throw new \Phalcon\Exception("Failure is not an option.");
         } catch (\Exception $e) {
-            throw new \Exception("Whoops !", 0, $e);
+            throw new \Exception("Whoops ! Something went wrong...", $e->getCode(), $e);
         }
+
+        $this->view->render('home', 'index');
     }
-}</code></pre>
+}
+</code></pre>
     <div class="browser">
       <div class="browser-top">
         <div class="circles">
