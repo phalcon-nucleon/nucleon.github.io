@@ -112,10 +112,10 @@ class User extends Model
         $this->column('remember_token', Column::TYPE_VARCHAR, [
             'nullable' => true
         ]);
-        $this->column('create_at', Column::TYPE_TIMESTAMP, [
+        $this->column('create_at', Column::TYPE_DATETIME, [
             'autoInsert' => true,
         ]);
-        $this->column('update_at', Column::TYPE_TIMESTAMP, [
+        $this->column('update_at', Column::TYPE_DATETIME, [
             'autoInsert' => true,
             'autoUpdate' => true,
         ]);
