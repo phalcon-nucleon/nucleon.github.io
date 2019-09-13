@@ -1,0 +1,169 @@
+<div class="row">
+  <div class="col s12">
+    <ul class="summary generate"></ul>
+  </div>
+  <div class="col s12">
+    <h2>Basic Routing</h2>
+    <p>All Nucleon routes are defined in your route files, which are located in the routes directory.<br/>
+      These files are automatically loaded by the framework.
+    </p>
+    <h3>Http kernel routes</h3>
+    <p>The <code class="language-php">routes/http.php</code> file defines routes that are for your <code class="language-php">web</code> interface.
+      The routes defined in <code class="language-php">routes/http.php</code> may be accessed by entering the defined route's URL in your browser.
+      For example, you may access the following route by navigating to <code class="language-php">http://app.test/index</code> in your browser : </p>
+    <pre><code class="language-php">$router->addGet('/user', ['controller' => 'home', 'action' => 'index']);</code></pre>
+    <p>The <code class="language-php">$router</code> is retrieve via the dependency injector at the top of file :</p>
+    <pre><code class="language-php">$router = Phalcon\Di::getDefault()->getShared(Neutrino\Constants\Services::ROUTER);</code></pre>
+
+    <blockquote class="notice">
+      Controllers must not have suffix <code class="language-php">Controller</code>, that's automatically added via the dispatcher. <br/>
+      Action must not have suffix <code class="language-php">Action</code>, that's automatically added via the dispatcher. <br/>
+    </blockquote>
+    <blockquote class="info">
+      Controller & Action suffix are managed by <a target="_blank" data-phalcon-link="/api/Phalcon_Mvc_Dispatcher"><code class="language-php">Phalcon\Mvc\Dispatcher</code></a>
+    </blockquote>
+
+    <h3>Micro kernel routes</h3>
+    <p>The <code class="language-php">routes/micro.php</code> file defines routes that are for your <code class="language-php">api</code> interface.
+      The routes defined in <code class="language-php">routes/micro.php</code> may be accessed by entering the defined route's URL in your browser.
+      For example, you may access the following route by navigating to <code class="language-php">http://app.test/api/index</code> in your browser : </p>
+    <h4>via <code class="language-php">Closure</code></h4>
+    <pre><code class="language-php">$router->addGet('/api/index', function(){
+    $this->response->setStatusCode(200);
+    $this->response->setJsonContent(['status' => 'found', 'code' => 200]);
+    return $this->response;
+});</code></pre>
+    <h4>via <code class="language-php">Controller</code></h4>
+    <pre><code class="language-php">$router->addGet('/api/index', [
+    'controller' => App\Kernels\Micro\Controllers\MicroController::class,
+    'action' => 'indexAction'
+]);</code></pre>
+
+    <blockquote class="warning">
+      <strong>In Micro kernel</strong>, Controllers must be specified with his namespace, and suffix (ex Controller) <br/>
+    </blockquote>
+
+    <h2>Available Router Methods</h2>
+    <pre><code class="language-php">$router->addHead($uri, $definition);
+$router->addGet($uri, $definition);
+$router->addPost($uri, $definition);
+$router->addPut($uri, $definition);
+$router->addPatch($uri, $definition);
+$router->addDelete($uri, $definition);
+$router->addOptions($uri, $definition);
+// ONLY FOR HTTP KERNEL
+$router->addConnect($uri, $definition);
+$router->addPurge($uri, $definition);
+$router->addTrace($uri, $definition);</code></pre>
+
+    <h2>Route Definition</h2>
+    <p>The first parameter of the method (<code class="language-php">$uri</code>) is the pattern you want to match.</p>
+    <p>The second parameter contains the definition of the route :</p>
+    <ul>
+      <li><code class="language-php">controller</code> : Define the Controller who handle the route </li>
+      <li><code class="language-php">action</code> : Define the Action of the controller who handle the route </li>
+    </ul>
+
+    <h2>Route Parameters</h2>
+    <h3>Required Parameters</h3>
+    <p>Of course, sometimes you will need to capture segments of the URI within your route. For example, you may need to capture a user's ID from the URL. You may do so by defining route parameters:</p>
+    <pre><code class="language-php">$router->addGet('/posts/{post}', [
+    'controller' => 'posts',
+    'action' => 'getPost'
+]);</code></pre>
+    <p>You may define as many route parameters as required by your route:</p>
+    <pre><code class="language-php">$router->addGet('posts/{post}/comments/{comment}', [
+    'controller' => 'posts',
+    'action' => 'getPostComment'
+]);</code></pre>
+    <p>Route parameters are always encased within <code>{}</code> braces and should consist of alphabetic characters, and may not contain a <code>-</code> character. Instead of using the <code>-</code> character, use an underscore (<code>_</code>). Route parameters are injected into route callbacks / controllers based on their order - the names of the callback / controller arguments do not matter.</p>
+
+    <pre><code class="language-php">use Neutrino\Http\Controller;
+
+class PostsController extends Controller
+{
+    public function getPostAction($post)
+    {
+        // ..
+    }
+    public function getPostCommentAction($post, $comment)
+    {
+        // ..
+    }
+}</code></pre>
+
+    <h3>Optional Parameters</h3>
+    <p>Occasionally you may need to specify a route parameter, but make the presence of that route parameter optional. You may do so by placing a <code>?</code> mark after the parameter name. Make sure to give the route's corresponding variable a default value:</p>
+    <pre><code class="language-php">$router->addGet('posts/{post}?', [
+    'controller' => 'posts',
+    'action' => 'getPost'
+]);</code></pre>
+
+    <pre><code class="language-php">use Neutrino\Http\Controller;
+
+class PostsController extends Controller
+{
+    public function getPostAction($post = null)
+    {
+        // ..
+    }
+}</code></pre>
+    <h3>Regular Expression Constraints</h3>
+    <p>You can constrain the format of your route parameters by adding your format in the parameter's closure, after the mark <code>:</code></p>
+    <pre><code class="language-php">$router->addGet('posts/{name:[A-Za-z]+}', []);
+
+$router->addGet('posts/{id:[0-9]+}', []);
+
+$router->addGet('posts/{id:[0-9]+}/{slug:[\w-]+}', []);</code></pre>
+
+    <blockquote class="info">For more information visite <a target="_blank" data-phalcon-link="/routing">Phalcon routing</a></blockquote>
+
+    <h2>Route Middleware</h2>
+    <p>To assign <code>middleware</code> to a route, you may use the middleware params in the definition. Middleware are executed in the order they are listed in the array:</p>
+<pre><code>$router->addPost('/login', [
+    'controller' => 'auth',
+    'action' => 'postLogin',
+    'middleware' => [
+        App\Kernels\Http\Middleware\RedirectIfAuthenticated::class,
+        Neutrino\Http\Middleware\Csrf::class
+    ],
+]);</code></pre>
+    <h2>Route Groups</h2>
+    <p>Route groups allow you to share route attributes, such as middleware or namespaces, across a large number of routes without needing to define those attributes on each individual route. </p>
+    <pre><code class="language-php">$profile = new \Phalcon\Mvc\Route\Group([
+    // Define a namespace
+    'namespace' => 'App\Kernels\Http\Controllers\Account',
+    // Define a controller
+    'controller' => 'profile',
+    // Define a middleware
+    'middleware' => [
+        Neutrino\Auth\Middleware\Authenticate::class
+    ]
+);
+// Define a prefix for all route
+$profile->setPrefix('/profile');
+
+$profile->addGet('/settings', [
+    'action' => 'settings'
+]);
+
+// Mount the group
+$router->mount($profile);</code></pre>
+
+    <h2>Rate Limiting</h2>
+    <p>Nucleon includes a middleware to rate limit access to routes within your application. To get started, assign the
+      <code>throttle</code> middleware to a route or a group of routes. The <code>throttle</code> middleware accepts two parameters that
+      determine the maximum number of requests that can be made in a given number of seconds. For example, let's specify that an
+      authenticated user may access the following group of routes 3 times per minute:</p>
+    <pre><code class="language-php">$router->addPost('/login', [
+    'controller' => 'auth',
+    'action' => 'postLogin',
+    'middleware' => [
+        \Neutrino\Http\Middleware\ThrottleRequest::class => [
+            3, // max attempts
+            60 // per seconds elapsed
+        ],
+    ]
+]);</code></pre>
+  </div>
+</div>

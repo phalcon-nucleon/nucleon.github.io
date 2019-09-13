@@ -1,0 +1,80 @@
+<div class="row">
+  <div class="col s12">
+    <ul class="summary generate"></ul>
+  </div>
+  <div class="col s12">
+    <h2>App : Core, Kernels, and Other</h2>
+    <p>Nucleon proposes an architecture separating the core of the application, the "business logic", of differents
+      kernels (Http, Micro, Cli).</p>
+    <ul class="browser-default">
+      <li>Core :
+        <p>Contains all services, models (entities and others), repositories, which can be global / used by all
+          kernels.</p>
+      </li>
+      <li>Kernels :
+        <p>Contains all Controllers, Middleware, used by each kernels. What is present in each kernel should not be used
+          outside.</p>
+      </li>
+    </ul>
+
+    <p>Example :</p>
+    <ul class="directory">
+      <li><span>app</span>
+        <ul>
+          <li><span>Core</span>
+            <ul>
+              <li><span>Models</span>
+                <ul>
+                  <li class="leaf"><code class="small">User:class</code></li>
+                </ul>
+              </li>
+              <li><span>Repositories</span>
+                <ul>
+                  <li class="leaf"><code class="small">UserRepositories::class use User::class</code></li>
+                </ul>
+              </li>
+              <li><span>Services</span>
+                <ul>
+                  <li class="leaf"><code class="small">UserService::class use UserRepositories::class</code><br/></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><span>Kernels</span>
+            <ul>
+              <li><span>Cli</span>
+                <ul>
+                  <li><span>Tasks</span>
+                    <ul>
+                      <li class="leaf"><code class="small">UserCheckTask::class use UserService::deleteToOld</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><span>Http</span>
+                <ul>
+                  <li><span>Controllers</span>
+                    <ul>
+                      <li class="leaf"><code class="small">UserController::class use UserService::get, UserService::store</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><span>Micro</span>
+                <ul>
+                  <li><span>Controllers</span>
+                    <ul>
+                      <li class="leaf"><code class="small">ApiUserController::class use UserService::getComment</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <p>In this way, you can define all your business logic, and then use your services in the various entry points of your application.</p>
+  </div>
+</div>

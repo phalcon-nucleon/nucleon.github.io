@@ -1,0 +1,94 @@
+<div class="row">
+  <div class="col s12">
+    <ul class="summary generate"></ul>
+  </div>
+  <p class="col s12">
+  <h1>Error Handling</h1>
+  <h2>Intro</h2>
+  <p>When you start a new Nucleon project, error and exception handling is already configured for you. The
+    <code>App\Exceptions\Handler</code> class is where all exceptions triggered by your application are logged and
+    then rendered back to the user. We'll dive deeper into this class throughout this documentation.</p>
+  <h2>Configuration</h2>
+  <p>The <code>debug</code> option in your <code>.const.ini</code> configuration file determines how much information
+    about an error is actually displayed to the user.</p>
+
+  <p>For local development, you should set the APP_DEBUG environment variable to true. In your production environment,
+    this value should always be false. If the value is set to true in production, you risk exposing sensitive
+    configuration values to your application's end users.</p>
+  <h2>The Exception Handler</h2>
+  <p>All exceptions are handled by the <code>App\Exceptions\Handler</code> class.
+    This class contains two methods: <code>report</code> and <code>render</code>.
+    We'll examine each of these methods in detail.</p>
+  <h3><code>report</code> method</h3>
+  <p>The <code>report</code> method is used to log exceptions. By default,
+    the <code>report</code> method passes the exception to the base class where the exception is logged. However, you
+    are free to log
+    exceptions however you wish.</p>
+  <p>
+    For example, if you need to report different types of exceptions in different ways, you may use the PHP <code>instanceof</code>
+    comparison operator:
+  </p>
+  <pre><code>/**
+ * Report or log an exception.
+ *
+ * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
+ *
+ * @param  \Exception|\Throwable $throwable
+ * @return void
+ */
+public function report($throwable)
+{
+    if ($throwable instanceof CustomException) {
+        // don't log
+        return;
+    }
+    if ($throwable instanceof CustomException) {
+        //
+    }
+
+    parent::report($throwable);
+}</code></pre>
+
+  <h3><code>render</code> method</h3>
+  <p>The <code>render</code> method is responsible for converting a given exception into an HTTP response that should be
+    sent back to
+    the browser. By default, the exception is passed to the base class which generates a response for you. However, you
+    are free to check the exception type or return your own custom response:</p>
+
+  <pre><code>/**
+ * Render any exception/error, in Web context.
+ *
+ * Only fateful exception/error will may be rendered.
+ *
+ * @param \Exception|\Throwable          $throwable
+ * @param \Phalcon\Http\RequestInterface $request
+ *
+ * @return \Phalcon\Http\ResponseInterface
+ */
+public function render($throwable, $request = null)
+{
+    if ($throwable instanceof CustomException) {
+        return (new Response)->redirect('index');
+    }
+
+    return parent::render($throwable, $request);
+}</code></pre>
+  <h3><code>renderConsole</code> method</h3>
+  <p>The <code>render</code> method is responsible for converting a given exception into an cli response that should be
+    sent back to
+    the console. By default, the exception is passed to the base class which generates a response for you. However, you
+    are free to check the exception type or return your own custom response:</p>
+  <pre><code>/**
+ * Render any exception/error, in Cli context.
+ *
+ * Fateful and not fateful exception/error will may be reported.
+ *
+ * @param \Exception|\Throwable $throwable
+ */
+public function renderConsole($throwable)
+{
+    parent::renderConsole($throwable);
+}</code></pre>
+  <h2>HTTP Exceptions</h2>
+  <h3>Custom HTTP Error Pages</h3>
+</div>

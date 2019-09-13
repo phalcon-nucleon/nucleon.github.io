@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col s12">
+    <ul class="summary">
+      <li><a href="#!getting-started/directory-structure.html@root-directory">The Root Directory</a>
+        <ul>
+          <li><a href="#!getting-started/directory-structure.html@root-app">The <code class="language-php">app</code> directory</a></li>
+          <li><a href="#!getting-started/directory-structure.html@root-bootstrap">The <code class="language-php">bootstrap</code> directory</a>
+          <li><a href="#!getting-started/directory-structure.html@root-config">The <code class="language-php">config</code> directory</a></li>
+          <li><a href="#!getting-started/directory-structure.html@root-migrations">The <code class="language-php">migrations</code> directory</a></li>
+          <li><a href="#!getting-started/directory-structure.html@root-public">The <code class="language-php">public</code> directory</a></li>
+          <li><a href="#!getting-started/directory-structure.html@root-resources">The <code class="language-php">resources</code> directory</a></li>
+          <li><a href="#!getting-started/directory-structure.html@root-routes">The <code class="language-php">routes</code> directory</a></li>
+          <li><a href="#!getting-started/directory-structure.html@root-storages">The <code class="language-php">storages</code> directory</a></li>
+          <li><a href="#!getting-started/directory-structure.html@root-tests">The <code class="language-php">tests</code> directory</a></li>
+          <li><a href="#!getting-started/directory-structure.html@root-vendor">The <code class="language-php">vendor</code> directory</a></li>
+        </ul>
+      </li>
+      <li><a href="#!getting-started/directory-structure.html@app-directory">The App Directory</a>
+        <ul>
+          <li><a href="#!getting-started/directory-structure.html@app-core">The <code class="language-php">Core</code> directory</a>
+            <ul>
+              <li><a href="#!getting-started/directory-structure.html@app-core-constants">The <code class="language-php">Constants</code> directory</a></li>
+              <li><a href="#!getting-started/directory-structure.html@app-core-facades">The <code class="language-php">Facades</code> directory</a></li>
+              <li><a href="#!getting-started/directory-structure.html@app-core-models">The <code class="language-php">Models</code> directory</a></li>
+              <li><a href="#!getting-started/directory-structure.html@app-core-micro">The <code class="language-php">Providers</code> directory</a></li>
+              <li><a href="#!getting-started/directory-structure.html@app-core-services">The <code class="language-php">Services</code> directory</a></li>
+              <li><a href="#!getting-started/directory-structure.html@app-core-support">The <code class="language-php">Support</code> directory</a></li>
+            </ul>
+          </li>
+          <li><a href="#!getting-started/directory-structure.html@app-kernels">The <code class="language-php">Kernels</code> directory</a>
+            <ul>
+              <li><a href="#!getting-started/directory-structure.html@app-kernels-cli">The <code class="language-php">Cli</code> directory</a></li>
+              <li><a href="#!getting-started/directory-structure.html@app-kernels-http">The <code class="language-php">Http</code> directory</a></li>
+              <li><a href="#!getting-started/directory-structure.html@app-kernels-micro">The <code class="language-php">Micro</code> directory</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2 data-anchor="root-directory">Root directory</h2>
+    <h5 data-anchor="root-app">The app directory</h5>
+    <p>The core code of your application. Autoloaded via PSR4.</p>
+    <h5 data-anchor="root-bootstrap">The bootstrap directory</h5>
+    <p>Files that bootstrap the framework and configure autoloading.</p>
+    <h5 data-anchor="root-bootstrap-compile">The bootstrap/compile directory</h5>
+    <p>Contains the compilation of various elements of the applications (code, config, routes, ...).</p>
+    <h5 data-anchor="root-config">The config directory</h5>
+    <p>Your application's configuration files.</p>
+    <h5 data-anchor="root-migrations">The migrations directory</h5>
+    <p>Contains your database migrations</p>
+    <h5 data-anchor="root-public">The public directory</h5>
+    <p>The entry point for all requests entering your application.</p>
+    <h5 data-anchor="root-resources">The resources directory</h5>
+    <p>Your views as well as your raw, uncompiled assets such as LESS, SASS, or JavaScript.</p>
+    <h5 data-anchor="root-routes">The routes directory</h5>
+    <p>All of the route definitions for your application.</p>
+    <h5 data-anchor="root-storages">The storages directory</h5>
+    <p>All logs & caches & compiled views.</p>
+    <h5 data-anchor="root-tests">The tests directory</h5>
+    <p>Your automated tests.</p>
+    <h5 data-anchor="root-vendor">The vendor directory</h5>
+    <p>The vendor directory contains your Composer dependencies.</p>
+
+    <h2 data-anchor="app-directory">App directory</h2>
+    <h3 data-anchor="app-core">The Core directory</h3>
+    <p>Contains your application core code. Should contains business logic, shared with all kernels.</p>
+    <h5 data-anchor="app-core-constants">The Constants directory</h5>
+    <p>This directory contains all constants you may should use in your application.</p>
+    <h5 data-anchor="app-core-facades">The Facades directory</h5>
+    <p>This directory contains all facades you may should use in your application.</p>
+    <h5 data-anchor="app-core-models">The Models directory</h5>
+    <p>The Models directory is a proposed location of your Models.</p>
+    <h5 data-anchor="app-core-providers">The Providers directory</h5>
+    <p>The Providers directory contains all of the service providers for your application. Service providers bootstrap your application by binding services in the service container (Phalcon\Di) without instantiating.</p>
+    <h5 data-anchor="app-core-support">The Support directory</h5>
+    <p>The Support directory is a proposed location of your tools.</p>
+
+    <h3 data-anchor="app-kernels">The Kernels directory</h3>
+    <p>Contains the code the application kernels (Kernel settings, Controllers, ... ).</p>
+    <h5 data-anchor="app-kernels-cli">The Cli directory <small>Console application</small></h5>
+    <p>The Tasks directory contains all of the custom cli commands for your application. This directory also houses your console kernel.</p>
+    <h5 data-anchor="app-kernels-http">The Http directory <small>Http fullstack application</small></h5>
+    <p>The Http directory contains your controllers, middleware, modules, and your http kernel.</p>
+    <h5 data-anchor="app-kernels-micro">The Micro directory <small>Micro application</small></h5>
+    <p>The Micro directory contains your controllers, middleware, and your micro kernel.</p>
+  </div>
+</div>

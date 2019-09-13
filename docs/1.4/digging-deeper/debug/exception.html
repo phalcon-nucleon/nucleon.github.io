@@ -1,0 +1,1129 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>Error</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,300,400"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"/>
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style rel="stylesheet">
+    pre.sql{white-space: pre-line; word-break: break-all; font-size: 13px !important;margin:0}pre.sql .string{color:#a5d6a7 !important}pre.sql .table{color:#90caf9 !important}pre.sql .column{color:#ce93d8 !important}pre.sql .func{color:#fdd835 !important}pre.sql .keyw{color:#fb8c00 !important}
+    .php-error{padding:10px 15px;margin-bottom:10px}.php-error.debug{background-color:#4db6ac !important;color:#212121 !important}.php-error.info{background-color:#fff176 !important;color:#212121 !important}.php-error.notice{background-color:#ffd54f !important;color:#212121 !important}.php-error.warning{background-color:#ff8a65 !important;color:#212121 !important}.php-error.error{background-color:#b71c1c !important;color:#f5f5f5 !important}.php-error .type,.php-error .msg{font-family:monospace, monospace}.php-error .msg{margin:3px 0;word-break:break-all;white-space:pre-line}.php-error .file{font-size:80%}.collapsible{-webkit-box-shadow:none;box-shadow:none;border:none;margin:0}.collapsible-header,.collapsible-body{background:transparent;padding:.25rem 0;border:none;color:#424242}.collapsible-header:hover{text-decoration:underline}.collection{word-break:break-all;word-wrap:break-word}
+  </style>
+</head>
+<body class="grey darken-3 grey-text text-lighten-3">
+
+<div class="row">
+  <div class="col s12">
+    <ul class="tabs grey darken-4">
+      <li class="tab col s3">
+        <a class="active" href="#error">
+          Exceptions              <span class="chip">2</span>
+        </a>
+      </li>
+      <li class="tab col s3 disabled">
+        <a href="#php-errors">Errors <span class="chip">0</span></a>
+      </li>
+      <li class="tab col s3 ">
+        <a href="#events">Events <span class="chip">47</span></a>
+      </li>
+    </ul>
+  </div>
+  <div id="error" class="col s12">
+    <div class="card grey lighten-3">
+      <div class="card-content">
+              <span class="card-title red-text text-accent-4">
+                #1 <b>Exception</b>
+                <br/>
+                <ul class="collapsible">
+                  <li>
+                    <div class="collapsible-header">
+                      <small class="grey-text text-darken-4"  title="View code">
+                        <b>in : </b> app\Kernels\Http\Controllers\<b>HomeController.php</b>(line: 13)
+                      </small>
+                    </div>
+                    <div class="collapsible-body">
+                      <style rel='stylesheet'>.hl5bbdfcd8a6691line_number {color:#999;padding:0 5px 0 2px;margin-right:5px;background-color:#444;border-bottom:1px solid #444;border-right:1px solid #555;width:2.4rem;display:inline-block;text-align:right;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}.hl5bbdfcd8a6691line_selected {display:inline-block;width:100%;background-color:#3a3a3a}.hl5bbdfcd8a6691pre {font-size:12px;line-height:1.3;background-color: #2b2b2b;color:#a9b7c6;margin:0;padding:0;display:block;overflow:auto;white-space:pre!important;}.hl5bbdfcd8a6691namespace {color:#a9b7c6}.hl5bbdfcd8a6691variable {color:#9876aa}.hl5bbdfcd8a6691keyword {color:#cc7832;}.hl5bbdfcd8a6691function {color:#ffc66d;}.hl5bbdfcd8a6691string {color:#6a8759}.hl5bbdfcd8a6691number {color:#6897bb }.hl5bbdfcd8a6691comment {color:#808080 }.hl5bbdfcd8a6691block_comment {color:#808080 }</style><pre class="hl5bbdfcd8a6691pre"><code class="hl5bbdfcd8a6691line_number">3</code><code class="hl5bbdfcd8a6691keyword">namespace</code>&nbsp;<code class="hl5bbdfcd8a6691namespace">App\Kernels\Http\Controllers</code><code>;</code>
+<code class="hl5bbdfcd8a6691line_number">4</code>
+<code class="hl5bbdfcd8a6691line_number">5</code><code class="hl5bbdfcd8a6691keyword">class</code>&nbsp;<code class="hl5bbdfcd8a6691namespace">HomeController</code>&nbsp;<code class="hl5bbdfcd8a6691keyword">extends</code>&nbsp;<code class="hl5bbdfcd8a6691namespace">ControllerBase</code>
+<code class="hl5bbdfcd8a6691line_number">6</code><code>{</code>
+<code class="hl5bbdfcd8a6691line_number">7</code>&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8a6691keyword">public</code>&nbsp;<code class="hl5bbdfcd8a6691keyword">function</code>&nbsp;<code class="hl5bbdfcd8a6691function">indexAction</code><code>(</code><code>)</code>
+<code class="hl5bbdfcd8a6691line_number">8</code>&nbsp;&nbsp;&nbsp;&nbsp;<code>{</code>
+<code class="hl5bbdfcd8a6691line_number">9</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8a6691keyword">try</code>&nbsp;<code>{</code>
+<code class="hl5bbdfcd8a6691line_number">10</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8a6691comment">// stuff</code>
+<code class="hl5bbdfcd8a6691line_number">11</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8a6691keyword">throw</code>&nbsp;<code class="hl5bbdfcd8a6691keyword">new</code>&nbsp;<code class="hl5bbdfcd8a6691namespace">\Phalcon\</code><code>Exception</code><code>(</code><code class="hl5bbdfcd8a6691string">&quot;Failure is not an option.&quot;</code><code>)</code><code>;</code>
+<code class="hl5bbdfcd8a6691line_number">12</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>}</code>&nbsp;<code class="hl5bbdfcd8a6691keyword">catch</code>&nbsp;<code>(</code><code class="hl5bbdfcd8a6691namespace">\Exception</code>&nbsp;<code class="hl5bbdfcd8a6691variable">$e</code><code>)</code>&nbsp;<code>{</code>
+<code class="hl5bbdfcd8a6691line_selected"><code class="hl5bbdfcd8a6691line_number">13</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8a6691keyword">throw</code>&nbsp;<code class="hl5bbdfcd8a6691keyword">new</code>&nbsp;<code class="hl5bbdfcd8a6691namespace">\Exception</code><code>(</code><code class="hl5bbdfcd8a6691string">&quot;Whoops ! Something went wrong...&quot;</code><code>,</code>&nbsp;<code class="hl5bbdfcd8a6691variable">$e</code><code>-&gt;</code><code class="hl5bbdfcd8a6691function">getCode</code><code>(</code><code>)</code><code>,</code>&nbsp;<code class="hl5bbdfcd8a6691variable">$e</code><code>)</code><code>;</code></code>
+<code class="hl5bbdfcd8a6691line_number">14</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>}</code>
+<code class="hl5bbdfcd8a6691line_number">15</code>
+<code class="hl5bbdfcd8a6691line_number">16</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8a6691variable">$this</code><code>-&gt;</code><code class="hl5bbdfcd8a6691variable">view</code><code>-&gt;</code><code class="hl5bbdfcd8a6691function">render</code><code>(</code><code class="hl5bbdfcd8a6691string">'home'</code><code>,</code>&nbsp;<code class="hl5bbdfcd8a6691string">'index'</code><code>)</code><code>;</code>
+<code class="hl5bbdfcd8a6691line_number">17</code>&nbsp;&nbsp;&nbsp;&nbsp;<code>}</code>
+<code class="hl5bbdfcd8a6691line_number">18</code><code>}</code>
+<code class="hl5bbdfcd8a6691line_number">19</code></pre>                    </div>
+                  </li>
+                </ul>
+                <pre style="
+          word-break: break-all;
+          max-width:  100%;
+          margin: 0;
+          overflow: hidden;
+          white-space: pre-line;
+    "><small class="grey-text text-darken-3">Whoops ! Something went wrong...</small></pre>
+              </span>
+        <div>
+          <ul class="collection">
+            <li class="collection-item blue-grey lighten-3 white-text">
+                    <span class="grey-text text-darken-3">
+                      <code style="color:#880000">App\Kernels\Http\Controllers\HomeController</code><code>-&gt;</code><code style="color:#880000;font-weight:bold">indexAction</code><code>(</code><code>)</code>                    </span>
+              <br/>
+              <small class="grey-text text-darken-3">[internal function]</small>
+            </li>
+            <li class="collection-item blue-grey lighten-3 white-text">
+                    <span class="grey-text text-darken-3">
+                      <code style="color:#880000">Phalcon\Dispatcher</code><code>-&gt;</code><code style="color:#880000;font-weight:bold">callActionMethod</code><code>(</code><code>object</code><code>(</code><code style="color:#880000">HomeController</code><code>)</code><code>,</code>&nbsp;<code style="color:#2e7d32">'indexAction'</code><code>,</code>&nbsp;<code style="color:#bf360c;">array</code><code>)</code>                    </span>
+              <br/>
+              <small class="grey-text text-darken-3">[internal function]</small>
+            </li>
+            <li class="collection-item blue-grey lighten-3 white-text">
+                    <span class="grey-text text-darken-3">
+                      <code style="color:#880000">Phalcon\Dispatcher</code><code>-&gt;</code><code style="color:#880000;font-weight:bold">dispatch</code><code>(</code><code>)</code>                    </span>
+              <br/>
+              <small class="grey-text text-darken-3">[internal function]</small>
+            </li>
+            <li class="collection-item blue-grey lighten-3 white-text">
+                    <span class="grey-text text-darken-3">
+                      <code style="color:#880000">Phalcon\Mvc\Application</code><code>-&gt;</code><code style="color:#880000;font-weight:bold">handle</code><code>(</code><code>)</code>                    </span>
+              <br/>
+              <ul class="collapsible">
+                <li>
+                  <div class="collapsible-header">
+                    <small class="grey-text text-darken-3" title="View code">in : vendor\nucleon\framework\src\Neutrino\Foundation\<b>Bootstrap.php</b>&nbsp;(line: 67)</small>
+                  </div>
+                  <div class="collapsible-body">
+                    <style rel='stylesheet'>.hl5bbdfcd8aaa14line_number {color:#999;padding:0 5px 0 2px;margin-right:5px;background-color:#444;border-bottom:1px solid #444;border-right:1px solid #555;width:2.4rem;display:inline-block;text-align:right;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}.hl5bbdfcd8aaa14line_selected {display:inline-block;width:100%;background-color:#3a3a3a}.hl5bbdfcd8aaa14pre {font-size:12px;line-height:1.3;background-color: #2b2b2b;color:#a9b7c6;margin:0;padding:0;display:block;overflow:auto;white-space:pre!important;}.hl5bbdfcd8aaa14namespace {color:#a9b7c6}.hl5bbdfcd8aaa14variable {color:#9876aa}.hl5bbdfcd8aaa14keyword {color:#cc7832;}.hl5bbdfcd8aaa14function {color:#ffc66d;}.hl5bbdfcd8aaa14string {color:#6a8759}.hl5bbdfcd8aaa14number {color:#6897bb }.hl5bbdfcd8aaa14comment {color:#808080 }.hl5bbdfcd8aaa14block_comment {color:#808080 }</style><pre class="hl5bbdfcd8aaa14pre"><code class="hl5bbdfcd8aaa14line_number">57</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8aaa14keyword">return</code>&nbsp;<code class="hl5bbdfcd8aaa14variable">$kernel</code><code>;</code>
+<code class="hl5bbdfcd8aaa14line_number">58</code>&nbsp;&nbsp;&nbsp;&nbsp;<code>}</code>
+<code class="hl5bbdfcd8aaa14line_number">59</code>
+<code class="hl5bbdfcd8aaa14line_number">60</code>&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8aaa14block_comment">/**</code>
+<code class="hl5bbdfcd8aaa14line_number">61</code><code class="hl5bbdfcd8aaa14block_comment">     * @param \Neutrino\Interfaces\Kernelable|\Phalcon\Application $kernel</code>
+<code class="hl5bbdfcd8aaa14line_number">62</code><code class="hl5bbdfcd8aaa14block_comment">     */</code>
+<code class="hl5bbdfcd8aaa14line_number">63</code>&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8aaa14keyword">public</code>&nbsp;<code class="hl5bbdfcd8aaa14keyword">function</code>&nbsp;<code class="hl5bbdfcd8aaa14function">run</code><code>(</code><code class="hl5bbdfcd8aaa14namespace">Kernelable</code>&nbsp;<code class="hl5bbdfcd8aaa14variable">$kernel</code><code>)</code>
+<code class="hl5bbdfcd8aaa14line_number">64</code>&nbsp;&nbsp;&nbsp;&nbsp;<code>{</code>
+<code class="hl5bbdfcd8aaa14line_number">65</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8aaa14variable">$kernel</code><code>-&gt;</code><code class="hl5bbdfcd8aaa14function">boot</code><code>(</code><code>)</code><code>;</code>
+<code class="hl5bbdfcd8aaa14line_number">66</code>
+<code class="hl5bbdfcd8aaa14line_selected"><code class="hl5bbdfcd8aaa14line_number">67</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8aaa14keyword">if</code>&nbsp;<code>(</code><code>(</code><code class="hl5bbdfcd8aaa14variable">$response</code>&nbsp;<code>=</code>&nbsp;<code class="hl5bbdfcd8aaa14variable">$kernel</code><code>-&gt;</code><code class="hl5bbdfcd8aaa14function">handle</code><code>(</code><code>)</code><code>)</code>&nbsp;<code class="hl5bbdfcd8aaa14keyword">instanceof</code>&nbsp;<code class="hl5bbdfcd8aaa14namespace">Response</code><code>)</code>&nbsp;<code>{</code></code>
+<code class="hl5bbdfcd8aaa14line_number">68</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8aaa14keyword">if</code>&nbsp;<code>(</code><code>!</code><code class="hl5bbdfcd8aaa14variable">$response</code><code>-&gt;</code><code class="hl5bbdfcd8aaa14function">isSent</code><code>(</code><code>)</code><code>)</code>&nbsp;<code>{</code>
+<code class="hl5bbdfcd8aaa14line_number">69</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8aaa14variable">$response</code><code>-&gt;</code><code class="hl5bbdfcd8aaa14function">send</code><code>(</code><code>)</code><code>;</code>
+<code class="hl5bbdfcd8aaa14line_number">70</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>}</code>
+<code class="hl5bbdfcd8aaa14line_number">71</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>}</code><code>;</code>
+<code class="hl5bbdfcd8aaa14line_number">72</code>
+<code class="hl5bbdfcd8aaa14line_number">73</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8aaa14variable">$kernel</code><code>-&gt;</code><code class="hl5bbdfcd8aaa14function">terminate</code><code>(</code><code>)</code><code>;</code>
+<code class="hl5bbdfcd8aaa14line_number">74</code>&nbsp;&nbsp;&nbsp;&nbsp;<code>}</code>
+<code class="hl5bbdfcd8aaa14line_number">75</code><code>}</code>
+<code class="hl5bbdfcd8aaa14line_number">76</code></pre>                          </div>
+                </li>
+              </ul>
+            </li>
+            <li class="collection-item blue-grey lighten-3 white-text">
+                    <span class="grey-text text-darken-3">
+                      <code style="color:#880000">Neutrino\Foundation\Bootstrap</code><code>-&gt;</code><code style="color:#880000;font-weight:bold">run</code><code>(</code><code>object</code><code>(</code><code style="color:#880000">Kernel</code><code>)</code><code>)</code>                    </span>
+              <br/>
+              <ul class="collapsible">
+                <li>
+                  <div class="collapsible-header">
+                    <small class="grey-text text-darken-3" title="View code">in : public\<b>index.php</b>&nbsp;(line: 16)</small>
+                  </div>
+                  <div class="collapsible-body">
+                    <style rel='stylesheet'>.hl5bbdfcd8abb22line_number {color:#999;padding:0 5px 0 2px;margin-right:5px;background-color:#444;border-bottom:1px solid #444;border-right:1px solid #555;width:2.4rem;display:inline-block;text-align:right;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}.hl5bbdfcd8abb22line_selected {display:inline-block;width:100%;background-color:#3a3a3a}.hl5bbdfcd8abb22pre {font-size:12px;line-height:1.3;background-color: #2b2b2b;color:#a9b7c6;margin:0;padding:0;display:block;overflow:auto;white-space:pre!important;}.hl5bbdfcd8abb22namespace {color:#a9b7c6}.hl5bbdfcd8abb22variable {color:#9876aa}.hl5bbdfcd8abb22keyword {color:#cc7832;}.hl5bbdfcd8abb22function {color:#ffc66d;}.hl5bbdfcd8abb22string {color:#6a8759}.hl5bbdfcd8abb22number {color:#6897bb }.hl5bbdfcd8abb22comment {color:#808080 }.hl5bbdfcd8abb22block_comment {color:#808080 }</style><pre class="hl5bbdfcd8abb22pre"><code class="hl5bbdfcd8abb22line_number">6</code>
+<code class="hl5bbdfcd8abb22line_number">7</code><code class="hl5bbdfcd8abb22block_comment">/** @var \Neutrino\Foundation\Bootstrap $bootstrap */</code>
+<code class="hl5bbdfcd8abb22line_number">8</code><code class="hl5bbdfcd8abb22variable">$bootstrap</code>&nbsp;<code>=</code>&nbsp;<code class="hl5bbdfcd8abb22keyword">require_once</code>&nbsp;<code class="hl5bbdfcd8abb22variable">__DIR__</code>&nbsp;<code>.</code>&nbsp;<code class="hl5bbdfcd8abb22string">'/../bootstrap/app.php'</code><code>;</code>
+<code class="hl5bbdfcd8abb22line_number">9</code>
+<code class="hl5bbdfcd8abb22line_number">10</code><code class="hl5bbdfcd8abb22block_comment">/** @var \App\Kernels\Http\Kernel $kernel */</code>
+<code class="hl5bbdfcd8abb22line_number">11</code><code class="hl5bbdfcd8abb22variable">$kernel</code>&nbsp;<code>=</code>&nbsp;<code class="hl5bbdfcd8abb22variable">$bootstrap</code><code>-&gt;</code><code class="hl5bbdfcd8abb22function">make</code><code>(</code><code class="hl5bbdfcd8abb22namespace">App\Kernels\Http\Kernel</code><code>::</code><code class="hl5bbdfcd8abb22variable">class</code><code>)</code><code>;</code>
+<code class="hl5bbdfcd8abb22line_number">12</code>
+<code class="hl5bbdfcd8abb22line_number">13</code><code class="hl5bbdfcd8abb22block_comment">/**</code>
+<code class="hl5bbdfcd8abb22line_number">14</code><code class="hl5bbdfcd8abb22block_comment"> * Run kernel</code>
+<code class="hl5bbdfcd8abb22line_number">15</code><code class="hl5bbdfcd8abb22block_comment"> */</code>
+<code class="hl5bbdfcd8abb22line_selected"><code class="hl5bbdfcd8abb22line_number">16</code><code class="hl5bbdfcd8abb22variable">$bootstrap</code><code>-&gt;</code><code class="hl5bbdfcd8abb22function">run</code><code>(</code><code class="hl5bbdfcd8abb22variable">$kernel</code><code>)</code><code>;</code></code>
+<code class="hl5bbdfcd8abb22line_number">17</code></pre>                          </div>
+                </li>
+              </ul>
+            </li>
+            <li class="collection-item blue-grey lighten-3 white-text">
+                    <span class="grey-text text-darken-3">
+                      <code style="color:#bf360c;">require</code><code>(</code><code style="color:#2e7d32">'public\index.php'</code><code>)</code>                    </span>
+              <br/>
+              <ul class="collapsible">
+                <li>
+                  <div class="collapsible-header">
+                    <small class="grey-text text-darken-3" title="View code">in : public\<b>app_dev.php</b>&nbsp;(line: 18)</small>
+                  </div>
+                  <div class="collapsible-body">
+                    <style rel='stylesheet'>.hl5bbdfcd8abdfdline_number {color:#999;padding:0 5px 0 2px;margin-right:5px;background-color:#444;border-bottom:1px solid #444;border-right:1px solid #555;width:2.4rem;display:inline-block;text-align:right;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}.hl5bbdfcd8abdfdline_selected {display:inline-block;width:100%;background-color:#3a3a3a}.hl5bbdfcd8abdfdpre {font-size:12px;line-height:1.3;background-color: #2b2b2b;color:#a9b7c6;margin:0;padding:0;display:block;overflow:auto;white-space:pre!important;}.hl5bbdfcd8abdfdnamespace {color:#a9b7c6}.hl5bbdfcd8abdfdvariable {color:#9876aa}.hl5bbdfcd8abdfdkeyword {color:#cc7832;}.hl5bbdfcd8abdfdfunction {color:#ffc66d;}.hl5bbdfcd8abdfdstring {color:#6a8759}.hl5bbdfcd8abdfdnumber {color:#6897bb }.hl5bbdfcd8abdfdcomment {color:#808080 }.hl5bbdfcd8abdfdblock_comment {color:#808080 }</style><pre class="hl5bbdfcd8abdfdpre"><code class="hl5bbdfcd8abdfdline_number">8</code><code>}</code>
+<code class="hl5bbdfcd8abdfdline_number">9</code>
+<code class="hl5bbdfcd8abdfdline_number">10</code><code class="hl5bbdfcd8abdfdkeyword">if</code>&nbsp;<code>(</code><code>preg_match</code><code>(</code><code class="hl5bbdfcd8abdfdstring">'/\.(?:png|jpg|jpeg|gif|ico|css|js|svg|ttf|eot|woff|woff2)$/'</code><code>,</code>&nbsp;<code class="hl5bbdfcd8abdfdvariable">$_SERVER</code><code>[</code><code class="hl5bbdfcd8abdfdstring">&quot;REQUEST_URI&quot;</code><code>]</code><code>)</code><code>)</code>&nbsp;<code>{</code>
+<code class="hl5bbdfcd8abdfdline_number">11</code>&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8abdfdkeyword">return</code>&nbsp;<code class="hl5bbdfcd8abdfdkeyword">false</code><code>;</code>
+<code class="hl5bbdfcd8abdfdline_number">12</code><code>}</code>
+<code class="hl5bbdfcd8abdfdline_number">13</code>
+<code class="hl5bbdfcd8abdfdline_number">14</code><code class="hl5bbdfcd8abdfdkeyword">if</code>&nbsp;<code>(</code><code>strpos</code><code>(</code><code class="hl5bbdfcd8abdfdvariable">$_SERVER</code><code>[</code><code class="hl5bbdfcd8abdfdstring">'REQUEST_URI'</code><code>]</code><code>,</code>&nbsp;<code class="hl5bbdfcd8abdfdstring">'/api/'</code><code>)</code>&nbsp;<code>=</code><code>=</code><code>=</code>&nbsp;<code class="hl5bbdfcd8abdfdnumber">0</code><code>)</code>&nbsp;<code>{</code>
+<code class="hl5bbdfcd8abdfdline_number">15</code>&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8abdfdkeyword">return</code>&nbsp;<code class="hl5bbdfcd8abdfdkeyword">require</code>&nbsp;<code class="hl5bbdfcd8abdfdvariable">__DIR__</code>&nbsp;<code>.</code>&nbsp;<code class="hl5bbdfcd8abdfdstring">'/micro.php'</code><code>;</code>
+<code class="hl5bbdfcd8abdfdline_number">16</code><code>}</code>
+<code class="hl5bbdfcd8abdfdline_number">17</code>
+<code class="hl5bbdfcd8abdfdline_selected"><code class="hl5bbdfcd8abdfdline_number">18</code><code class="hl5bbdfcd8abdfdkeyword">return</code>&nbsp;<code class="hl5bbdfcd8abdfdkeyword">require</code>&nbsp;<code class="hl5bbdfcd8abdfdvariable">__DIR__</code>&nbsp;<code>.</code>&nbsp;<code class="hl5bbdfcd8abdfdstring">'/index.php'</code><code>;</code></code></pre>                          </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card grey lighten-3">
+      <div class="card-content">
+              <span class="card-title red-text text-accent-4">
+                #2 <b>Phalcon\Exception</b>
+                <br/>
+                <ul class="collapsible">
+                  <li>
+                    <div class="collapsible-header">
+                      <small class="grey-text text-darken-4"  title="View code">
+                        <b>in : </b> app\Kernels\Http\Controllers\<b>HomeController.php</b>(line: 11)
+                      </small>
+                    </div>
+                    <div class="collapsible-body">
+                      <style rel='stylesheet'>.hl5bbdfcd8ace49line_number {color:#999;padding:0 5px 0 2px;margin-right:5px;background-color:#444;border-bottom:1px solid #444;border-right:1px solid #555;width:2.4rem;display:inline-block;text-align:right;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}.hl5bbdfcd8ace49line_selected {display:inline-block;width:100%;background-color:#3a3a3a}.hl5bbdfcd8ace49pre {font-size:12px;line-height:1.3;background-color: #2b2b2b;color:#a9b7c6;margin:0;padding:0;display:block;overflow:auto;white-space:pre!important;}.hl5bbdfcd8ace49namespace {color:#a9b7c6}.hl5bbdfcd8ace49variable {color:#9876aa}.hl5bbdfcd8ace49keyword {color:#cc7832;}.hl5bbdfcd8ace49function {color:#ffc66d;}.hl5bbdfcd8ace49string {color:#6a8759}.hl5bbdfcd8ace49number {color:#6897bb }.hl5bbdfcd8ace49comment {color:#808080 }.hl5bbdfcd8ace49block_comment {color:#808080 }</style><pre class="hl5bbdfcd8ace49pre"><code class="hl5bbdfcd8ace49line_number">1</code><code class="hl5bbdfcd8ace49keyword">&lt;?php</code>
+<code class="hl5bbdfcd8ace49line_number">2</code>
+<code class="hl5bbdfcd8ace49line_number">3</code><code class="hl5bbdfcd8ace49keyword">namespace</code>&nbsp;<code class="hl5bbdfcd8ace49namespace">App\Kernels\Http\Controllers</code><code>;</code>
+<code class="hl5bbdfcd8ace49line_number">4</code>
+<code class="hl5bbdfcd8ace49line_number">5</code><code class="hl5bbdfcd8ace49keyword">class</code>&nbsp;<code class="hl5bbdfcd8ace49namespace">HomeController</code>&nbsp;<code class="hl5bbdfcd8ace49keyword">extends</code>&nbsp;<code class="hl5bbdfcd8ace49namespace">ControllerBase</code>
+<code class="hl5bbdfcd8ace49line_number">6</code><code>{</code>
+<code class="hl5bbdfcd8ace49line_number">7</code>&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8ace49keyword">public</code>&nbsp;<code class="hl5bbdfcd8ace49keyword">function</code>&nbsp;<code class="hl5bbdfcd8ace49function">indexAction</code><code>(</code><code>)</code>
+<code class="hl5bbdfcd8ace49line_number">8</code>&nbsp;&nbsp;&nbsp;&nbsp;<code>{</code>
+<code class="hl5bbdfcd8ace49line_number">9</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8ace49keyword">try</code>&nbsp;<code>{</code>
+<code class="hl5bbdfcd8ace49line_number">10</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8ace49comment">// stuff</code>
+<code class="hl5bbdfcd8ace49line_selected"><code class="hl5bbdfcd8ace49line_number">11</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8ace49keyword">throw</code>&nbsp;<code class="hl5bbdfcd8ace49keyword">new</code>&nbsp;<code class="hl5bbdfcd8ace49namespace">\Phalcon\</code><code>Exception</code><code>(</code><code class="hl5bbdfcd8ace49string">&quot;Failure is not an option.&quot;</code><code>)</code><code>;</code></code>
+<code class="hl5bbdfcd8ace49line_number">12</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>}</code>&nbsp;<code class="hl5bbdfcd8ace49keyword">catch</code>&nbsp;<code>(</code><code class="hl5bbdfcd8ace49namespace">\Exception</code>&nbsp;<code class="hl5bbdfcd8ace49variable">$e</code><code>)</code>&nbsp;<code>{</code>
+<code class="hl5bbdfcd8ace49line_number">13</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8ace49keyword">throw</code>&nbsp;<code class="hl5bbdfcd8ace49keyword">new</code>&nbsp;<code class="hl5bbdfcd8ace49namespace">\Exception</code><code>(</code><code class="hl5bbdfcd8ace49string">&quot;Whoops ! Something went wrong...&quot;</code><code>,</code>&nbsp;<code class="hl5bbdfcd8ace49variable">$e</code><code>-&gt;</code><code class="hl5bbdfcd8ace49function">getCode</code><code>(</code><code>)</code><code>,</code>&nbsp;<code class="hl5bbdfcd8ace49variable">$e</code><code>)</code><code>;</code>
+<code class="hl5bbdfcd8ace49line_number">14</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>}</code>
+<code class="hl5bbdfcd8ace49line_number">15</code>
+<code class="hl5bbdfcd8ace49line_number">16</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8ace49variable">$this</code><code>-&gt;</code><code class="hl5bbdfcd8ace49variable">view</code><code>-&gt;</code><code class="hl5bbdfcd8ace49function">render</code><code>(</code><code class="hl5bbdfcd8ace49string">'home'</code><code>,</code>&nbsp;<code class="hl5bbdfcd8ace49string">'index'</code><code>)</code><code>;</code>
+<code class="hl5bbdfcd8ace49line_number">17</code>&nbsp;&nbsp;&nbsp;&nbsp;<code>}</code>
+<code class="hl5bbdfcd8ace49line_number">18</code><code>}</code>
+<code class="hl5bbdfcd8ace49line_number">19</code></pre>                    </div>
+                  </li>
+                </ul>
+                <pre style="
+          word-break: break-all;
+          max-width:  100%;
+          margin: 0;
+          overflow: hidden;
+          white-space: pre-line;
+    "><small class="grey-text text-darken-3">Failure is not an option.</small></pre>
+              </span>
+        <div>
+          <ul class="collection">
+            <li class="collection-item blue-grey lighten-3 white-text">
+                    <span class="grey-text text-darken-3">
+                      <code style="color:#880000">App\Kernels\Http\Controllers\HomeController</code><code>-&gt;</code><code style="color:#880000;font-weight:bold">indexAction</code><code>(</code><code>)</code>                    </span>
+              <br/>
+              <small class="grey-text text-darken-3">[internal function]</small>
+            </li>
+            <li class="collection-item blue-grey lighten-3 white-text">
+                    <span class="grey-text text-darken-3">
+                      <code style="color:#880000">Phalcon\Dispatcher</code><code>-&gt;</code><code style="color:#880000;font-weight:bold">callActionMethod</code><code>(</code><code>object</code><code>(</code><code style="color:#880000">HomeController</code><code>)</code><code>,</code>&nbsp;<code style="color:#2e7d32">'indexAction'</code><code>,</code>&nbsp;<code style="color:#bf360c;">array</code><code>)</code>                    </span>
+              <br/>
+              <small class="grey-text text-darken-3">[internal function]</small>
+            </li>
+            <li class="collection-item blue-grey lighten-3 white-text">
+                    <span class="grey-text text-darken-3">
+                      <code style="color:#880000">Phalcon\Dispatcher</code><code>-&gt;</code><code style="color:#880000;font-weight:bold">dispatch</code><code>(</code><code>)</code>                    </span>
+              <br/>
+              <small class="grey-text text-darken-3">[internal function]</small>
+            </li>
+            <li class="collection-item blue-grey lighten-3 white-text">
+                    <span class="grey-text text-darken-3">
+                      <code style="color:#880000">Phalcon\Mvc\Application</code><code>-&gt;</code><code style="color:#880000;font-weight:bold">handle</code><code>(</code><code>)</code>                    </span>
+              <br/>
+              <ul class="collapsible">
+                <li>
+                  <div class="collapsible-header">
+                    <small class="grey-text text-darken-3" title="View code">in : vendor\nucleon\framework\src\Neutrino\Foundation\<b>Bootstrap.php</b>&nbsp;(line: 67)</small>
+                  </div>
+                  <div class="collapsible-body">
+                    <style rel='stylesheet'>.hl5bbdfcd8b1f12line_number {color:#999;padding:0 5px 0 2px;margin-right:5px;background-color:#444;border-bottom:1px solid #444;border-right:1px solid #555;width:2.4rem;display:inline-block;text-align:right;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}.hl5bbdfcd8b1f12line_selected {display:inline-block;width:100%;background-color:#3a3a3a}.hl5bbdfcd8b1f12pre {font-size:12px;line-height:1.3;background-color: #2b2b2b;color:#a9b7c6;margin:0;padding:0;display:block;overflow:auto;white-space:pre!important;}.hl5bbdfcd8b1f12namespace {color:#a9b7c6}.hl5bbdfcd8b1f12variable {color:#9876aa}.hl5bbdfcd8b1f12keyword {color:#cc7832;}.hl5bbdfcd8b1f12function {color:#ffc66d;}.hl5bbdfcd8b1f12string {color:#6a8759}.hl5bbdfcd8b1f12number {color:#6897bb }.hl5bbdfcd8b1f12comment {color:#808080 }.hl5bbdfcd8b1f12block_comment {color:#808080 }</style><pre class="hl5bbdfcd8b1f12pre"><code class="hl5bbdfcd8b1f12line_number">57</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8b1f12keyword">return</code>&nbsp;<code class="hl5bbdfcd8b1f12variable">$kernel</code><code>;</code>
+<code class="hl5bbdfcd8b1f12line_number">58</code>&nbsp;&nbsp;&nbsp;&nbsp;<code>}</code>
+<code class="hl5bbdfcd8b1f12line_number">59</code>
+<code class="hl5bbdfcd8b1f12line_number">60</code>&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8b1f12block_comment">/**</code>
+<code class="hl5bbdfcd8b1f12line_number">61</code><code class="hl5bbdfcd8b1f12block_comment">     * @param \Neutrino\Interfaces\Kernelable|\Phalcon\Application $kernel</code>
+<code class="hl5bbdfcd8b1f12line_number">62</code><code class="hl5bbdfcd8b1f12block_comment">     */</code>
+<code class="hl5bbdfcd8b1f12line_number">63</code>&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8b1f12keyword">public</code>&nbsp;<code class="hl5bbdfcd8b1f12keyword">function</code>&nbsp;<code class="hl5bbdfcd8b1f12function">run</code><code>(</code><code class="hl5bbdfcd8b1f12namespace">Kernelable</code>&nbsp;<code class="hl5bbdfcd8b1f12variable">$kernel</code><code>)</code>
+<code class="hl5bbdfcd8b1f12line_number">64</code>&nbsp;&nbsp;&nbsp;&nbsp;<code>{</code>
+<code class="hl5bbdfcd8b1f12line_number">65</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8b1f12variable">$kernel</code><code>-&gt;</code><code class="hl5bbdfcd8b1f12function">boot</code><code>(</code><code>)</code><code>;</code>
+<code class="hl5bbdfcd8b1f12line_number">66</code>
+<code class="hl5bbdfcd8b1f12line_selected"><code class="hl5bbdfcd8b1f12line_number">67</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8b1f12keyword">if</code>&nbsp;<code>(</code><code>(</code><code class="hl5bbdfcd8b1f12variable">$response</code>&nbsp;<code>=</code>&nbsp;<code class="hl5bbdfcd8b1f12variable">$kernel</code><code>-&gt;</code><code class="hl5bbdfcd8b1f12function">handle</code><code>(</code><code>)</code><code>)</code>&nbsp;<code class="hl5bbdfcd8b1f12keyword">instanceof</code>&nbsp;<code class="hl5bbdfcd8b1f12namespace">Response</code><code>)</code>&nbsp;<code>{</code></code>
+<code class="hl5bbdfcd8b1f12line_number">68</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8b1f12keyword">if</code>&nbsp;<code>(</code><code>!</code><code class="hl5bbdfcd8b1f12variable">$response</code><code>-&gt;</code><code class="hl5bbdfcd8b1f12function">isSent</code><code>(</code><code>)</code><code>)</code>&nbsp;<code>{</code>
+<code class="hl5bbdfcd8b1f12line_number">69</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8b1f12variable">$response</code><code>-&gt;</code><code class="hl5bbdfcd8b1f12function">send</code><code>(</code><code>)</code><code>;</code>
+<code class="hl5bbdfcd8b1f12line_number">70</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>}</code>
+<code class="hl5bbdfcd8b1f12line_number">71</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>}</code><code>;</code>
+<code class="hl5bbdfcd8b1f12line_number">72</code>
+<code class="hl5bbdfcd8b1f12line_number">73</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8b1f12variable">$kernel</code><code>-&gt;</code><code class="hl5bbdfcd8b1f12function">terminate</code><code>(</code><code>)</code><code>;</code>
+<code class="hl5bbdfcd8b1f12line_number">74</code>&nbsp;&nbsp;&nbsp;&nbsp;<code>}</code>
+<code class="hl5bbdfcd8b1f12line_number">75</code><code>}</code>
+<code class="hl5bbdfcd8b1f12line_number">76</code></pre>                          </div>
+                </li>
+              </ul>
+            </li>
+            <li class="collection-item blue-grey lighten-3 white-text">
+                    <span class="grey-text text-darken-3">
+                      <code style="color:#880000">Neutrino\Foundation\Bootstrap</code><code>-&gt;</code><code style="color:#880000;font-weight:bold">run</code><code>(</code><code>object</code><code>(</code><code style="color:#880000">Kernel</code><code>)</code><code>)</code>                    </span>
+              <br/>
+              <ul class="collapsible">
+                <li>
+                  <div class="collapsible-header">
+                    <small class="grey-text text-darken-3" title="View code">in : public\<b>index.php</b>&nbsp;(line: 16)</small>
+                  </div>
+                  <div class="collapsible-body">
+                    <style rel='stylesheet'>.hl5bbdfcd8b3037line_number {color:#999;padding:0 5px 0 2px;margin-right:5px;background-color:#444;border-bottom:1px solid #444;border-right:1px solid #555;width:2.4rem;display:inline-block;text-align:right;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}.hl5bbdfcd8b3037line_selected {display:inline-block;width:100%;background-color:#3a3a3a}.hl5bbdfcd8b3037pre {font-size:12px;line-height:1.3;background-color: #2b2b2b;color:#a9b7c6;margin:0;padding:0;display:block;overflow:auto;white-space:pre!important;}.hl5bbdfcd8b3037namespace {color:#a9b7c6}.hl5bbdfcd8b3037variable {color:#9876aa}.hl5bbdfcd8b3037keyword {color:#cc7832;}.hl5bbdfcd8b3037function {color:#ffc66d;}.hl5bbdfcd8b3037string {color:#6a8759}.hl5bbdfcd8b3037number {color:#6897bb }.hl5bbdfcd8b3037comment {color:#808080 }.hl5bbdfcd8b3037block_comment {color:#808080 }</style><pre class="hl5bbdfcd8b3037pre"><code class="hl5bbdfcd8b3037line_number">6</code>
+<code class="hl5bbdfcd8b3037line_number">7</code><code class="hl5bbdfcd8b3037block_comment">/** @var \Neutrino\Foundation\Bootstrap $bootstrap */</code>
+<code class="hl5bbdfcd8b3037line_number">8</code><code class="hl5bbdfcd8b3037variable">$bootstrap</code>&nbsp;<code>=</code>&nbsp;<code class="hl5bbdfcd8b3037keyword">require_once</code>&nbsp;<code class="hl5bbdfcd8b3037variable">__DIR__</code>&nbsp;<code>.</code>&nbsp;<code class="hl5bbdfcd8b3037string">'/../bootstrap/app.php'</code><code>;</code>
+<code class="hl5bbdfcd8b3037line_number">9</code>
+<code class="hl5bbdfcd8b3037line_number">10</code><code class="hl5bbdfcd8b3037block_comment">/** @var \App\Kernels\Http\Kernel $kernel */</code>
+<code class="hl5bbdfcd8b3037line_number">11</code><code class="hl5bbdfcd8b3037variable">$kernel</code>&nbsp;<code>=</code>&nbsp;<code class="hl5bbdfcd8b3037variable">$bootstrap</code><code>-&gt;</code><code class="hl5bbdfcd8b3037function">make</code><code>(</code><code class="hl5bbdfcd8b3037namespace">App\Kernels\Http\Kernel</code><code>::</code><code class="hl5bbdfcd8b3037variable">class</code><code>)</code><code>;</code>
+<code class="hl5bbdfcd8b3037line_number">12</code>
+<code class="hl5bbdfcd8b3037line_number">13</code><code class="hl5bbdfcd8b3037block_comment">/**</code>
+<code class="hl5bbdfcd8b3037line_number">14</code><code class="hl5bbdfcd8b3037block_comment"> * Run kernel</code>
+<code class="hl5bbdfcd8b3037line_number">15</code><code class="hl5bbdfcd8b3037block_comment"> */</code>
+<code class="hl5bbdfcd8b3037line_selected"><code class="hl5bbdfcd8b3037line_number">16</code><code class="hl5bbdfcd8b3037variable">$bootstrap</code><code>-&gt;</code><code class="hl5bbdfcd8b3037function">run</code><code>(</code><code class="hl5bbdfcd8b3037variable">$kernel</code><code>)</code><code>;</code></code>
+<code class="hl5bbdfcd8b3037line_number">17</code></pre>                          </div>
+                </li>
+              </ul>
+            </li>
+            <li class="collection-item blue-grey lighten-3 white-text">
+                    <span class="grey-text text-darken-3">
+                      <code style="color:#bf360c;">require</code><code>(</code><code style="color:#2e7d32">'public\index.php'</code><code>)</code>                    </span>
+              <br/>
+              <ul class="collapsible">
+                <li>
+                  <div class="collapsible-header">
+                    <small class="grey-text text-darken-3" title="View code">in : public\<b>app_dev.php</b>&nbsp;(line: 18)</small>
+                  </div>
+                  <div class="collapsible-body">
+                    <style rel='stylesheet'>.hl5bbdfcd8b32feline_number {color:#999;padding:0 5px 0 2px;margin-right:5px;background-color:#444;border-bottom:1px solid #444;border-right:1px solid #555;width:2.4rem;display:inline-block;text-align:right;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}.hl5bbdfcd8b32feline_selected {display:inline-block;width:100%;background-color:#3a3a3a}.hl5bbdfcd8b32fepre {font-size:12px;line-height:1.3;background-color: #2b2b2b;color:#a9b7c6;margin:0;padding:0;display:block;overflow:auto;white-space:pre!important;}.hl5bbdfcd8b32fenamespace {color:#a9b7c6}.hl5bbdfcd8b32fevariable {color:#9876aa}.hl5bbdfcd8b32fekeyword {color:#cc7832;}.hl5bbdfcd8b32fefunction {color:#ffc66d;}.hl5bbdfcd8b32festring {color:#6a8759}.hl5bbdfcd8b32fenumber {color:#6897bb }.hl5bbdfcd8b32fecomment {color:#808080 }.hl5bbdfcd8b32feblock_comment {color:#808080 }</style><pre class="hl5bbdfcd8b32fepre"><code class="hl5bbdfcd8b32feline_number">8</code><code>}</code>
+<code class="hl5bbdfcd8b32feline_number">9</code>
+<code class="hl5bbdfcd8b32feline_number">10</code><code class="hl5bbdfcd8b32fekeyword">if</code>&nbsp;<code>(</code><code>preg_match</code><code>(</code><code class="hl5bbdfcd8b32festring">'/\.(?:png|jpg|jpeg|gif|ico|css|js|svg|ttf|eot|woff|woff2)$/'</code><code>,</code>&nbsp;<code class="hl5bbdfcd8b32fevariable">$_SERVER</code><code>[</code><code class="hl5bbdfcd8b32festring">&quot;REQUEST_URI&quot;</code><code>]</code><code>)</code><code>)</code>&nbsp;<code>{</code>
+<code class="hl5bbdfcd8b32feline_number">11</code>&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8b32fekeyword">return</code>&nbsp;<code class="hl5bbdfcd8b32fekeyword">false</code><code>;</code>
+<code class="hl5bbdfcd8b32feline_number">12</code><code>}</code>
+<code class="hl5bbdfcd8b32feline_number">13</code>
+<code class="hl5bbdfcd8b32feline_number">14</code><code class="hl5bbdfcd8b32fekeyword">if</code>&nbsp;<code>(</code><code>strpos</code><code>(</code><code class="hl5bbdfcd8b32fevariable">$_SERVER</code><code>[</code><code class="hl5bbdfcd8b32festring">'REQUEST_URI'</code><code>]</code><code>,</code>&nbsp;<code class="hl5bbdfcd8b32festring">'/api/'</code><code>)</code>&nbsp;<code>=</code><code>=</code><code>=</code>&nbsp;<code class="hl5bbdfcd8b32fenumber">0</code><code>)</code>&nbsp;<code>{</code>
+<code class="hl5bbdfcd8b32feline_number">15</code>&nbsp;&nbsp;&nbsp;&nbsp;<code class="hl5bbdfcd8b32fekeyword">return</code>&nbsp;<code class="hl5bbdfcd8b32fekeyword">require</code>&nbsp;<code class="hl5bbdfcd8b32fevariable">__DIR__</code>&nbsp;<code>.</code>&nbsp;<code class="hl5bbdfcd8b32festring">'/micro.php'</code><code>;</code>
+<code class="hl5bbdfcd8b32feline_number">16</code><code>}</code>
+<code class="hl5bbdfcd8b32feline_number">17</code>
+<code class="hl5bbdfcd8b32feline_selected"><code class="hl5bbdfcd8b32feline_number">18</code><code class="hl5bbdfcd8b32fekeyword">return</code>&nbsp;<code class="hl5bbdfcd8b32fekeyword">require</code>&nbsp;<code class="hl5bbdfcd8b32fevariable">__DIR__</code>&nbsp;<code>.</code>&nbsp;<code class="hl5bbdfcd8b32festring">'/index.php'</code><code>;</code></code></pre>                          </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="php-errors" class="col s12">
+    <div class="card grey darken-4">
+      <div class="card-content">
+        <div style="margin: 0;padding: 0;">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="events" class="col s12">
+    <div class="card grey darken-4">
+      <div class="card-content">
+        <table style="margin: 0;padding: 0;" class="bordered">
+          <thead>
+          <tr>
+            <th>-</th>
+            <th>type</th>
+            <th>src</th>
+            <th>data</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td style="padding: 5px 10px">
+              <small>0 ns</small>
+            </td>
+            <td style="padding: 5px 10px">
+              <small class="event">
+                REQUEST_TIME_FLOAT
+              </small>
+            </td>
+            <td style="padding: 5px 10px">
+            </td>
+            <td style="padding: 5px 10px">
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">23.44 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:<span class="purple-text text-lighten-3">beforeServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('name' => 'config', 'parameters' => null)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">23.47 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:<span class="purple-text text-lighten-3">afterServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('name' => 'config', 'parameters' => null, 'instance' => object(Config))</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.1 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:<span class="purple-text text-lighten-3">beforeServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('name' => 'router', 'parameters' => null)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.13 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:<span class="purple-text text-lighten-3">afterServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('name' => 'router', 'parameters' => null, 'instance' => object(Router))</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.2 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:<span class="purple-text text-lighten-3">beforeMount</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Group)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.22 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:<span class="purple-text text-lighten-3">beforeMount</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Group)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.23 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">kernel</span>:<span class="purple-text text-lighten-3">boot</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Kernel)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title=""></small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.25 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">application</span>:<span class="purple-text text-lighten-3">boot</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Kernel)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title=""></small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.25 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:<span class="purple-text text-lighten-3">beforeCheckRoutes</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title=""></small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.27 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:<span class="purple-text text-lighten-3">beforeServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('name' => 'request', 'parameters' => null)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.28 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:<span class="purple-text text-lighten-3">afterServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('name' => 'request', 'parameters' => null, 'instance' => object(Request))</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.3 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:<span class="purple-text text-lighten-3">beforeCheckRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.31 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:<span class="purple-text text-lighten-3">notMatchedRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.32 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:<span class="purple-text text-lighten-3">beforeCheckRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.32 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:<span class="purple-text text-lighten-3">notMatchedRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.33 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:<span class="purple-text text-lighten-3">beforeCheckRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.33 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:<span class="purple-text text-lighten-3">notMatchedRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.34 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:<span class="purple-text text-lighten-3">beforeCheckRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.34 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:<span class="purple-text text-lighten-3">notMatchedRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.35 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:<span class="purple-text text-lighten-3">beforeCheckRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.35 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:<span class="purple-text text-lighten-3">notMatchedRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.35 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:<span class="purple-text text-lighten-3">beforeCheckRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.36 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:<span class="purple-text text-lighten-3">notMatchedRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.36 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:<span class="purple-text text-lighten-3">beforeCheckRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.36 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:<span class="purple-text text-lighten-3">matchedRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Route)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.38 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">router</span>:<span class="purple-text text-lighten-3">afterCheckRoutes</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Router)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title=""></small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.39 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:<span class="purple-text text-lighten-3">beforeServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('name' => 'dispatcher', 'parameters' => null)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.4 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:<span class="purple-text text-lighten-3">beforeServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('name' => 'eventsManager', 'parameters' => null)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.41 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:<span class="purple-text text-lighten-3">afterServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('name' => 'eventsManager', 'parameters' => null, 'instance' => object(DebugEventsManagerWrapper))</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.43 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:<span class="purple-text text-lighten-3">afterServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('name' => 'dispatcher', 'parameters' => null, 'instance' => object(Dispatcher))</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.45 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">application</span>:<span class="purple-text text-lighten-3">beforeHandleRequest</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Kernel)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Dispatcher)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.46 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">dispatch</span>:<span class="purple-text text-lighten-3">beforeDispatchLoop</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Dispatcher)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title=""></small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">26.46 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">dispatch</span>:<span class="purple-text text-lighten-3">beforeDispatch</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Dispatcher)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title=""></small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">27.6 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:<span class="purple-text text-lighten-3">beforeServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('name' => 'App\Kern...ntroller'[43], 'parameters' => null)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">27.63 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:<span class="purple-text text-lighten-3">afterServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('name' => 'App\Kern...ntroller'[43], 'parameters' => null, 'instance' => object(HomeController))</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">27.65 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">dispatch</span>:<span class="purple-text text-lighten-3">beforeExecuteRoute</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Dispatcher)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title=""></small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">27.67 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:<span class="purple-text text-lighten-3">beforeServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('name' => 'view', 'parameters' => null)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">28.62 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:<span class="purple-text text-lighten-3">afterServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('name' => 'view', 'parameters' => null, 'instance' => object(View))</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">30.58 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">dispatch</span>:<span class="purple-text text-lighten-3">afterInitialize</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Dispatcher)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title=""></small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">30.58 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">dispatch</span>:<span class="purple-text text-lighten-3">afterBinding</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Dispatcher)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title=""></small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">30.6 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">dispatch</span>:<span class="purple-text text-lighten-3">beforeException</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(Dispatcher)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">object(Exception)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">39.17 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:<span class="purple-text text-lighten-3">beforeServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('name' => 'logger', 'parameters' => null)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">39.56 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:<span class="purple-text text-lighten-3">afterServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('name' => 'logger', 'parameters' => null, 'instance' => object(File))</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.17 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:<span class="purple-text text-lighten-3">beforeServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('name' => 'flash', 'parameters' => null)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.19 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:<span class="purple-text text-lighten-3">afterServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('name' => 'flash', 'parameters' => null, 'instance' => object(Direct))</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.28 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:<span class="purple-text text-lighten-3">beforeServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('name' => 'escaper', 'parameters' => null)</small>
+            </td>
+          </tr>
+          <tr class="grey darken-4" style="padding: 5px 10px">
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">40.29 ms</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small style="white-space: nowrap;">
+                <span class="blue-text text-lighten-3">di</span>:<span class="purple-text text-lighten-3">afterServiceResolve</span>
+              </small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small>object(FactoryDefault)</small>
+            </td>
+            <td style="padding: 5px 10px;border-radius: 0">
+              <small title="">array('name' => 'escaper', 'parameters' => null, 'instance' => object(Escaper))</small>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+</body>
+</html>

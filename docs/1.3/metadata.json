@@ -1,0 +1,196 @@
+{
+  "sections": [
+    {
+      "name": "Getting Started",
+      "path": "getting-started",
+      "items": [
+        {
+          "name": "Installation",
+          "path": "installation.html",
+          "keywords": "started installation"
+        },
+        {
+          "name": "Configuration",
+          "path": "configuration.html",
+          "keywords": "start configuration"
+        },
+        {
+          "name": "Directory Structure",
+          "path": "directory-structure.html",
+          "keywords": "start directory structure"
+        }
+      ]
+    },
+    {
+      "name": "Architecture Concepts",
+      "path": "architecture-concepts",
+      "items": [
+        {
+          "name": "Global Architecture",
+          "path": "global-architecture.html",
+          "keywords": "global application structure"
+        },
+        {
+          "name": "Kernels Concepts",
+          "path": "kernels-concepts.html",
+          "keywords": "kernels concepts structure"
+        },
+        {
+          "name": "Modules Concepts",
+          "path": "modules-concepts.html",
+          "keywords": "modules concepts mvc hmvc structure"
+        },
+        {
+          "name": "Dependency Injection",
+          "path": "dependency-injection.html",
+          "keywords": "di dependency injection service-container"
+        }
+      ]
+    },
+    {
+      "name": "Kernels Concepts",
+      "path": "kernels-concepts",
+      "items": [
+        {
+          "name": "Http Kernel",
+          "path": "http-kernel.html",
+          "keywords": "http kernel fullstack framework"
+        },
+        {
+          "name": "Micro Kernel",
+          "path": "micro-kernel.html",
+          "keywords": "micro kernel framework"
+        },
+        {
+          "name": "Cli Kernel",
+          "path": "cli-kernel.html",
+          "keywords": "console cli kernel console"
+        }
+      ]
+    },
+    {
+      "name": "Basics",
+      "path": "basics",
+      "items": [
+        {
+          "name": "Routing",
+          "path": "routing.html",
+          "keywords": "routing route"
+        },
+        {
+          "name": "Controllers",
+          "path": "controllers.html",
+          "keywords": "controller handling handler"
+        },
+        {
+          "name": "Middleware",
+          "path": "middleware.html",
+          "keywords": "middleware"
+        },
+        {
+          "name": "Csrf Protection",
+          "path": "csrf-protection.html",
+          "keywords": "csrf security protection"
+        },
+        {
+          "name": "Requests",
+          "path": "requests.html",
+          "keywords": "request"
+        },
+        {
+          "name": "Responses",
+          "path": "responses.html",
+          "keywords": "response"
+        },
+        {
+          "name": "Views",
+          "path": "views.html",
+          "keywords": "view template"
+        },
+        {
+          "name": "Error Handling",
+          "path": "errors.html",
+          "keywords": "errors exceptions"
+        }
+      ]
+    },
+    {
+      "name": "Database",
+      "path": "database",
+      "items": [
+        {
+          "name": "Getting Started",
+          "path": "getting-started.html",
+          "keywords": "database"
+        },
+        {
+          "name": "Queries Phql",
+          "path": "queries-phql.html",
+          "keywords": "query queries phql sql"
+        },
+        {
+          "name": "Models",
+          "path": "models.html",
+          "keywords": "model entity"
+        },
+        {
+          "name": "Relationships",
+          "path": "relationships.html",
+          "keywords": "relationships relation"
+        },
+        {
+          "name": "Repositories",
+          "path": "repositories.html",
+          "keywords": "repository"
+        },
+        {
+          "name": "Migrations",
+          "path": "migrations.html",
+          "keywords": "migrations versioning schema"
+        }
+      ]
+    },
+    {
+      "name": "Digging Deeper",
+      "path": "digging-deeper",
+      "items": [
+        {
+          "name": "Quark Console",
+          "path": "quark-console.html",
+          "keywords": "quark console cli"
+        },
+        {
+          "name": "Helpers",
+          "path": "helpers.html",
+          "keywords": "helpers array string object functions"
+        },
+        {
+          "name": "Volt",
+          "path": "volt.html",
+          "keywords": "volt template render"
+        },
+        {
+          "name": "Debug",
+          "path": "debug.html",
+          "keywords": "debug var-dump profile toolbar"
+        }
+      ]
+    },
+    {
+      "name": "Performance",
+      "path": "performance",
+      "items": [
+        {
+          "name": "Application",
+          "path": "application.html",
+          "keywords": "performance"
+        },
+        {
+          "name": "Php And Server",
+          "path": "php-and-server.html",
+          "keywords": "performance server"
+        }
+      ]
+    }
+  ]
+}

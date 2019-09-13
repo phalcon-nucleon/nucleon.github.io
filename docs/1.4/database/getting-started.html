@@ -1,0 +1,318 @@
+<div class="row">
+  <div class="col s12">
+    <ul class="summary generate"></ul>
+  </div>
+  <div class="col s12">
+    <h2>Intro</h2>
+    <p>Phalcon makes interacting with databases extremely simple across a variety of database backends using either raw SQL,
+      the Phql query, and the ORM. Currently, Phalcon supports tree databases:</p>
+    <ul class="browser-default">
+      <li>MySQL</li>
+      <li>PostgreSQL</li>
+      <li>SQLite</li>
+    </ul>
+
+    <h3>Configuration</h3>
+    <p>The database configuration for your application is located at <code>config/database.php</code>.
+      In this file you may define all of your database connections, as well as specify which connection should be used by default.
+      Examples for most of the supported database systems are provided in this file.</p>
+
+    <h5>SQLite Configuration</h5>
+    <p>After creating a new SQLite database using a command such as <code>touch storage/database/database.sqlite</code>,
+      you can easily configure your environment variables to point to this newly created database by using the database's absolute path:</p>
+<pre><code class="language-ini">[db]
+driver=sqlite
+[sqlite]
+name=@php/dir:storage/database/database.sqlite</code></pre>
+
+    <h3>Using Multiple Database Connections</h3>
+    <p>When using multiple connections, you may access each connection via the <code>uses</code> method on the <code>db</code> service.
+      The name passed to the <code>uses</code> method should correspond to one of the connections listed in your
+      <code>config/database.php</code> configuration file:</p>
+    <pre><code>$db->uses('mysql')->query(...);</code></pre>
+
+    <h2>Running Raw SQL Queries</h2>
+    <p>Once you have configured your database connection, you may run queries using the <code>db</code> service.
+      The <code>db</code> service.</p>
+      <table class="small">
+        <thead>
+        <tr>
+          <td>Method</td>
+          <td>Description</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><code>query</code></td>
+          <td>Run a select query</td>
+        </tr>
+        <tr>
+          <td><code>update</code></td>
+          <td>Run a update query</td>
+        </tr>
+        <tr>
+          <td><code>insert</code></td>
+          <td>Run a insert query</td>
+        </tr>
+        <tr>
+          <td><code>delete</code></td>
+          <td>Run a delete query</td>
+        </tr>
+        <tr>
+          <td><code>execute</code></td>
+          <td>Execute any statement</td>
+        </tr>
+        </tbody>
+      </table>
+
+    <h5>Running A Select Query</h5>
+    <p>To run a basic query, you may use the <code>query</code> method on the <code>db</code> service:</p>
+    <pre><code>namespace App\Kernels\Http\Controllers;
+
+class UserController extends Neutrino\Http\Controller
+{
+    /**
+     * Show a list of all of the application's users.
+     */
+    public function index()
+    {
+        $users = $this->db->select('select * from users where active = ?', [1]);
+
+        $this->view->render('users', 'index', ['users' => $users]);
+    }
+}</code></pre>
+
+    <p>The first argument passed to the <code>query</code> method is the raw SQL query,
+      while the second argument is any parameter bindings that need to be bound to the query.
+      Typically, these are the values of the <code>where</code> clause constraints.
+      Parameter binding provides protection against SQL injection.</p>
+
+    <p>The <code>query</code> method will return an instance of <code>Phalcon\Db\Result\Pdo</code> or <code>false</code> on error.</p>
+    <p>The <code>Phalcon\Db\Result\Pdo</code> allow you to fetch your result with many way. You may use the <code>setFetchMode</code> method to define the fetch mode : </p>
+    <table class="small">
+      <thead>
+      <tr>
+        <th>Constant</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>Phalcon\Db::FETCH_NUM</code></td>
+        <td>Return an array with numeric indexes</td>
+      </tr>
+      <tr>
+        <td><code>Phalcon\Db::FETCH_ASSOC</code></td>
+        <td>Return an array with associative indexes</td>
+      </tr>
+      <tr>
+        <td><code>Phalcon\Db::FETCH_BOTH</code></td>
+        <td>Return an array with both associative and numeric indexes</td>
+      </tr>
+      <tr>
+        <td><code>Phalcon\Db::FETCH_OBJ</code></td>
+        <td>Return an object instead of an array</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <pre><code>use Phalcon\Db;
+
+$users = $db->query('SELECT id FROM users WHERE active = ?', [1]);
+
+$users->setFetchMode(Db::FETCH_NUM);
+foreach($users as $user){
+    $user[0];
+}
+$users->setFetchMode(Db::FETCH_ASSOC);
+foreach($users as $user){
+    $user['id'];
+}
+$users->setFetchMode(Db::FETCH_BOTH);
+foreach($users as $user){
+    $user[0];
+    $user['id'];
+}
+$users->setFetchMode(Db::FETCH_OBJ);
+foreach($users as $user){
+    $user->id;
+}</code></pre>
+
+    <h5>Running An Insert Statement</h5>
+    <p>To execute an <code>insert</code> statement, you may use the <code>insert</code> method on the <code>db</code> service.
+      Like <code>query</code>, this method takes the table as its first argument, the values as is second argument,  and column as its third argument:</p>
+    <pre><code>
+$success = $db->insert(
+    'users',
+    [1, 'James'],
+    ['id', 'name']
+);
+
+// Other syntax
+$success = $db->insertAsDict(
+    'users',
+    [
+        'id' => 1,
+        'name' => James,
+    ]
+);
+
+// Raw SQL
+$success = $db->execute('INSERT INTO users (id, name) VALUES (?, ?)', [1, 'James']);</code></pre>
+
+    <h5>Running An Update Statement</h5>
+    <p>The <code>update</code> method should be used to update existing records in the database :</p>
+    <pre><code>
+$success = $db->update(
+    'users',
+    ['name'],
+    ['Jordan'],
+    'id = 1' // Warning! In this case values are not escaped
+);
+
+// Other syntax
+$success = $db->updateAsDict(
+    'users',
+    ['name' => 'Jordan'],
+    'id = 1' // Warning! In this case values are not escaped
+);
+
+// With escaping conditions
+$success = $connection->updateAsDict(
+    'users',
+    ['name' => 'Jordan'],
+    [
+        'conditions' => 'id = ?',
+        'bind'       => [1],
+    ]
+);
+
+// Raw SQL
+$success = $db->execute('UPDATE users SET `name` = ? WHERE `id` = ?', ['James', 1]);</code></pre>
+
+    <h5>Running A Delete Statement</h5>
+    <p>The <code>delete</code> method should be used to delete records from the database</p>
+
+    <pre><code>
+$success = $db->delete(
+    'user',
+    'id = ?',
+    [1]
+);
+
+// Raw SQL
+$success = $db->execute('DELETE FROM users WHERE `id` = ?', [1]);</code></pre>
+  </div>
+
+  <h5>Running A General Statement</h5>
+  <p>The <code>execute</code> method should be used to execute statement in the database</p>
+  <pre><code>$success = $db->execute('SET @var_name = expr;');</code></pre>
+
+  <h3>Listening For Query Events</h3>
+  <p>A <code>event manager</code> can be attached to the <code>db</code> service for listen query events.</p>
+  <pre><code>
+use Neutrino\Constants\Events;
+use Phalcon\Db;
+use Phalcon\Events\Event;
+use Phalcon\Events\Manager as EventManager;
+
+$em = new EventManager();
+$em->attach(Events\Db::BEFORE_QUERY, function (Event $event, Db\Adapter\Pdo $db) {
+    $db->getSQLStatement();
+    $db->getSqlVariables();
+    $db->getSQLBindTypes();
+});
+$db->setEventsManager($em);</code></pre>
+
+  <table class="small">
+    <thead>
+    <tr>
+      <td>Const</td>
+      <td>Event</td>
+      <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        <code class="small">Neutrino\Constants\Events\Db::BEFORE_QUERY</code>
+      </td>
+      <td>
+        <code>db:beforeQuery</code>
+      </td>
+      <td>Catch query before execution</td>
+    </tr>
+    <tr>
+      <td>
+      <code class="small">Neutrino\Constants\Events\Db::AFTER_QUERY</code>
+      </td>
+      <td>
+        <code>db:afterQuery</code>
+      </td>
+      <td>Catch query after execution</td>
+    </tr>
+    <tr>
+      <td>
+        <code class="small">Neutrino\Constants\Events\Db::BEGIN_TRANSACTION</code>
+      </td>
+      <td>
+        <code>db:beginTransaction</code>
+      </td>
+      <td>Transaction started</td>
+    </tr>
+    <tr>
+      <td>
+        <code class="small">Neutrino\Constants\Events\Db::COMMIT_TRANSACTION</code>
+      </td>
+      <td>
+        <code>db:commitTransaction</code>
+      </td>
+      <td>Transaction commit</td>
+    </tr>
+    <tr>
+      <td>
+        <code class="small">Neutrino\Constants\Events\Db::ROLLBACK_TRANSACTION</code>
+      </td>
+      <td>
+        <code>db:rollbackTransaction</code>
+      </td>
+      <td>Transaction rollback</td>
+    </tr>
+    <tr>
+      <td>
+        <code class="small">Neutrino\Constants\Events\Db::CREATE_SAVEPOINT</code>
+      </td>
+      <td>
+        <code>db:createSavepoint</code>
+      </td>
+      <td>Save point created</td>
+    </tr>
+    <tr>
+      <td>
+        <code class="small">Neutrino\Constants\Events\Db::RELEASE_SAVEPOINT</code>
+      </td>
+      <td>
+        <code>db:releaseSavepoint</code>
+      </td>
+      <td>Save point released</td>
+    </tr>
+    <tr>
+      <td>
+        <code class="small">Neutrino\Constants\Events\Db::ROLLBACK_SAVEPOINT</code>
+      </td>
+      <td>
+        <code>db:rollbackSavepoint</code>
+      </td>
+      <td>Save point rollback</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h2>Database Transactions</h2>
+  <p>If you would like to begin a transaction manually and have complete control over rollbacks and commits, you may use the <code>begin</code> method on the <code>db</code> service:</p>
+  <pre><code>$db->begin();</code></pre>
+  <p>You can rollback the transaction via the <code>rollback</code> method:</p>
+  <pre><code>$db->rollback();</code></pre>
+  <p>Lastly, you can commit a transaction via the <code>commit</code> method:</p>
+  <pre><code>$db->commit();</code></pre>
+</div>
